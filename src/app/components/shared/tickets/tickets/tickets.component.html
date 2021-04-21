@@ -1,0 +1,92 @@
+<div class="card-container">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6" style="background-color:#fafafa;"> 
+          <div *ngIf="tickets.length>0" >
+          <!-- <span>{{projectData.project_name}}</span> -->
+            <canvas baseChart 
+              width="800"
+              height="200"
+              [datasets]="ChartData"
+              [labels]="Labels"
+              [options]="ChartOptions"
+              [legend]="ChartLegend"
+              [chartType]="ChartType" >
+            </canvas>
+          </div>
+       </div> 
+        <div class="col-md-6">
+           <mat-card>
+              <form action="#" autocomplete="off">
+                   <mat-form-field style="width:45%">
+                       <input matInput name="name" [(ngModel)]="search" (keyup)="onSearch()" type="text" placeholder="Search" #nameInput="ngModel">
+                   </mat-form-field>
+                  <mat-icon md-list-icon>search</mat-icon>
+              <button class="btn btn-success float-right"  (click)="openDialog(0,'create')">+ Ticket</button>
+             </form>
+           </mat-card>
+       </div>
+    </div>
+   </div>
+  </div>
+<br />
+<div class="card-container1">
+  <table mat-table [dataSource]="tickets" class="mat-elevation-z8 table-striped">
+   <ng-container matColumnDef="Ticket">
+     <th mat-header-cell style="width:50%" *matHeaderCellDef > Ticket </th>
+     <td mat-cell *matCellDef="let element" matTooltip="{{element.ticket_name}}"> {{element.ticket_name}} </td>
+   </ng-container>
+   <!-- <ng-container matColumnDef="Project Name">
+     <th mat-header-cell *matHeaderCellDef> Project Name </th>
+     <td mat-cell *matCellDef="let element"> {{element.projectId.project_name}} </td>
+   </ng-container>  -->
+   <ng-container matColumnDef="Created At">
+    <th mat-header-cell *matHeaderCellDef> Created At </th>
+    <td mat-cell *matCellDef="let element"  matTooltip="Last Updated By {{element.updatedAt|date:'medium'}}"> {{element.createdAt | date:'medium'}} </td>
+  </ng-container> 
+   <!-- <ng-container matColumnDef="Priority">
+     <th mat-header-cell *matHeaderCellDef> Priority </th>
+     <td mat-cell *matCellDef="let element">
+       <mat-form-field  appearance="outline" class="status_cus">
+        <mat-label>Ticket Priority</mat-label>
+       <mat-select name="ticket_priority" (selectionChange)="onChangeStatus('priority',ticketPInput.value,element._id,element.status)" placeholder="Select Ticket Priority" value="{{element.ticket_priority}}" #ticketPInput>
+        <mat-option *ngFor="let p of ticket_priority" [value]="p">
+        {{p}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+     </td>
+   </ng-container>  -->
+   <ng-container matColumnDef="Status">
+     <th mat-header-cell *matHeaderCellDef >Status </th>
+     <td mat-cell *matCellDef="let element"> 
+      <mat-form-field  appearance="outline" class="status_cus">
+        <mat-label>Ticket Status</mat-label>
+       <mat-select name="status" (selectionChange)="onChangeStatus('status',ticketSInput.value,element._id,element.ticket_priority)" placeholder="Select Status" value="{{element.status}}" #ticketSInput>
+        <mat-option *ngFor="let p of ticket_status" [value]="p">
+        {{p}}
+        </mat-option>
+     </mat-select>
+  </mat-form-field>
+     </td>
+   </ng-container> 
+   <ng-container matColumnDef="Action">
+     <th mat-header-cell *matHeaderCellDef  style="text-align: center;">Action </th>
+     <td mat-cell *matCellDef="let element" style="text-align: center;">
+        <mat-icon *ngIf="userData.role!=3" color="primary" (click)="openDialog(element._id,'edit')"  matTooltip="Edit" md-list-icon>edit</mat-icon>
+        <mat-icon *ngIf="userData.role!=3" color="warn" (click)="onDelete(element._id)" matTooltip="Delete" md-list-icon>delete</mat-icon>
+        <mat-icon md-list-icon (click)="ticketInfoDialog(element._id)" matTooltip="Ticket Info">info</mat-icon>
+        <mat-icon md-list-icon color="accent" (click)="commentsDialog(element.projectId._id,element._id)" matTooltip="Comments / Chat">chat</mat-icon>
+     </td>
+   </ng-container>
+   <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+ </table>
+</div>
+ <br /><br />
+<div class="card-container">
+ <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
+ <p class="info-text mat-body-1" *ngIf="tickets.length <= 0&&!isLoading">No Tickets Found!</p>
+  <mat-paginator [length]="Count" [pageSize]="perPage" [pageSizeOptions]="sizeOptions" 
+  (page)="onChangedPage($event)" *ngIf="tickets.length > 0"></mat-paginator>
+</div>

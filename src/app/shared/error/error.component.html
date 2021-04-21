@@ -1,0 +1,11 @@
+<div style="min-width: 210px;">
+<h1 mat-dialog-title style="font-weight: 500;">{{data?.title}}</h1>
+<div mat-dialog-content>
+  <p class="mat-body-1" style="margin-bottom: 10px; margin-top: 10px;">{{ data?.message }}</p>
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button 
+  style="color: #ffffff ; background: #f6851c;  border: 1px solid;  padding: 6px 17px 4px 21px;  border-radius: 8px;" 
+  (click)="onClose()">Ok</button>
+</div>
+</div>

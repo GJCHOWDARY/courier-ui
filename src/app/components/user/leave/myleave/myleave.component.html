@@ -1,0 +1,110 @@
+<div class="card-container">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+          <div class="row" style="margin: 9px;">
+              <div class="col-md-6">
+        <mat-form-field appearance="outline">           
+            <mat-label>Start Date</mat-label>
+            <input matInput  [matDatepicker]="picker" readonly (dateChange)="checkChangesDates('startDate', $event)" name="start_date" [(ngModel)]="start_date" placeholder="Select Start Date" #sdataInput="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+         </mat-form-field>
+        </div>
+        <div class="col-md-6">
+         <mat-form-field appearance="outline">           
+             <mat-label>End Date</mat-label>
+             <input matInput [matDatepicker]="picker1" readonly (dateChange)="checkChangesDates('edataInput', $event)" name="end_date" [(ngModel)]="end_date" placeholder="Select End Date" #edataInput="ngModel" required>
+             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+             <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+       </div>
+        <div class="col-md-6">
+          <div class="row" style="margin: 9px;">
+            <div class="col-md-6">
+           <mat-form-field  appearance="outline">
+            <mat-label>Filter</mat-label>
+          <mat-select name="shift"  placeholder="Select Filter" (selectionChange)="onChangeFilter()"   [(ngModel)]="filter" #filterInput="ngModel">
+            <mat-option *ngFor="let d of filterTypes" [value]="d.title">
+              {{d.title}}
+            </mat-option>
+          </mat-select>
+         </mat-form-field>
+           </div>
+           <div class="col-md-6">
+            <button class="btn btn-success float-right"  matTooltip="Apply New Leave"  [routerLink]="['/authorized/emp/apply', 'create', 'new']">+ Apply Leave</button>
+           </div>
+       </div>
+    </div>
+   </div>
+  </div>
+<br />
+<div class="container"  *ngIf="!isLoading&&leaveBalance">
+  <div class="row" style="float:right;">
+    <button mat-mini-fab matTooltip="Annual Leave  {{calHours(leaveBalance.leave_balance)}}">{{(leaveBalance.leave_balance).toFixed(2)}}</button>&nbsp;
+    <button mat-mini-fab matTooltip="Optional Leave">{{leaveBalance.optional_holidays}}</button>&nbsp;
+    <button mat-mini-fab matTooltip="Camp Off Leave">{{leaveBalance.camp_off}}</button>&nbsp;
+    <button mat-mini-fab matTooltip="Marternity Leave">{{leaveBalance.marternity_leave}}</button>&nbsp;
+    <button mat-mini-fab matTooltip="Paternity Leave">{{leaveBalance.paternity_leave}}</button>&nbsp;  
+  </div>
+</div>
+
+  <table mat-table [dataSource]="leaves" class="mat-elevation-z8 table-striped">
+   <ng-container matColumnDef="Leave Type">
+     <th mat-header-cell *matHeaderCellDef> Leave Type</th>
+     <td mat-cell *matCellDef="let element"> {{element.leaveId.leave_type}} </td>
+   </ng-container>
+   <ng-container matColumnDef="Start Date">
+     <th mat-header-cell *matHeaderCellDef> Start Date </th>
+     <td mat-cell *matCellDef="let element"> {{element.start_date | date}} </td>
+   </ng-container> 
+   <ng-container matColumnDef="Applied Date">
+     <th mat-header-cell *matHeaderCellDef> Applied Date </th>
+     <td mat-cell *matCellDef="let element"> {{element.createdAt | date}} </td>
+   </ng-container> 
+   <ng-container matColumnDef="End Date">
+     <th mat-header-cell *matHeaderCellDef> End Date </th>
+     <td mat-cell *matCellDef="let element"> {{element.end_date | date}} </td>
+   </ng-container> 
+   <ng-container matColumnDef="No of Days Taken">
+     <th mat-header-cell *matHeaderCellDef> No of Days Taken </th>
+     <td mat-cell *matCellDef="let element"> {{element.no_of_days_taken}} <a *ngIf="element.no_of_days_taken==0" matTooltip="{{element.time_taken}}" > days - {{element.time_taken}} (hrs : mins)</a> </td>
+   </ng-container> 
+   <ng-container matColumnDef="Loss of Pay">
+     <th mat-header-cell *matHeaderCellDef> Loss of Pay </th>
+     <td mat-cell *matCellDef="let element"> 
+      <a *ngIf="element.los_of_pay_days<0">{{element.los_of_pay_days}}</a>
+      <a *ngIf="element.los_of_pay_days>=0">-- -- </a>
+       </td>
+   </ng-container> 
+   <ng-container matColumnDef="Status">
+     <th mat-header-cell *matHeaderCellDef> Status </th>
+     <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+   </ng-container> 
+   <ng-container matColumnDef="Action">
+     <th mat-header-cell  *matHeaderCellDef  style=" padding: 18px 55px; text-align: center;">Action </th>
+     <td mat-cell  style="text-align: center;" [ngSwitch]="element.status" *matCellDef="let element">
+      <a mat-button (click)="openDialog(element)"  matTooltip="Leave Details">
+         <mat-icon md-list-icon>info</mat-icon>
+      </a> 
+       <a *ngSwitchCase="'Approved'" mat-button color="primary" matTooltip="Approved">
+         <mat-icon md-list-icon>check</mat-icon>
+       </a>
+       <a  *ngSwitchCase="'Pending'" mat-button  color="warn" (click)="updateLeaveStatus(element,'Canceled')" matTooltip="Cancel Leave">
+         <mat-icon md-list-icon>cancel</mat-icon>
+      </a>
+      <a  *ngSwitchCase="'Canceled'" mat-button  color="warn"  matTooltip="Leave Canceled">
+        <mat-icon md-list-icon>block</mat-icon>
+     </a>
+     </td>
+   </ng-container>
+   <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+ </table>
+   <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
+  <p class="info-text mat-body-1" *ngIf="leaves.length <= 0 && !isLoading">No Leaves Found!</p>
+  <mat-paginator [length]="Count" [pageSize]="perPage" [pageSizeOptions]="sizeOptions" 
+  (page)="onChangedPage($event)" *ngIf="leaves.length > 0"></mat-paginator>
+</div>

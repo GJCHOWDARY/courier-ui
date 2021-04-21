@@ -1,0 +1,186 @@
+.link{
+    /* width: 100%; */
+    font-size: 14px;
+    text-align: right
+  }
+  .img-login{
+    width: 18%;
+  }
+  mat-spinner {
+    margin: auto;
+  }
+  .title {
+     /* width: 100%; */
+     font-size: 24px;
+     font-weight: 700;
+     letter-spacing: 2px;
+     color: #4169E1;
+  }
+  
+  input {
+  color:black;
+  }
+  
+  /* login page title */
+  
+  .carousel-caption {
+    position: absolute;
+    top: 5% !important; 
+    right: 15%;
+    bottom: 20px;
+    left: 34% ;
+    width: 500px !important;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: center;
+  }
+  
+  
+  /* Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) { 
+    
+    .carousel-caption {
+      position: absolute;
+      top: 5% ; 
+      right: 15%;
+      bottom: 20px;
+      left: 5% ;
+      width: 150px ;
+      z-index: 10;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      color: #fff;
+      text-align: center;
+    }
+   }
+  
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) { 
+    
+    .carousel-caption {
+      position: absolute;
+      top: 5% ;
+      right: 15%;
+      bottom: 20px;
+      left: 20% ;
+      width: 250px ;
+      z-index: 10;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      color: #fff;
+      text-align: center;
+    }
+   }
+   /* Medium devices (tablets, less than 992px) */
+  @media (min-width: 991.98px) { 
+    .carousel-caption {
+      position: absolute;
+      top: 5% !important; 
+      right: 15%;
+      bottom: 20px;
+      left: 27% ;
+      width: 500px !important;
+      z-index: 10;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      color: #fff;
+      text-align: center;
+    }
+   }
+  
+  /* Large devices (desktops, less than 1200px)*/
+  @media (min-width: 1199.98px) { 
+    .carousel-caption {
+      position: absolute;
+      top: 5% !important; 
+      right: 15%;
+      bottom: 20px;
+      left: 34% ;
+      width: 500px !important;
+      z-index: 10;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      color: #fff;
+      text-align: center;
+    }
+   }
+   
+  mat-form-field {
+    width: 100%;
+  }
+  
+  mat-spinner {
+    margin: auto;
+  }
+  
+  /*   Create Button code */
+  
+  .btn-success:hover {
+    color: #0747a6 !important;
+    background-color: #fff !important;
+    border-color: #0747a6 !important;
+  }
+  
+  .btn-success {
+    color: #fff !important;
+    background-color: #0747a6 !important;
+    border-color: #0747a6 !important;
+  }
+  
+  
+  /* Edit Button */
+  a {
+    color: #0747a6 !important;
+    cursor: pointer;
+  }
+  
+  /* model button */
+  .model-button{
+    background-color: #0747a6;
+  }
+  /* button Focus */
+  .mat-fab.mat-primary, .mat-flat-button.mat-primary,
+  .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    padding: 4px;
+    border: 0.5px solid #faba7f;
+    background-color: #fff;
+    color: #0747a6 !important;
+    margin: 0 0 2px 0;
+    width: 50%;
+  }
+  /* button hover */
+  
+  /* .mat-fab.mat-primary, .mat-flat-button.mat-primary,
+  .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary:hover {
+    color: #faba7f !important;
+    background-color: #fff !important;
+    border-color: #faba7f !important;
+    border: 0.5px solid #faba7f;
+    width: 50%;
+  } */
+
+  .mat-flat-button.mat-warn, .mat-raised-button.mat-warn, .mat-fab.mat-warn, .mat-mini-fab.mat-warn{
+    padding: 4px;
+    border: 0.5px solid #faba7f;
+    color: #f44336 !important;
+     background-color:#fff !important;
+     margin: 0 0 2px 0;
+     width: 50%;
+  }
+
+  .login-btn:hover{
+    color: #ffffff !important;
+    background-color:#f89b46 !important;
+  }
+
+  .mat-raised-button[disabled]:not([class*=mat-elevation-z])  {
+    color: #b3b7bd !important;
+    background-color: #fff !important;
+    border-color:#b3b7bd !important;
+    width: 50%;
+    /* border-color: red !important; */
+  }
+   
+ 

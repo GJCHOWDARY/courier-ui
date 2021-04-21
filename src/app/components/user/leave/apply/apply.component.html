@@ -1,0 +1,102 @@
+<div class="card-container">
+  <mat-card  *ngIf="!isLoading">
+<h2 mat-dialog-title *ngIf="mode=='update'">Edit Leave</h2>
+<h2 mat-dialog-title *ngIf="mode=='create'">Apply Leve</h2>
+<form (submit)="onApplyLeave(leaveForm)" #leaveForm="ngForm">
+  <div class="container">
+   <div class="row">
+     <div class="col-md-2">
+     </div> 
+     <div class="col-md-8">
+ <div class="font" mat-dialog-content>
+    <mat-form-field  appearance="outline">
+        <mat-label>Leave Type</mat-label>
+      <mat-select name="leaveId" placeholder="Select Leave Type"  (selectionChange)="onChangeLeaveType(leaveTypeInput.value)" [(ngModel)]="leave.leaveId" #leaveTypeInput="ngModel" required>
+        <mat-option *ngFor="let leave of leaveTypes" [value]="leave._id">
+          {{leave.leave_type}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="leaveTypeInput.hasError('required')">Please Leave Type.</mat-error>
+    </mat-form-field>
+        <mat-form-field appearance="outline">           
+            <mat-label>Start Date</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" readonly (dateChange)="checkChangesDates('startDate', $event)" name="start_date" [(ngModel)]="leave.start_date" placeholder="Select Start Date" #sdataInput="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi  #picker disabled="false"></mat-datepicker>
+            <mat-error *ngIf="sdataInput.hasError('required')">Please Select Start Date.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">           
+            <mat-label>End Date</mat-label>
+            <input matInput  [min]="minforEndDate" [max]="maxDate"  [matDatepicker]="picker1" readonly  (dateChange)="checkChangesDates('endDate', $event)" name="end_date" [(ngModel)]="leave.end_date" placeholder="Select End Date" #edataInput="ngModel" required>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker touchUi  #picker1 disabled="false"></mat-datepicker>
+            <mat-error *ngIf="edataInput.hasError('required')">Please Select End Date.</mat-error>
+        </mat-form-field>
+        <mat-form-field  *ngIf="showDuration" appearance="outline">
+          <mat-label>Duration</mat-label>
+        <mat-select name="duration" placeholder="Select Duration"   [(ngModel)]="leave.duration" #durationInput="ngModel" required>
+          <mat-option *ngFor="let d of durationData" [value]="d.name">
+            {{d.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="durationInput.hasError('required')">Please Select Duration.</mat-error>
+      </mat-form-field>
+      <mat-form-field  *ngIf="leave.duration=='Half Day'" appearance="outline">
+        <mat-label>Shift</mat-label>
+      <mat-select name="shift"  placeholder="Select Shift"   [(ngModel)]="leave.shift" #shiftInput="ngModel" required>
+        <mat-option *ngFor="let d of halfDay" [value]="d.name">
+          {{d.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="shiftInput.hasError('required')">Please Select Shift.</mat-error>
+    </mat-form-field>
+    <div *ngIf="leave.duration=='Specify Time'" class="row">
+      <div class="col-md-5">
+      <mat-form-field appearance="outline">           
+          <mat-label>Start Time</mat-label>
+             <input matInput name="start_time" (ngModelChange)="checkChangeTime('start', stimeInput.value)" placeholder="Start Time" #stimeInput="ngModel" [(ngModel)]="leave.start_time"  [ngxTimepicker]="fullTime" [format]="24"  readonly required>
+            <ngx-material-timepicker style="background-color: #f6851c !important;" #fullTime   [defaultTime]="'09:00'" [enableKeyboardInput]="true"></ngx-material-timepicker>                
+             <mat-icon matSuffix>access_time</mat-icon>
+            <mat-error *ngIf="stimeInput.hasError('required')">Please Select Start Time.</mat-error>
+      </mat-form-field>
+    </div>
+      <div class="col-md-5">
+      <mat-form-field appearance="outline">           
+        <mat-label>End Time</mat-label>
+           <input matInput name="end_time"  (ngModelChange)="checkChangeTime('end',etimeInput.value)" placeholder="End Time" #etimeInput="ngModel" [(ngModel)]="leave.end_time"  [ngxTimepicker]="fullTime1" [format]="24"  readonly required>
+          <ngx-material-timepicker #fullTime1 [defaultTime]="'18:00'" [enableKeyboardInput]="true"></ngx-material-timepicker> 
+          <mat-icon matSuffix>access_time</mat-icon>
+          <mat-error *ngIf="stimeInput.hasError('required')">Please Select Start Time.</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-md-2">  
+    <mat-form-field appearance="outline">                                         
+    <mat-label>Time Taken</mat-label>
+     <input  matInput name="time_taken" disabled="true" [(ngModel)]="leave.time_taken" type="text" placeholder="Time Taken" #timetakenInput="ngModel" required>
+     <mat-icon matSuffix>timelapse</mat-icon>
+     <mat-error *ngIf="timetakenInput.hasError('required')">Validation Failed.</mat-error>
+    </mat-form-field>
+    </div>
+    </div>
+        <mat-form-field appearance="outline">                                         
+         <mat-label>Comments</mat-label>
+          <textarea  matInput name="leave_desc" [(ngModel)]="leave.leave_desc" type="text" placeholder="Comments" #descInput="ngModel">{{leave.leave_desc}}</textarea>
+        </mat-form-field> 
+      </div>
+      <br />
+      <div mat-card-actions align="end">
+         <button mat-raised-button color="primary"  [routerLink]="['/authorized/emp/myleave', userId]" >Close</button>&nbsp;
+         <button mat-raised-button color="primary" [disabled]="isDisabled||leaveForm.invalid" type="submit">Save</button>
+      </div>
+    </div>
+      <div class="col-md-2" *ngIf="leaveBalance" matTooltip="Annual Leave {{calHours(leaveBalance.balance)}}">
+        <button mat-mini-fab color="primary" >{{(leaveBalance.balance).toFixed(2)}}</button>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="card-container" *ngIf="isDisabled">
+  <mat-progress-spinner  class="example-margin" mode="indeterminate" diameter="20" value="20"></mat-progress-spinner> 
+</div>
+</mat-card>
+</div>

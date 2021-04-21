@@ -1,0 +1,11 @@
+.custom-btn {
+    color: #ffffff ;
+    background: #f6851c;
+    border: 1px solid;
+    padding: 6px 17px 4px 21px;
+    border-radius: 8px;
+}
+
+.model_view{
+    min-width: 210px;
+}

@@ -1,0 +1,31 @@
+<h1 mat-dialog-title *ngIf="mode=='edit'">Edit Ticket</h1>
+<h1 mat-dialog-title *ngIf="mode=='create'">Create New Ticket</h1>
+<form (submit)="onSave(ticketForm)" #ticketForm="ngForm">
+ <div class="font" mat-dialog-content>
+     <mat-form-field appearance="outline">                                         
+      <mat-label>Ticket</mat-label>
+        <input matInput name="ticket_name"  [(ngModel)]="ticket.ticket_name" type="text" placeholder="ticket Name" #nameInput="ngModel" required>
+           <mat-error *ngIf="nameInput.hasError('required')">Please Enter Project Name.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">                                         
+         <mat-label>Description</mat-label>
+          <textarea  matInput name="ticket_desc" [(ngModel)]="ticket.ticket_desc" type="text" placeholder="Description" #descInput="ngModel" required>{{ticket.ticket_desc}}</textarea>
+           <mat-error *ngIf="descInput.hasError('required')">Please Enter Project Description.</mat-error>
+         </mat-form-field> 
+         <mat-form-field  appearance="outline">
+            <mat-label>Ticket Priority</mat-label>
+           <mat-select name="ticket_priority" placeholder="Select Priority" [(ngModel)]="ticket.ticket_priority" #ticketInput="ngModel" required>
+            <mat-option *ngFor="let p of ticket_priority" [value]="p">
+            {{p}}
+            </mat-option>
+         </mat-select>
+         <mat-error *ngIf="ticketInput.hasError('required')">Select Ticket Priority.</mat-error>
+      </mat-form-field>
+      </div>
+
+      <!-- ticket_priority -->
+      <div mat-card-actions align="end">
+         <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+         <button mat-raised-button color="primary" [disabled]="ticketForm.invalid" type="submit">Save</button>
+      </div>
+</form>

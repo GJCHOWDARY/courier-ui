@@ -1,0 +1,286 @@
+<div class="card-container-div">
+  <div class="container">
+    <div class="row">
+        <div  style="float:right;">
+            <button mat-button [ngClass]="{'tab_btn_active': viewpage==='Skills'}" (click)="viewPage('Skills')">
+            <mat-icon md-list-icon>label_important</mat-icon> Skills</button>
+            <button mat-button [ngClass]="{'tab_btn_active': viewpage==='Education'}" (click)="viewPage('Education')">
+            <mat-icon md-list-icon>explore</mat-icon> Education</button>
+            <button mat-button [ngClass]="{'tab_btn_active': viewpage==='Work'}" (click)="viewPage('Work')">
+            <mat-icon md-list-icon>work_outline</mat-icon> Work Experience</button>
+            <button mat-button [ngClass]="{'tab_btn_active': viewpage==='Certifications'}" (click)="viewPage('Certifications')">
+            <mat-icon md-list-icon>book</mat-icon> Certifications </button>
+            <button mat-button [ngClass]="{'tab_btn_active': viewpage==='Social'}" (click)="viewPage('Social')">
+            <mat-icon md-list-icon>language</mat-icon> Social Media </button>
+     </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-container1" *ngIf="isLoading">
+  <mat-progress-spinner  class="example-margin" mode="indeterminate" diameter="20" value="20"></mat-progress-spinner> 
+</div>
+
+<div *ngIf="viewpage=='Skills'">
+<div class="card-container1">
+    <div>  
+        <form (submit)="addSkill(addSkills)" #addSkills="ngForm">
+            <mat-form-field style="width: 35%;" appearance="outline">                                         
+                <mat-label>Skill</mat-label>
+                  <input matInput  ngModel name="skill" type="text" placeholder="Skill" #nameInput="ngModel" required>
+                 <mat-error *ngIf="nameInput.hasError('required')">Please Enter Your Skill.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width:20%">                                         
+                <mat-label>Years</mat-label>
+                  <input matInput  ngModel name="years" type="text" placeholder="Years of Eperience" #yearInput="ngModel" required>
+                 <mat-error *ngIf="yearInput.hasError('required')">Please Enter Years of Experience.</mat-error>
+            </mat-form-field>
+            <button class="skill_add_btn" mat-raised-button  [disabled]="addSkills.invalid" type="submit">Add</button>
+        </form>
+    </div>
+</div>
+<div class="card-container1" *ngIf="skillsData">
+    <h2 *ngIf="skillsData&&skillsData.length<=0">No Details Found.</h2>
+</div>
+<div class="card-container1">
+ <div class="container" style="width: 75%;">
+   <div class="row">       
+        <mat-chip-list #chipList>
+            <mat-chip  matTooltip="Year of Experience {{s.years}}" *ngFor="let s of skillsData"
+            [selectable]="selectable"
+            [removable]="removable"
+            (removed)="remove(s)"> 
+              <a class="formate_chip">{{s.skill}}</a>
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <mat-chip *ngIf="update" style="background-color: red;" (click)="updateSkills()"  matTooltip="Update"
+            [selectable]="selectable" > 
+              <a class="formate_chip">Update</a>
+            </mat-chip>
+          </mat-chip-list>
+     </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="viewpage=='Education'||viewpage=='Work'">
+  <div style="text-align: right;">
+     <button matTooltip="Add {{viewpage}}" (click)="openDialog({},'add')" mat-mini-fab> <mat-icon>add</mat-icon>  </button> 
+  </div>
+</div> 
+
+<div *ngIf="viewpage=='Education'">
+  <div *ngIf="educations&&educations.length<=0" class="card-container1">
+     <h2> No Details Found.</h2>
+  </div>
+<div class="card-container1" *ngIf="educations">
+   <div class="container">
+      <mat-card style="width: 100%; height: auto;margin: 0px 0px 12px 0px;"  *ngFor="let e of educations">
+        <div class="row">
+          <div class="col-md-3">
+           <div style="flex: 1 1 0%; box-sizing: border-box;"> 
+           <p style="font-size: 15px;font-weight: 600;" > Institution </p>
+          <div style="margin-top: 4px">{{e.institute}}</div>
+         </div>
+       </div>
+       <div class="col-md-3">
+          <div style="flex: 1 1 0%; box-sizing: border-box;"> 
+            <p style="font-size: 15px;font-weight: 600;" >
+              Specialization</p>
+           <div style="margin-top: 4px">{{e.specialization}}</div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div style="flex: 1 1 0%; box-sizing: border-box;"> 
+            <p style="font-size: 15px;font-weight: 600;" >
+            Year</p>
+            <div style="margin-top: 4px">{{e.start_date|date:'longDate'}} - {{e.end_date|date:'longDate'}}</div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div style="flex: 1 1 0%; box-sizing: border-box;"> 
+            <p style="font-size: 15px;font-weight: 600;" >
+            Score</p>
+            <div style="margin-top: 4px">{{e.score}}</div>
+         </div>
+        </div>
+        <div class="col-md-1  mat_btns">
+          <div style="flex: 1 1 0%; box-sizing: border-box;"> 
+            <mat-icon matTooltip="Priority" (click)="onDeleteEdu(e._id)">delete</mat-icon>
+            <mat-icon matTooltip="Starred" (click)="openDialog(e,'update')">edit</mat-icon> 
+         </div>
+        </div>
+       </div>
+    </mat-card> 
+   </div>
+  </div>
+</div> 
+
+<div *ngIf="viewpage=='Work'">
+  <div *ngIf="workData&&workData.length<=0" class="card-container1">
+    <h2>No Details Found.</h2>
+  </div>
+  <div class="card-container1" *ngIf="workData">
+    <div class="container">
+       <mat-card style="width: 100%; height: auto;margin: 0px 0px 12px 0px;"  *ngFor="let w of workData">
+        <div class="row">
+          <div class="col-md-10">
+        <div class="row">
+           <div class="col-md-3">
+            <div > 
+            <p style="font-size: 15px;font-weight: 600;" > Company </p>
+          </div>
+        </div>
+          <div class="col-md-9">
+            <div style="margin-top: 4px">{{w.company_name}}</div>
+            <div style="margin-top: 4px">{{w.job_title}}</div>
+          </div>
+         </div>
+         <div class="row">
+          <div class="col-md-3">
+          <div>
+            <p style="font-size: 15px;font-weight: 600;" > Duration </p>
+          </div>
+        </div>
+         <div class="col-md-9">
+          <div style="margin-top: 4px">
+           From ({{w.start_date|date:'longDate'}}) To ({{w.end_date|date:'longDate'}})
+        </div>
+         </div>
+         </div>
+         <div class="row">
+          <div class="col-md-3">
+          <div>
+            <p style="font-size: 15px;font-weight: 600;" > Description </p>
+          </div>
+        </div>
+         <div class="col-md-9 mat-desc">
+          <div style="margin-top: 4px">{{w.work_desc}}</div><br />
+         </div>
+         </div>
+         <br />  <br />
+         <div class="row">
+          <div class="col-md-3">
+          <div>
+            <p style="font-size: 15px;font-weight: 600;"> Projects </p>
+          </div>
+        </div>
+         <div class="col-md-9"> 
+          <mat-chip-list #chipList *ngIf="w.projects&&w.projects.length>0">
+            <mat-chip  matTooltip="{{a.project_name}}" *ngFor="let a of w.projects"> 
+              <a class="formate_chip">{{a.project_name}}</a>
+            <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+          <div *ngIf="w.projects.length<=0" style="margin-top: 4px">No Data Found.</div>
+         </div>
+         </div> 
+        </div>
+         <div class="col-md-2  mat_btns">
+           <div style="flex: 1 1 0%; box-sizing: border-box;"> 
+             <mat-icon matTooltip="Priority" (click)="onDeleteWork(w._id)">delete</mat-icon>
+             <mat-icon matTooltip="Starred" (click)="openDialog(w,'update')">edit</mat-icon> 
+          </div>
+         </div>
+        </div> 
+     </mat-card> 
+    </div>
+   </div>
+</div>
+
+<div *ngIf="viewpage=='Certifications'">
+  <div class="card-container1">
+      <div>  
+          <form (submit)="addCertificate(certForm)" #certForm="ngForm">
+            <div class="row">
+              <mat-form-field style="width: 35%;" appearance="outline">                                         
+                  <mat-label>Certificate</mat-label>
+                    <input matInput  ngModel name="certificate" type="text" placeholder="Certificate Name" #nameInput="ngModel" required>
+                   <mat-error *ngIf="nameInput.hasError('required')">Please Enter Certificate Name.</mat-error>
+                  </mat-form-field>
+                  <input type="file" #filePicker style="width: 2px;" (change)="selectFile($event)">    
+                <div *ngIf="selectedFileName" style="white-space: nowrap;width: 150px;overflow: hidden; text-overflow: ellipsis;">
+                  <a  matTooltip="{{selectedFileName}}">{{selectedFileName}}</a></div>
+                <a *ngIf="!selectedFiles" class="skill_file_btn" (click)="filePicker.click()" mat-raised-button type="submit">Choose File</a> 
+                <button *ngIf="selectedFiles" class="skill_add_btn" mat-raised-button  [disabled]="isLoading||certForm.invalid" type="submit">Upload</button>
+              </div>                                   
+          </form>
+      </div>
+  </div>
+  <div class="card-container1" *ngIf="certificates">
+    <div class="container">
+       <mat-card style="width: 100%; height: auto;margin: 0px 0px 12px 0px;">
+         <div class="row">
+           <div class="col-md-4">
+             <p style="font-size: 15px;font-weight: 600;"> Certifications </p>
+           </div>
+           <div class="col-md-3">
+             <p style="font-size: 15px;font-weight: 600;">File Name</p>
+           </div>
+           <div class="col-md-3">
+             <p style="font-size: 15px;font-weight: 600;">Created At</p>
+           </div>
+           <div class="col-md-2">
+             <p style="font-size: 15px;font-weight: 600;">Action</p>
+           </div>
+         </div> 
+         <div class="row" *ngFor="let c of certificates">
+            <div class="col-md-4">
+              <div style="margin-top: 4px">{{c.attachment_name}}</div>
+            </div>
+            <div class="col-md-3">
+              <div style="margin-top: 4px">{{c.attachment_url}}</div>
+            </div>
+            <div class="col-md-3">
+              <div style="margin-top: 4px">{{c.createdAt | date}}</div>
+             </div>
+            <div class="col-md-2">
+              <mat-icon matTooltip="Delete" (click)="onDeleteAtt(c._id)">delete</mat-icon>
+              <a style="color:#000" href="{{host_ip}}/uploads/{{c.attachment_url}}" target="_blank" title="{{c.attachment_url}}"><mat-icon matTooltip="Download File">cloud_download</mat-icon></a>
+            </div>
+        </div> 
+       </mat-card> 
+      </div>
+    </div> 
+  </div>
+
+  <div class="card-container1"  *ngIf="viewpage=='Social'">
+    <div class="container">     
+    <br /><br />
+      <form (submit)="updateSocial(socialForm)" #socialForm="ngForm">
+        <div class="row"> 
+           <div class="col-md-10"> 
+             <div class="font" mat-dialog-content>
+               <mat-card-header>
+               </mat-card-header><br /> 
+                  <mat-form-field appearance="outline">                         
+                    <mat-label>Twitter</mat-label>
+                    <input matInput name="twitter" [(ngModel)]="user.twitter" type="text" placeholder="Twitter URL" #twitterInput="ngModel"/>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">                         
+                    <mat-label>LinkedIn</mat-label>
+                    <input matInput name="linkedin" [(ngModel)]="user.linkedin" type="text" placeholder="LinkedIn URL" #linkInput="ngModel"/>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">                         
+                    <mat-label>Facebook</mat-label>
+                    <input matInput name="facebook" [(ngModel)]="user.facebook" type="text" placeholder="Facebook URL" #facebookInput="ngModel"/>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">                         
+                    <mat-label>Github</mat-label>
+                    <input matInput name="github" [(ngModel)]="user.github" type="text" placeholder="Github URL" #gitInput="ngModel"/>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">                         
+                    <mat-label>portfolio/Website</mat-label>
+                    <input matInput name="portfolio" [(ngModel)]="user.portfolio" type="text" placeholder="portfolio/Website URL" #websiteInput="ngModel"/>
+                  </mat-form-field>
+             </div> 
+          </div>
+        <div class="col-md-2 mat_btns">
+          <div style="flex: 1 1 0%; box-sizing: border-box;"> 
+            <button mat-raised-button color="primary" [disabled]="socialForm.invalid" type="submit">Update</button>
+         </div>
+        </div>
+      </div>         
+    </form>
+  </div>
+</div>

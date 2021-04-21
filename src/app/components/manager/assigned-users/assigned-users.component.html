@@ -1,0 +1,70 @@
+<div class="card-container">  
+    <div class="container">
+       <div class="row">
+           <div class="col-md-6">
+          </div>
+           <div class="col-md-6">
+              <mat-card>
+              <form action="#" autocomplete="off">
+                  <mat-form-field style="width:50%">
+                    <input matInput name="name" [(ngModel)]="usersearch" (keyup)="userChangeValue(nameInput.value)" type="text" placeholder="Search" #nameInput="ngModel">
+                    <mat-icon matSuffix>search</mat-icon>
+                  </mat-form-field>
+                  <button class="btn btn-success float-right" 
+                  matTooltip="Approve Assigne Employee Leave"  [routerLink]="['/authorized/manager/approve_leave']" >Approve Leaves</button>
+             </form> 
+          </mat-card>
+       </div>
+     </div>
+   </div>
+      <table mat-table [dataSource]="users" class="mat-elevation-z8 table-striped">
+       <ng-container matColumnDef="Name">
+         <th mat-header-cell *matHeaderCellDef>User Name </th>
+         <td mat-cell *matCellDef="let element"> {{element.first_name}} {{element.last_name}}</td>
+       </ng-container>
+       <ng-container matColumnDef="Email">
+         <th mat-header-cell *matHeaderCellDef > Email </th>
+         <td mat-cell *matCellDef="let element" matTooltip="Leave Balance: {{element.leave_balance}}/Status: {{element.status}}" > {{element.email}} </td>
+       </ng-container>
+       <ng-container matColumnDef="Location">
+         <th mat-header-cell *matHeaderCellDef > Location </th>
+         <td mat-cell *matCellDef="let element" > {{element.jobDetailsId.job_location}} </td>
+       </ng-container>
+       <ng-container matColumnDef="Status">
+         <th mat-header-cell *matHeaderCellDef>Status </th>
+         <td mat-cell *matCellDef="let element">
+             {{element.status}} 
+         </td>
+       </ng-container>
+       <ng-container matColumnDef="Role">
+         <th mat-header-cell *matHeaderCellDef> Role </th>
+         <td mat-cell *matCellDef="let element">
+           <a *ngIf="element.role==1">Admin</a>
+           <a *ngIf="element.role==2">Manager</a>
+           <a *ngIf="element.role==3">Employee</a>
+         </td>
+       </ng-container>
+       <ng-container matColumnDef="Mobile">
+         <th mat-header-cell *matHeaderCellDef> Mobile </th>
+         <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+       </ng-container>
+       <ng-container matColumnDef="Action">
+        <th mat-header-cell  *matHeaderCellDef  style=" padding: 18px 55px; text-align: center;">Action </th>
+        <td mat-cell  style="text-align: center;" [ngSwitch]="element.status" *matCellDef="let element">
+         <a mat-button   [routerLink]="['/authorized/manager/approve_leave',element._id]"   matTooltip="User Leave Details">
+            <mat-icon md-list-icon>info</mat-icon>
+         </a> 
+         <button mat-button  [routerLink]="['/authorized/emp/qualifications',element._id]" matTooltip="Qualifications">
+           <mat-icon md-list-icon>account_balance</mat-icon>
+         </button>
+        </td>
+      </ng-container> 
+       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+     </table>
+     <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
+     <p class="info-text mat-body-1" *ngIf="users.length <= 0 && !isLoading">No Users Found!</p>
+     <mat-paginator [length]="userCount" [pageSize]="usersPerPage" [pageSizeOptions]="userSizeOptions" (page)="onChangedPage($event)"
+     *ngIf="users.length > 0"></mat-paginator>
+   </div> 
+     

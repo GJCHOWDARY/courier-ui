@@ -1,0 +1,36 @@
+<h1 mat-dialog-title *ngIf="mode=='edit'">Edit Job Category</h1>
+<h1 mat-dialog-title *ngIf="mode=='create'">Create Job Cateogry</h1>
+<form (submit)="onSaveRole(attachmentForm)" #attachmentForm="ngForm">
+ <div class="font" mat-dialog-content>
+     <mat-form-field appearance="outline">                                         
+      <mat-label>Attachment Name</mat-label>
+        <input matInput name="attachment_name" [disabled]="isEdit" [(ngModel)]="attachment.attachment_name" type="text" placeholder="Attachment Name" #nameInput="ngModel" required>
+           <mat-error *ngIf="nameInput.invalid">Please Attachment Name.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">                                         
+         <mat-label>Description</mat-label>
+          <textarea  matInput name="attachment_desc" [(ngModel)]="attachment.attachment_desc" type="text" placeholder="Attachment Description" #descInput="ngModel" >{{attachment.attachment_desc}}</textarea> 
+           <mat-error *ngIf="descInput.invalid">Please Attachment Description.</mat-error>
+         </mat-form-field> 
+         <div class="row">
+            <div class="col-md-6">
+               <mat-form-field appearance="outline">                                         
+                  <mat-label>File Name</mat-label>
+                  <input readonly matInput name="file" [(ngModel)]="attachment.attachment_url" type="text" placeholder="File Name" #fileInput="ngModel" required>  
+                <mat-error *ngIf="fileInput.invalid">Please Select File.</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-md-6">
+               <button style="margin: 10px;" mat-raised-button color="primary" type="button" (click)="filePicker.click()">Pick File</button>
+                <input type="file" #filePicker (change)="selectFile($event)">
+            </div>
+         </div>
+      </div>
+      <div mat-card-actions align="end">
+         <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+         <button mat-raised-button color="primary" [disabled]="isLoading||attachmentForm.invalid" type="submit">Save</button>
+      </div>
+      <div class="card-container">
+         <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="20" value="20"></mat-progress-spinner> 
+      </div>
+</form>

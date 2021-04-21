@@ -1,0 +1,310 @@
+<div class="card-container">
+  <mat-progress-spinner *ngIf="isLoading||isLoadingData" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner>
+  <mat-card *ngIf="!isLoadingData">
+     <mat-tab-group color="accent" animationDuration="0ms" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+        <mat-tab>
+           <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">business_center</mat-icon>
+              Job Info
+           </ng-template>
+           <br /> <br />
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Email</mat-label>
+                       <input matInput readonly name="email" value="{{user.email}}" type="email">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4" *ngIf="user.jobDetailsId.jobId">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Job Title</mat-label>
+                       <input matInput *ngIf="user.jobDetailsId" readonly name="jobId" value="{{user.jobDetailsId.jobId.job_name}}" type="text">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4" *ngIf="user.jobDetailsId.categoryId">
+                    <mat-form-field  appearance="outline">
+                       <mat-label>Job Category</mat-label>
+                       <input matInput readonly  name="categoryId" value="{{user.jobDetailsId.categoryId.category_name}}" type="text">
+                    </mat-form-field>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4" *ngIf="user.jobDetailsId.subcategoryId">
+                    <mat-form-field  appearance="outline">
+                       <mat-label>Sub Unit</mat-label>
+                       <input matInput readonly name="subcategoryId" value="{{user.jobDetailsId.subcategoryId.sub_category_name}}" type="text">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field  appearance="outline">
+                       <mat-label>Work Shift</mat-label>
+                       <input matInput readonly name="work_shift" value="{{user.jobDetailsId.work_shift}}" type="text">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field  appearance="outline">
+                       <mat-label>Role</mat-label>
+                       <input matInput readonly name="role" value="{{user.role}}" type="text">
+                    </mat-form-field>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field  appearance="outline">
+                       <mat-label>Employment Status</mat-label>
+                       <input matInput readonly name="employment_status" value="{{user.jobDetailsId.employment_status}}" type="text">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Job Specification</mat-label>
+                       <input matInput readonly name="job_specification" value="{{user.jobDetailsId.job_specification}}" type="text">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Leave Balance</mat-label>
+                       <input matInput readonly name="leave_balance" value="{{user.leave_balance}}" type="number">
+                    </mat-form-field>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Joined Date</mat-label>
+                       <input matInput  name="join_date" value="{{user.jobDetailsId.join_date|date}}">
+                       <mat-icon matSuffix>calendar_today</mat-icon>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Jod Location</mat-label>
+                       <input matInput readonly name="job_location" value="{{user.jobDetailsId.job_location}}" type="text">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>EMP ID</mat-label>
+                       <input matInput readonly name="emp_ID" value="{{user.emp_ID}}" type="text">
+                    </mat-form-field>
+                 </div>
+              </div>
+              <div class="row" *ngIf="user.assignee">
+                 <div class="col-md-6">
+                    <p>Assigned Manager </p>
+                 </div>
+              </div>
+              <div class="row" *ngIf="user.assignee">
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Manager Email</mat-label>
+                       <input matInput readonly name="emp_ID" value="{{user.assignee.email}}" type="text">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Name</mat-label>
+                       <input matInput readonly name="emp_ID" value="{{user.assignee.first_name}} {{user.assignee.last_name}}" type="text">
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4"> 
+                 </div>
+              </div>
+           </div>
+        </mat-tab>
+        <mat-tab *ngIf="user">
+           <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">person_pin</mat-icon>
+              Profile Info
+           </ng-template>
+           <br /><br />
+           <form (submit)="saveProfileInfo(profileForm)" #profileForm="ngForm">
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>First Name</mat-label>
+                       <input matInput name="first_name" [(ngModel)]="user.first_name" type="text" placeholder="Enter First Name" #FnameInput="ngModel" required>
+                       <mat-hint align="end">Not more then 50 characters long.</mat-hint>
+                       <mat-error *ngIf="FnameInput.hasError('required')">Please Enter First Name.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Last Name</mat-label>
+                       <input matInput name="last_name" [(ngModel)]="user.last_name" type="text" placeholder="Enter Last Name" #LnameInput="ngModel" required>
+                       <mat-hint align="end">Not more then 50 characters long.</mat-hint>
+                       <mat-error *ngIf="LnameInput.hasError('required')">Please Enter Last Name.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Personal Email</mat-label>
+                       <input matInput name="personal_email" [(ngModel)]="user.personal_email" type="email" placeholder="Enter Personale Email" #pemailInput="ngModel" email pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"  required>
+                       <mat-error *ngIf="pemailInput.hasError('required')">Please Enter Personal Email.</mat-error>
+                       <mat-error *ngIf="pemailInput.hasError('pattern')">Email format should be
+                          <small><b>joe@abc.com</b></small>
+                       </mat-error>
+                    </mat-form-field>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Date of Birth</mat-label>
+                       <input matInput [matDatepicker]="picker1" name="date_of_birth" [(ngModel)]="user.date_of_birth" placeholder="Select Join Date" #dobdataInput="ngModel" required>
+                       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                       <mat-datepicker #picker1></mat-datepicker>
+                       <mat-error *ngIf="dobdataInput.hasError('required')">Please Select Date of Birth.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field  appearance="outline">
+                       <mat-label>Marital Status</mat-label>
+                       <mat-select name="marital_status" placeholder="Select Marital Status" [(ngModel)]="user.marital_status" #MStatusInput="ngModel" required>
+                       <mat-option *ngFor="let status of maritalStatus" [value]="status.title">
+                       {{status.title}}
+                       </mat-option>
+                       </mat-select>
+                       <mat-error *ngIf="MStatusInput.hasError('required')">Please Marital Status.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Nationality</mat-label>
+                       <input matInput name="nationality" [(ngModel)]="user.nationality" type="text" placeholder="Enter Nationality" #nationInput="ngModel" required>
+                       <mat-error *ngIf="nationInput.hasError('required')">Please Enter Nationality.</mat-error>
+                    </mat-form-field>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Aadhar No</mat-label>
+                       <input matInput name="aadhar_no" [(ngModel)]="user.aadhar_no" type="text" placeholder="Enter Aadhar No" #aadharInput="ngModel">
+                       <mat-error *ngIf="aadharInput.hasError('required')">Please Enter Aadhar No.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>PAN No</mat-label>
+                       <input matInput name="pan_no" [(ngModel)]="user.pan_no" type="text" placeholder="Enter PAN No" #panInput="ngModel">
+                       <mat-error *ngIf="panInput.hasError('required')">Please Enter PAN No.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <div>
+                       <mat-label>Gender</mat-label>
+                       <mat-radio-group  name="gender" [(ngModel)]="user.gender"  #genderInput="ngModel" required>
+                       <mat-radio-button value="Male">Male</mat-radio-button>
+                       <mat-radio-button value="Female">Female</mat-radio-button>
+                       <mat-error *ngIf="genderInput.hasError('required')">Please Select Gender.</mat-error>
+                       </mat-radio-group> 
+                    </div>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field  appearance="outline">
+                       <mat-label>Mobile</mat-label>
+                       <input matInput name="mobile" [(ngModel)]="user.mobile" type="text" mobile  pattern="[0-9]*" minlength="10" maxlength="10" placeholder="Enter Mobile Number" #mobileInput="ngModel" required>
+                       <mat-error *ngIf="mobileInput.hasError('required')">Please Enter PhoneNumber.</mat-error>
+                       <mat-error *ngIf="mobileInput.hasError('pattern')">Mobile number should be only numbers</mat-error>
+                       <mat-error *ngIf="mobileInput.hasError('minlength')">Mobile should be 10digit</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field *ngIf="MStatusInput.value=='Married'" appearance="outline">
+                       <mat-label>Married Date</mat-label>
+                       <input matInput [matDatepicker]="picker3" name="married_date" [(ngModel)]="user.married_date" placeholder="Select Married Date" #marrieddataInput="ngModel" required>
+                       <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                       <mat-datepicker #picker3></mat-datepicker>
+                       <mat-error *ngIf="marrieddataInput.hasError('required')">Please Select Married Date.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <button mat-raised-button color="primary" [disabled]="isLoading||profileForm.invalid" type="submit" >Update Personal Info</button>
+                 </div>
+              </div>
+           </div>
+           </form>
+        </mat-tab>
+        <mat-tab *ngIf="user">
+           <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">info</mat-icon>
+              Contact Info
+           </ng-template>
+           <br /><br />
+           <form (submit)="saveContactInfo(contactInfoForm)" #contactInfoForm="ngForm">
+           <div class="container">
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Address1</mat-label>
+                       <textarea matInput name="address1" [(ngModel)]="user.userAddressId.address1" type="text" placeholder="Enter Address1" #Add1Input="ngModel" required>{{user.address1}}</textarea>
+                       <mat-hint align="end">Not more then 50 characters long.</mat-hint>
+                       <mat-error *ngIf="Add1Input.hasError('required')">Please Enter Address1.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Address2</mat-label>
+                       <textarea matInput name="address2" [(ngModel)]="user.userAddressId.address2" type="text" placeholder="Enter Address2" #Add12nput="ngModel" required>{{user.address2}}</textarea>
+                       <mat-hint align="end">Not more then 50 characters long.</mat-hint>
+                       <mat-error *ngIf="Add1Input.hasError('required')">Please Enter Address2.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>City</mat-label>
+                       <input matInput name="city" [(ngModel)]="user.userAddressId.city" type="text" placeholder="Enter City" #cityInput="ngModel" required>
+                       <mat-error *ngIf="cityInput.hasError('required')">Please Enter City.</mat-error>
+                    </mat-form-field>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>State</mat-label>
+                       <input matInput name="state" [(ngModel)]="user.userAddressId.state" type="text" placeholder="Enter State" #stateInput="ngModel" required>
+                       <mat-error *ngIf="stateInput.hasError('required')">Please Enter State.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Country</mat-label>
+                       <input matInput name="country" [(ngModel)]="user.userAddressId.country" type="text" placeholder="Enter Country" #countryInput="ngModel" required>
+                       <mat-error *ngIf="countryInput.hasError('required')">Please Enter County.</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                       <mat-label>Zip Code</mat-label>
+                       <input matInput name="zip_code" [(ngModel)]="user.userAddressId.zip_code" type="text" placeholder="Enter Zip" #zipInput="ngModel" required>
+                       <mat-error *ngIf="zipInput.hasError('required')">Please Enter Zip Code.</mat-error>
+                    </mat-form-field>
+                 </div>
+              </div>
+              <div class="row">
+                 <div class="col-md-4">
+                    <mat-form-field  appearance="outline">
+                       <mat-label>Mobile</mat-label>
+                       <input matInput name="mobile" [(ngModel)]="user.mobile" type="text" mobile  pattern="[0-9]*" minlength="10" maxlength="10" placeholder="Enter Mobile Number" #mobileInput="ngModel" required>
+                       <mat-error *ngIf="mobileInput.hasError('required')">Please Enter PhoneNumber.</mat-error>
+                       <mat-error *ngIf="mobileInput.hasError('pattern')">Mobile number should be only numbers</mat-error>
+                       <mat-error *ngIf="mobileInput.hasError('minlength')">Mobile should be 10digit</mat-error>
+                    </mat-form-field>
+                 </div>
+                 <div class="col-md-4">
+                 </div>
+                 <div class="col-md-4">
+                    <button mat-raised-button color="primary" [disabled]="isLoading||contactInfoForm.invalid" type="submit" >Update Contact Info</button>
+                 </div>
+              </div>
+           </div>
+           </form>
+        </mat-tab>
+     </mat-tab-group>
+  </mat-card>
+</div>

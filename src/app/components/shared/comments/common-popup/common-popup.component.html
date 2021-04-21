@@ -1,0 +1,119 @@
+<mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="20" value="20"></mat-progress-spinner> 
+<div *ngIf="data.mode=='info'">
+    <div>    
+      <mat-icon  matTooltip="Move Task" style="float: right;" (click)="viewPage()">info</mat-icon>
+    </div>
+    <br /><br />
+    <div>
+        <div><h2>Move Task to Other</h2></div>
+        <form (submit)="moveTask(moveTaskForm)" #moveTaskForm="ngForm">
+            <mat-form-field style="height: 1px;top:-20px" class="status_cus" appearance="outline">
+                <mat-label>Search Ticks</mat-label> 
+                  <input type="text" name="ticketId" [(ngModel)]="ticketId" matInput (keyup)="searchTickets(assigneeInput.value)" [matAutocomplete]="auto"
+                    placeholder="Serach Tickets..." #assigneeInput required> 
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn1">
+               <mat-option *ngFor="let t of tickets" [value]="t" #datae>
+                  {{ t.ticket_name }}
+               </mat-option>    
+               </mat-autocomplete>
+            </mat-form-field> 
+            <div mat-card-actions align="end">
+                <a mat-raised-button (click)="close()" color="primary" >close</a>
+                <button mat-raised-button color="primary" [disabled]="isLoading||moveTaskForm.invalid" type="submit">Move</button>
+             </div>
+       </form>
+    </div> 
+  </div> 
+  
+<div  *ngIf="data.mode=='add'||data.mode=='update'">
+  <div  mat-dialog-title >
+    <div class="row">
+      <div class="col-md-6">
+        <h1 *ngIf="data.mode=='update'">Edit Task</h1>
+        <h1 *ngIf="data.mode=='add'">New Task</h1>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field style="font-size:11px;width:49%;float:right;" appearance="outline">
+          <mat-label>Tages</mat-label> 
+          <mat-select name="tags" placeholder="Choose tags" [(value)]="selectedTage" [compareWith]="comparer" multiple #toppings>
+            <mat-select-trigger *ngIf="selectedTage&&selectedTage.length>0">
+              {{selectedTage ? selectedTage[0].name : ''}}
+              <span *ngIf="selectedTage?.length > 1" class="example-additional-selection">
+                (+{{selectedTage.length - 1}} {{selectedTage?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let tag of tags" [value]="tag">{{tag.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <form (submit)="onCreate(createTaskForm)" #createTaskForm="ngForm"> 
+    <div class="font" mat-dialog-content>
+        <mat-form-field appearance="outline">                                         
+         <mat-label>Title</mat-label>
+           <textarea matInput  cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"name="task_name" [(ngModel)]="task.task_name" 
+           type="text" placeholder="Task Title" #nameInput="ngModel" required>{{task.task_name}}</textarea>
+              <mat-error *ngIf="nameInput.hasError('required')">Enter Task Title.</mat-error>
+           </mat-form-field>
+           <div class="row">
+             <div class="col-md-6">
+              <mat-form-field appearance="outline">           
+                <mat-label>Start Date</mat-label>
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" readonly  name="start_date" [(ngModel)]="task.start_date" placeholder="Select Start Date" #sdataInput="ngModel" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+                <mat-error *ngIf="sdataInput.hasError('required')">Please Select Start Date.</mat-error>
+            </mat-form-field>
+          </div>
+            <div class="col-md-6">
+             <mat-form-field appearance="outline">           
+                <mat-label>Due Date</mat-label>
+                <input matInput  [min]="minDate" [max]="maxDate"  [matDatepicker]="picker1" readonly   name="end_date" [(ngModel)]="task.end_date" placeholder="Select Due Date" #edataInput="ngModel" required>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                <mat-error *ngIf="edataInput.hasError('required')">Please Select Due Date.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      <div class="container" *ngIf="assignedUsers.length>0">
+        <div class="row">  
+           <mat-icon md-list-icon>group</mat-icon>
+           <mat-label>Assigned Users</mat-label>  <br />
+        </div>
+     <div class="row">                           
+       <mat-chip-list #chipList>
+         <mat-chip  matTooltip="{{a.first_name}} {{a.last_name}}" *ngFor="let a of assignedUsers"
+         [selectable]="selectable"
+         [removable]="removable"
+         (removed)="remove(a)"> 
+           <a class="formate_chip">{{a.first_name}} {{a.last_name}}</a>
+         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+         </mat-chip>
+       </mat-chip-list>
+     </div>  
+        </div> <br />
+        <mat-form-field style="width: 100%;" appearance="outline">
+        <mat-label>Assign Users</mat-label> 
+          <input type="text" matInput (keyup)="searchUsers(assigneeInput.value)" [matAutocomplete]="auto" #assigneeInput
+            placeholder="New User..."
+            #assigneeInput   
+            [formControl]="fruitCtrl"> 
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelection($event)" [displayWith]="displayFn">
+        <mat-option *ngFor="let user of searchUser" [value]="user" #datae>
+          {{ user.first_name }} {{user.last_name}}
+        </mat-option>      
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline">                                         
+        <mat-label>Note</mat-label>
+         <textarea  matInput name="task_desc" [(ngModel)]="task.task_desc" type="text" placeholder="Description" #descInput="ngModel" required>{{task.task_desc}}</textarea>
+          <mat-error *ngIf="descInput.hasError('required')">Enter Task Note.</mat-error>
+        </mat-form-field> 
+      </div>
+         <div mat-card-actions align="end">
+            <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+            <button mat-raised-button color="primary" [disabled]="isLoading||createTaskForm.invalid" type="submit">Save</button>
+         </div>
+   </form>
+</div>

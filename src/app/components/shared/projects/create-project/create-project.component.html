@@ -1,0 +1,60 @@
+<h1 mat-dialog-title *ngIf="mode=='edit'">Edit Project</h1>
+<h1 mat-dialog-title *ngIf="mode=='create'">Create Project</h1>
+<form (submit)="onSave(projectForm)" #projectForm="ngForm">
+ <div class="font" mat-dialog-content>
+     <mat-form-field appearance="outline">                                         
+      <mat-label>Project Name</mat-label>
+        <input matInput name="project_name" [disabled]="isEdit" [(ngModel)]="project.project_name" type="text" placeholder="Project Name" #nameInput="ngModel" required>
+           <mat-error *ngIf="nameInput.hasError('required')">Please Enter Project Name.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">                                         
+         <mat-label>Description</mat-label>
+          <textarea  matInput name="project_desc" [(ngModel)]="project.project_desc" type="text" placeholder="Description" #descInput="ngModel" required>{{project.project_desc}}</textarea>
+           <mat-error *ngIf="descInput.hasError('required')">Please Enter Project Description.</mat-error>
+         </mat-form-field> 
+         <div class="container" *ngIf="project.assignedUsers.length>0">
+            <div class="row">  
+               <mat-icon md-list-icon>group</mat-icon>
+               <mat-label>Assigned Users</mat-label>  <br />
+            </div>
+         <div class="row">                                      
+            <input type="hidden" name="assignedUsers" [(ngModel)]="project.assignedUsers">
+            <mat-chip-list #chipList>
+               <mat-chip
+               *ngFor="let a of project.assignedUsers"
+               [selectable]="selectable"
+               [removable]="removable"
+               (removed)="remove(a)">
+               {{a.first_name}} {{a.last_name}}
+               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+               </mat-chip>
+            </mat-chip-list>
+         </div>  
+      </div> <br />
+         <mat-form-field appearance="outline">
+            <mat-label>Assign Users</mat-label> 
+               <input type="text" matInput (keyup)="searchUsers(assigneeInput.value)" [matAutocomplete]="auto" #assigneeInput
+                 placeholder="New User..."
+                 #assigneeInput   
+                 [formControl]="fruitCtrl"> 
+             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelection($event)" [displayWith]="displayFn">
+               <mat-option *ngFor="let user of searchUser" [value]="user" #datae>
+                  {{ user.first_name }} {{user.last_name}}
+               </mat-option>      
+               </mat-autocomplete>
+          </mat-form-field>
+            <!-- <mat-form-field appearance="outline">
+               <mat-label>Assignee</mat-label>
+               <input type="text" name="assignedUsers" matInput  (keyup)="searchUsers(assigneeInput.value)" [matAutocomplete]="auto" #assigneeInput>
+               <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelection($event)" [displayWith]="displayFn">
+               <mat-option *ngFor="let user of searchUser" [value]="user" #datae>
+                  {{ user.first_name }} {{user.last_name}}
+               </mat-option>      
+               </mat-autocomplete>
+            </mat-form-field> --> 
+   </div>
+      <div mat-card-actions align="end">
+         <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+         <button mat-raised-button color="primary" [disabled]="isLoading||projectForm.invalid" type="submit">Save</button>
+      </div>
+</form>

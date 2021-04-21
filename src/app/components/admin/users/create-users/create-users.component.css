@@ -1,0 +1,84 @@
+.form{
+    line-height: normal;
+    }
+    
+    mat-form-field,
+    textarea {
+      width: 50%;
+      padding: 5px
+    }
+    
+    mat-spinner {
+      margin: auto;
+    }
+    
+    .image-preview {
+      height: 5rem;
+      margin: 1rem 0;
+    }
+    
+    .image-preview img {
+      height: 100%;
+    }
+    
+    .select_role{
+      width: auto;
+    }
+    
+    /*   Create Button code */
+    
+    .btn-success:hover {
+      color: #0747a6 !important;
+      background-color: #fff !important; 
+      border-color: #0747a6 !important;
+    }
+    
+    .btn-success {
+      color: #fff !important;
+      background-color: #0747a6 !important;
+      border-color: #0747a6 !important;
+    }
+    
+    .mat-fab.mat-primary, .mat-flat-button.mat-primary,
+     .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+       background-color: #fff !important; 
+       color:#f89b46;
+    }
+    
+    .mat-raised-button[disabled]:not([class*=mat-elevation-z])  {
+      color: #b3b7bd !important;
+      background-color: #fff !important; 
+      border-color:#b3b7bd !important;  
+      border-color: red !important;
+    }
+    
+    .mat-fab.mat-primary, .mat-flat-button.mat-primary,
+     .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary:hover {
+      color: #fff !important;
+      background-color: #f89b46 !important; 
+      border-color: #f89b46 !important;
+    }
+
+/* model width */
+.mat-dialog-container{
+   display: block  !important;
+    padding: 37px !important;
+    border-radius: 4px  !important;
+    box-sizing: border-box  !important;
+    overflow: auto  !important;
+    outline: 0  !important;
+    width: 100%  !important;
+    min-width: 525px !important;
+    height: 100%  !important;
+    min-height: inherit;
+    max-height: inherit;
+  }
+  
+  .mat-dialog-content {
+    display: block;
+    margin: 0 -24px;
+    padding: 0 24px;
+    max-height: 78vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }

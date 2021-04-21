@@ -1,0 +1,15 @@
+<div class="card-spinner">
+  <mat-progress-spinner *ngIf="!isLoading" class="example-margin" mode="indeterminate" diameter="300" value="20"></mat-progress-spinner> 
+</div>
+<mat-nav-list *ngFor="let u of usersData" >
+  <a mat-list-item >
+    <span matTooltip="Joined Date: {{u.join_date2|date}}" mat-line>{{u.first_name}} {{u.last_name}}</span>
+    <span matTooltip="Joined Date: {{u.join_date2|date}}" mat-line>{{u.email}}</span>
+    <span style="color:#afaead; font-size: 14px;text-align: center;" mat-line> Joined Date: {{u.join_date2|date}} ({{diff_years(u.join_date2)}} Years)</span>
+    <img *ngIf="u.profile_img" mat-card-md-image src="{{host_ip}}/uploads/{{u.profile_img}}">
+    <img *ngIf="!u.profile_img" mat-card-md-image src="/assets/logo01.PNG">
+  </a>
+</mat-nav-list> 
+<mat-nav-list *ngIf="usersData.length<=0">
+  <a>No Result Found!</a>
+</mat-nav-list>

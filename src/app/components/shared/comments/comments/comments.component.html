@@ -1,0 +1,262 @@
+<mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
+<div *ngIf="!isLoading">
+  <div mat-dialog-title>
+    <div>
+      <button matDialogClose (click)="close()" style="float: right;" mat-mini-fab> <mat-icon>close</mat-icon>  </button>
+    </div>  
+    <div style="font-size: 19px;"> 
+      <mat-icon>subtitles</mat-icon>  
+        {{ticket.ticket_name}}
+    </div> 
+    <div class="row" style="text-align: center;">
+      <div class="col-md-4 col-sm-12">
+      <button class="tab_btn" [ngClass]="{'tab_btn_active': viewpage==='comments'}" (click)="viewPage('comments')" mat-button>
+        <mat-icon md-list-icon>chat</mat-icon> Comments</button>
+      </div>
+      <div class="col-md-4 col-sm-12">
+      <button class="tab_btn" [ngClass]="{'tab_btn_active': viewpage==='attachments'}" (click)="viewPage('attachments')" mat-button>
+        <mat-icon md-list-icon>attachment</mat-icon> Attachments</button>
+      </div>
+      <div class="col-md-4 col-sm-12">
+      <button class="tab_btn" [ngClass]="{'tab_btn_active': viewpage==='tasks'}" (click)="viewPage('tasks')" mat-button>
+        <mat-icon md-list-icon>list</mat-icon> Tasks</button>
+      </div>
+    </div>
+  </div>  
+<div class="font" mat-dialog-content>
+<div>
+  <mat-chip-list #chipList>
+    <button mat-button matTooltip="Assigned Users"><mat-icon md-list-icon>group</mat-icon></button> 
+      <mat-chip (click)="filter(a)" matTooltip="{{a.first_name}} {{a.last_name}}" *ngFor="let a of ticket.projectId.assignedUsers">
+       <a class="formate_chip">{{a.first_name}} {{a.last_name}}</a></mat-chip>
+       <mat-chip style="width:70px;" *ngIf="clearFilter&&viewpage=='tasks'" (removed)="removeFilter()"
+       [selectable]="selectable"  [removable]="removable">clear <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon></mat-chip>
+  </mat-chip-list>
+ </div>
+<div *ngIf="viewpage==='comments'">
+  <div class="row">
+    <div class="col-md-2"> 
+      <mat-icon>notes</mat-icon>                                         
+      <mat-label class="mat_label">Description</mat-label>
+    </div>
+    <div class="col-md-10">
+      <div class="mat-desc">
+        <pre>{{ticket.ticket_desc}} </pre>
+            <!-- <textarea readonly matTextareaAutosize matAutosizeMinRows=0 matAutosizeMaxRows=8 matInput>{{ticket.ticket_desc}} </textarea> -->
+        </div> 
+    </div>
+  </div>
+    <div class="container"> 
+       <form (submit)="onComment(commentForm)" #commentForm="ngForm">
+      <div class="row">  
+        <div class="col-md-9"> 
+          <mat-form-field appearance="outline">                                         
+            <mat-label>Your Comment</mat-label>
+             <textarea  matInput name="comment" type="text" [(ngModel)]="commentDataForm.comment" placeholder="Write Comment Here ..." #descInput="ngModel" required></textarea>
+             <mat-icon  matSuffix>insert_comment</mat-icon>
+             <mat-error *ngIf="descInput.hasError('required')">Write Your Comment...</mat-error>
+            </mat-form-field> 
+          </div>
+          <div class="col-md-3" style="text-align: left;">  
+            <div>
+            <input type="file" #filePicker style="width: 40px;" (change)="selectFile($event)">
+            <a class="comment_btn" (click)="filePicker.click()" mat-stroked-button >
+              <mat-icon matTooltip="Attachment"  matSuffix>attachment</mat-icon></a>
+              <button [disabled]="isLoadingComments||commentForm.invalid" class="comment_btn" mat-stroked-button color="primary">
+              <mat-icon matTooltip="Save Your Comment" type="submit"  matSuffix>send</mat-icon></button>
+              </div>
+              <br />
+              <div *ngIf="selectedFileName" class="file_name" matTooltip="{{selectedFileName}}">
+                <a>{{selectedFileName}}</a>
+              </div>
+            </div>
+          </div> 
+        </form>
+     </div> 
+  <div>
+    <div class="spinner_center">
+      <mat-progress-spinner *ngIf="isLoadingComments" class="example-margin" mode="indeterminate" diameter="20" value="20"></mat-progress-spinner> 
+    </div>
+    <div *ngFor="let a of comments">
+        <div class="msj macro" *ngIf="userId!=a.userId._id"> 
+                <div class="text text-l">
+                  <span  matTooltip="{{a.userId.first_name}} {{a.userId.last_name}}" class="img-circle">{{formateName(a.userId.first_name,a.userId.last_name)}}</span>
+                  <p>{{a.comment}}</p>
+                    <p><small>{{a.createdAt|date:'mediumDate'}} at {{a.createdAt|date:'shortTime'}}</small></p>
+                </div>
+            </div> 
+            <div class="msj-rta macro" *ngIf="userId==a.userId._id">
+           <div class="text text-r">
+              <span> <p class=" img-circle"  matTooltip="{{a.first_name}} {{a.last_name}}" style="float: right;padding: 5px;">{{formateName(a.userId.first_name,a.userId.last_name)}}</p></span>
+                <p>{{a.comment}}</p>
+                <p>
+                  <a *ngIf="a.file_url" target="_blank" matTooltip="{{a.file_url}}" href="{{host_ip}}/uploads/{{a.file_url}}"><mat-icon  md-list-icon style="font-size:16px;float:left">attachment</mat-icon></a>
+                  <small>{{a.createdAt|date:'mediumDate'}} at {{a.createdAt|date:'shortTime'}}</small>
+                </p>
+             </div> 
+        </div> 
+      </div>
+      <div *ngIf="!isLoadingComments&&comments.length<=0">No Comments Found..!</div>
+    </div>
+  </div>
+  
+  <div *ngIf="viewpage==='attachments'">
+    <br />
+    <div class="container" *ngFor="let a of comments">
+      <div *ngIf="a.fileType">
+        <div class="attachment-thumbnail">
+          <a class="attachment-thumbnail-preview js-open-viewer attachment-thumbnail-preview-is-cover" href="{{host_ip}}/uploads/{{a.file_url}}" target="_blank" title="{{a.file_url}}" style="background-image: url({{host_ip}}/uploads/{{a.file_url}});background-color: #5a5857;">
+           <p class="file_type" *ngIf="a.fileType!='jpg'&&a.fileType!='gif'&&a.fileType!='png'&&a.fileType!='jpeg'">
+             {{a.fileType}}
+            </p>
+          </a>
+          <p class="attachment-thumbnail-details js-open-viewer">
+            <span class="attachment-thumbnail-name">{{a.file_url}}</span>
+              <a class="attachment-thumbnail-details-title-action dark-hover js-attachment-action js-direct-link" href="" target="_blank" rel="noreferrer nofollow noopener">
+                <span class="icon-sm icon-external-link"></span></a>
+                <span class="u-block quiet attachment-thumbnail-details-title-options">
+                <span>Added on<span class="date" dt="2020-01-08T10:23:41.360Z" title="January 8, 2020 3:50 PM"> {{a.createdAt|date:'mediumDate'}} at {{a.createdAt|date:'shortTime'}}</span></span>
+                <span><a class="attachment-thumbnail-details-title-options-item dark-hover js-confirm-delete">
+                <span class="del_att" (click)="deleteAttachment(a._id,a.file_url)" mat-button>Delete</span></a></span>
+            </span>
+         </div> 
+      </div>
+    </div>
+  </div>
+
+<div *ngIf="viewpage==='tasks'" #top>
+  <div class="container" >
+     <div class="row">  
+      <div class="side_nav_filter">
+        <div style="background-color: #eaeaea;height: 100%;border-radius: 7px;">
+        <div style="padding: 0px 15px 0px 18px;">FILTERS</div>
+        <mat-nav-list>
+          <mat-list-item  [ngClass]="{'active_filter': selectionFilter==='all'}" (click)="changeFilter('all')" matTooltip="Starred">
+            <mat-icon >list</mat-icon>
+             <div fxFlex="10"></div>
+            <div class="sidenav-item">
+              <span>All</span>
+            </div>
+          </mat-list-item>  
+          <mat-list-item [ngClass]="{'active_filter': selectionFilter==='Starred'}" (click)="changeFilter('Starred')" matTooltip="Starred">
+            <mat-icon >star_border</mat-icon>
+             <div fxFlex="10"></div>
+            <div class="sidenav-item">
+              <span>Starred</span>
+            </div>
+          </mat-list-item>  
+          <mat-list-item  [ngClass]="{'active_filter': selectionFilter==='Priority'}" (click)="changeFilter('Priority')" matTooltip="Priority">
+            <mat-icon >error</mat-icon>
+             <div fxFlex="10"></div>
+            <div class="sidenav-item">
+              <span>Priority</span>
+            </div>
+          </mat-list-item> 
+          <mat-list-item  [ngClass]="{'active_filter': selectionFilter==='Sheduled'}" (click)="changeFilter('Sheduled')" matTooltip="Sheduled">
+            <mat-icon >schedule</mat-icon>
+             <div fxFlex="10"></div>
+            <div class="sidenav-item">
+              <span>Sheduled</span>
+            </div>
+          </mat-list-item> 
+          <mat-list-item  [ngClass]="{'active_filter': selectionFilter==='Today'}" (click)="changeFilter('Today')" matTooltip="Today">
+            <mat-icon >today</mat-icon>
+             <div fxFlex="10"></div>
+            <div class="sidenav-item">
+              <span>Today</span>
+            </div>
+          </mat-list-item> 
+          <mat-list-item [ngClass]="{'active_filter': selectionFilter==='Done'}" (click)="changeFilter('Done')" matTooltip="Done">
+            <mat-icon >done</mat-icon>
+             <div fxFlex="10"></div>
+            <div class="sidenav-item">
+              <span>Done</span>
+            </div>
+          </mat-list-item> 
+          <mat-list-item  [ngClass]="{'active_filter': selectionFilter==='Deleted'}" (click)="changeFilter('Deleted')" matTooltip="Deleted">
+            <mat-icon >delete</mat-icon>
+             <div fxFlex="10"></div>
+            <div class="sidenav-item">
+              <span>Deleted</span>
+            </div>
+          </mat-list-item>
+        </mat-nav-list>
+     </div> 
+   </div>
+  <div class="side_nav_content">
+    <div matTooltip="Tags" class="tags">
+       <a>
+       <span class="tag" [ngClass]="{'active_tag': selectionFilter===t.name}" (click)="changeTage(t)" [ngStyle]="{color:t.color}" *ngFor="let t of tags">{{t.name}}</span>
+       </a>
+       <button matTooltip="Add New Task" style="float: right;" (click)="openDialog(ticket,'add')" mat-mini-fab> <mat-icon>add</mat-icon>  </button> 
+    </div>  
+    <div class="spinner_center">
+        <mat-progress-spinner *ngIf="isLoadingTask" class="example-margin" mode="indeterminate" diameter="20" value="20"></mat-progress-spinner> 
+    </div>
+    <div  style="max-height: 335px; overflow-y: scroll;height:335px;">
+   <div style="text-align: center;" *ngIf="tasks.length<=0&&!isLoadingTask">No Tasks Found..!</div> 
+   <span id="task"></span>
+    <mat-card class="task_matcard" *ngFor="let item of tasks">
+        <div class="task_task" >
+        <div style="flex: 1 1 0%; box-sizing: border-box;">
+          <!-- <p style="font-size: 15px;font-weight: 600;" name="commentEdit" 
+            [contentEditable]="editable" 
+            [ngClass]="item.status=='Done' ? 'task_done' : '{editable:true}'" 
+            (keyup.enter)="onEdit(item,$event)" 
+            (blur)="onEdit(item,$event)"
+        >{{ item.task_name }}</p> -->
+        <p style="font-size: 15px;font-weight: 600;"  [ngClass]="item.status=='Done' ? 'task_done' : ' '">
+         {{ item.task_name }}</p>
+        <div style="margin-top: 4px"  [ngClass]="item.status=='Done' ? 'task_done' : ' '">{{item.task_desc}}</div>
+        <div style="padding: 11px 0px 3px 0px;">  
+          <span  matTooltip="{{a.first_name}} {{a.last_name}}" *ngFor="let a of item.assignedUsers" class="name_circle">{{formateName(a.first_name,a.last_name)}}</span>
+          <span matTooltip="Add New User" (click)="openDialog(item,'update')"><a style="font-size: 12px;">+</a></span>
+         <div class="tags" *ngIf="item.tags" style="flex-flow: row wrap; box-sizing: border-box; display: flex; place-content: center flex-start; align-items: center;">
+          <a class="tag" [ngStyle]="{color:t.color}" *ngFor="let t of item.tags">{{t.name}}</a>
+            </div> 
+        </div>
+      </div>
+        <div class="task_tags">     
+          <mat-icon matTooltip="Priority" [ngClass]="item.task_priority ? 'priority_true' : 'priority_false'" (click)="onChangeStatus(item,'priority',item.status)">error_outline</mat-icon>
+          <mat-icon matTooltip="Starred" [ngClass]="item.starred ? 'starred_true' : 'starred_false'" (click)="onChangeStatus(item,'starred',item.status)">star_border</mat-icon>
+          <button matTooltip="Change Task Status (or) Move" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button *ngIf="item.status=='Done'" (click)="onChangeStatus(item,'status','Pending')" mat-menu-item>
+              <mat-icon>check_box</mat-icon>
+              <span>Mark as undone</span>
+            </button>
+            <button *ngIf="item.status!='Done'" (click)="onChangeStatus(item,'status','Done')" mat-menu-item>
+              <mat-icon>check_box_outline_blank</mat-icon>
+              <span>Mark as Done</span>
+            </button>
+            <button mat-menu-item (click)="onChangeStatus(item,'starred',item.status)">
+              <mat-icon>star_border</mat-icon>
+              <span *ngIf="item.starred">Remove Starred</span>
+              <span *ngIf="!item.starred">Make as Starred</span>
+            </button>
+            <button mat-menu-item  (click)="onChangeStatus(item,'priority',item.status)">
+              <mat-icon>error_outline</mat-icon>
+              <span *ngIf="item.task_priority">Remove Priority</span>
+              <span *ngIf="!item.task_priority">Mark as Priority</span>
+            </button>
+            <button (click)="openDialog(item,'info')" mat-menu-item>
+              <mat-icon>assignment_late</mat-icon>
+              <span>Move to Other</span>
+            </button>
+          </mat-menu>
+        </div> 
+      </div>
+    </mat-card> 
+    </div>
+   </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- <div mat-dialog-actions align="end">
+       <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+       <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">Save</button>
+</div> -->
+</div>

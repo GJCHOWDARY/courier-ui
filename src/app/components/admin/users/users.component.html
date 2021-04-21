@@ -1,0 +1,99 @@
+<div class="card-container"> 
+  <!-- <div class="spinner">
+     <mat-spinner [diameter]=40 *ngIf="isLoading"></mat-spinner>
+   </div> -->
+   <div class="container">
+     <div class="row">
+         <div class="col-md-6">
+        </div>
+         <div class="col-md-6">
+            <mat-card>
+            <form action="#" autocomplete="off">
+                <mat-form-field style="width:45%">
+                  <input matInput name="name" [(ngModel)]="usersearch" (keyup)="userChangeValue(nameInput.value)" type="text" placeholder="Search" #nameInput="ngModel">
+                  <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+                <button class="btn btn-success float-right"  (click)="openDialog(0,'create')">+ New User</button>
+           </form> 
+        </mat-card>
+     </div>
+   </div>
+ </div>
+   <!-- </mat-card> -->
+    <table mat-table [dataSource]="users" role="grid" class="mat-elevation-z8 table-striped">
+     <ng-container matColumnDef="Name">
+       <th mat-header-cell *matHeaderCellDef>User Name </th>
+       <td mat-cell *matCellDef="let element">
+        <div fxlayout="row" fxlayoutalign="center center" style="flex-direction: row; box-sizing: border-box; display: flex;align-items: center;">
+          <img *ngIf="element.profile_img" src="{{host_ip}}/uploads/{{element.profile_img}}" class="avatar mr-0 mr-sm-16">
+          <img *ngIf="!element.profile_img" src="/assets/logo01.PNG" class="avatar mr-0 mr-sm-16">
+           {{element.first_name}} {{element.last_name}}
+          </div>
+        </td>
+     </ng-container>
+     <ng-container matColumnDef="Email">
+       <th mat-header-cell *matHeaderCellDef > Email </th>
+       <td mat-cell *matCellDef="let element" matTooltip="Leave Balance: {{(element.leave_balance).toFixed(2)}}/Status: {{element.status}}" > {{element.email}} </td>
+     </ng-container>
+     <ng-container matColumnDef="Status">
+       <th mat-header-cell *matHeaderCellDef>Status </th>
+       <td mat-cell *matCellDef="let element">
+           {{element.status}} 
+       </td>
+     </ng-container>
+     <ng-container matColumnDef="Role">
+       <th mat-header-cell *matHeaderCellDef> Role </th>
+       <td mat-cell *matCellDef="let element">
+         <a *ngIf="element.role==1">Admin</a>
+         <a *ngIf="element.role==2">Sub-Admin</a>
+         <a *ngIf="element.role==3">Employee</a>
+       </td>
+     </ng-container>
+     <ng-container matColumnDef="Mobile">
+       <th mat-header-cell *matHeaderCellDef> Mobile </th>
+       <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+     </ng-container>
+     <ng-container matColumnDef="Action">
+       <th mat-header-cell *matHeaderCellDef  style=" padding: 18px 146px;">Action </th>
+       <td mat-cell *matCellDef="let element">
+         <button mat-button color="primary" (click)="openDialog(element._id,'edit')"
+         matTooltip="Edit User Details" aria-label="Button that displays a tooltip when focused or hovered over">
+           <mat-icon md-list-icon>edit</mat-icon>
+         </button>
+         <button *ngIf="element.status=='Inactive'" mat-button color="primary"  (click)="activeAccount(element)"
+         matTooltip="Activate User">
+           <mat-icon md-list-icon>how_to_reg</mat-icon>
+         </button>
+         <button *ngIf="element.status=='Active'" mat-button color="warn"  (click)="deactiveAccount(element)"
+         matTooltip="Inactivate User">
+           <mat-icon md-list-icon>how_to_reg</mat-icon>
+         </button>
+         <button mat-button color="link" [routerLink]="['/authorized/emp/myattachments', element._id]" matTooltip="User Attachments">
+           <mat-icon md-list-icon>attachment</mat-icon>
+         </button>
+         <button mat-button [routerLink]="['/authorized/emp/profile', element._id]" matTooltip="User Info">
+           <mat-icon md-list-icon>info</mat-icon>
+         </button>
+         <button mat-button [routerLink]="['/authorized/emp/myleave', element._id]" matTooltip="User Leaves">
+           <mat-icon md-list-icon>timelapse</mat-icon>
+         </button>
+         <button *ngIf="element.role==2" mat-button color="accent" [routerLink]="['/authorized/manager/assigned_users',element._id]" matTooltip="Assigned Employees">
+           <mat-icon md-list-icon>account_tree</mat-icon>
+         </button>
+         <button mat-button  [routerLink]="['/authorized/emp/qualifications',element._id]" matTooltip="Qualifications">
+           <mat-icon md-list-icon>account_balance</mat-icon>
+         </button>
+        <!-- <button mat-button color="warn"  (click)="onDelete(element._id)"
+         matTooltip="Delete User" aria-label="Button that displays a tooltip when focused or hovered over">
+           <mat-icon md-list-icon>delete</mat-icon>
+         </button> -->
+       </td>
+     </ng-container>
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+   </table>
+   <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
+   <mat-paginator [length]="userCount" [pageSize]="usersPerPage" [pageSizeOptions]="userSizeOptions" (page)="onChangedPage($event)"
+   *ngIf="users.length > 0"></mat-paginator>
+ </div> 
+   

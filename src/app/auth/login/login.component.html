@@ -1,0 +1,35 @@
+<div class="content" role="main">
+  <!-- <div class="card-container">
+    <a class="card1"  [routerLink]="'/auth/login'" routerLinkActive="active" rel="noopener">
+     <img width="40" alt="Angular Logo" src="\assets\logo1.png"/>
+  </a>  
+  </div> -->
+    <div class="card-container">
+    <form (submit)="onLogin(loginForm)"  #loginForm="ngForm"  >
+        <mat-form-field appearance="outline">                                          
+          <mat-label>Email</mat-label>
+          <input matInput name="email" autocomplete="off" ngModel type="email" placeholder="Enter Your Email" #emailInput="ngModel" required email>
+          <mat-icon matSuffix>email</mat-icon>         
+          <mat-error *ngIf="emailInput.hasError('required')">Please enter a valid email.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">                                         
+            <mat-label>Password</mat-label>
+            <input [type]="hide ? 'password' : 'text'" autocomplete="off" name="password" ngModel matInput placeholder="Enter Your Password" #passwordInput="ngModel" required>
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="passwordInput.hasError('required')">Please enter a valid password.</mat-error>
+          </mat-form-field> 
+          <div>
+              <a [routerLink]="'/auth/forgot'">Forgot Password?</a>
+           </div><br  />
+           <div>
+        <mat-card-actions align="end">
+          <button class="login-btn" [disabled]="isDisabled" style="width: 100%;" mat-raised-button color="primary" type="submit">Login</button>
+        </mat-card-actions>
+        <div class="card-container" *ngIf="isDisabled">
+          <mat-progress-spinner  class="example-margin" mode="indeterminate" diameter="20" value="20"></mat-progress-spinner> 
+        </div>
+    </div>
+  </form>
+  <!-- <button class="login-btn" rel="noopener" (click)="test()" mat-raised-button color="warn">Close</button> -->
+    </div>
+</div>

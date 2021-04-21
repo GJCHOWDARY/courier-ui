@@ -1,0 +1,49 @@
+<h1 mat-dialog-title *ngIf="mode=='edit'">Edit Leave types</h1>
+<h1 mat-dialog-title *ngIf="mode=='create'">Create Leave types</h1>
+<form (submit)="onSaveLeave(leaveForm)" #leaveForm="ngForm">
+ <div class="font" mat-dialog-content>
+     <mat-form-field appearance="outline">                                         
+      <mat-label>Leave Type</mat-label>
+        <input matInput name="leave_type"  [(ngModel)]="leave.leave_type" type="text" placeholder="Leve Type" #LtypeInput="ngModel" required>
+           <mat-error *ngIf="LtypeInput.hasError('required')">Please Enter Leave Type.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">                                         
+         <mat-label>Description</mat-label>
+          <textarea matInput name="leave_desc" [(ngModel)]="leave.leave_desc" type="text" placeholder="Description" #descInput="ngModel" required>{{leave.leave_desc}}</textarea>
+           <mat-error *ngIf="descInput.hasError('required')">Please Enter Description.</mat-error>
+         </mat-form-field> 
+         <mat-form-field appearance="outline">                                         
+          <mat-label>No of Days</mat-label>
+           <input matInput name="no_of_days" [(ngModel)]="leave.no_of_days" type="number" placeholder="No of Days" #daysInput="ngModel" required>
+            <mat-error *ngIf="daysInput.hasError('required')">Please Enter No of Days.</mat-error>
+          </mat-form-field> 
+          <mat-form-field appearance="outline">                                         
+           <mat-label> Carry Forward</mat-label>
+            <input matInput name="carry_forward" [min]="0" [max]="50" [(ngModel)]="leave.carry_forward" type="number" placeholder="Carry Forward Leave" #cfInput="ngModel" required>
+             <mat-error *ngIf="cfInput.hasError('required')">Please Enter Carry Forward Leaves for Every Year.</mat-error>
+           </mat-form-field> 
+          <mat-form-field appearance="outline">
+          <mat-label>Any Validation</mat-label>
+        <mat-select name="any_validation" placeholder="Select Validation"   [(ngModel)]="leave.any_validation" #validationInput="ngModel" required>
+         <mat-option *ngFor="let v of validations" [value]="v.value">
+           {{v.title}}
+         </mat-option>
+       </mat-select>
+       <mat-error *ngIf="validationInput.hasError('required')">Please Select Duration.</mat-error>
+     </mat-form-field>
+     <mat-form-field *ngIf="leave.any_validation==true" appearance="outline">                                         
+      <mat-label>No of Days Allowed</mat-label>
+       <input type="number" matInput name="allowed_days" [(ngModel)]="leave.allowed_days" placeholder="Allowed Days" #no_of_daysInput="ngModel" required>
+        <mat-error *ngIf="no_of_daysInput.hasError('required')">Please Enter No of Days Allowed.</mat-error>
+      </mat-form-field> 
+     <mat-form-field *ngIf="leave.any_validation==true" appearance="outline">                                         
+      <mat-label>Message</mat-label>
+       <textarea matInput name="message" [(ngModel)]="leave.message" type="text" placeholder="Message" #messageInput="ngModel" required>{{leave.message}}</textarea>
+        <mat-error *ngIf="messageInput.hasError('required')">Please Enter Description.</mat-error>
+      </mat-form-field> 
+   </div>
+      <div mat-card-actions align="end">
+         <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+         <button mat-raised-button color="primary" [disabled]="isLoading||leaveForm.invalid" type="submit">Save</button>
+      </div>
+</form>

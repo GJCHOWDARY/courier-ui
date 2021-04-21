@@ -1,0 +1,14 @@
+footer {
+    position: relative;
+    /* padding-top: 610px; */
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+  } 
+
+  #icon {
+    cursor: pointer;
+    shape-rendering: crispEdges;
+    fill: url(#MyGradient);
+} 

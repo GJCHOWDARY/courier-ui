@@ -1,0 +1,39 @@
+mat-card{
+    width: 200px;
+    height: auto;
+    min-height: 140px;
+    margin:20px;
+}
+.main_card{
+    width: 940px;
+} 
+table{
+    width:100%
+}
+.card_icon{
+ float: right;
+}
+
+.line-height-72 {
+    line-height: 72px;
+}
+
+.font-size-72 {
+    font-size: 72px;
+}
+
+.light-blue-fg {
+    color: #03a9f4!important;
+}
+.light-orange-fg {
+    color: #ff9800!important;
+}
+.light-black-fg {
+    color: #607d8b!important;
+}
+.light-red-fg {
+    color: #f44336!important;
+}
+.light-gold-fg {
+    color: #ffc107!important;
+}

@@ -1,0 +1,131 @@
+<div  mat-dialog-title > 
+    <h1 *ngIf="data.mode=='update'">Edit {{data.page}}</h1>
+    <h1 *ngIf="data.mode=='add'">New {{data.page}}</h1>
+ </div>
+ <div  *ngIf="data.page=='Education'&&data.mode=='add'||data.page=='Education'&&data.mode=='update'">
+    <form (submit)="addEdu(eduForm)" #eduForm="ngForm"> 
+      <div class="font" mat-dialog-content>
+          <mat-form-field appearance="outline">                                         
+           <mat-label>Level</mat-label>
+           <mat-select  name="level" [(ngModel)]="edu.level" type="text" placeholder="Choose Level" #levelInput="ngModel" required>
+            <mat-option *ngFor="let level of levels" [value]="level.name">
+              {{level.name}}
+            </mat-option>
+          </mat-select>
+           <mat-error *ngIf="levelInput.hasError('required')">Select Level.</mat-error>
+          </mat-form-field>  
+            <mat-form-field appearance="outline">                         
+           <mat-label>Institute</mat-label>
+           <input matInput name="institute" [(ngModel)]="edu.institute" type="text" placeholder="Institute" #insInput="ngModel" required/>
+              <mat-error *ngIf="insInput.hasError('required')">Enter Institute Name.</mat-error>
+           </mat-form-field>
+        <mat-form-field appearance="outline">                                         
+            <mat-label>Specialization</mat-label>
+             <input  matInput name="specialization" [(ngModel)]="edu.specialization" type="text" placeholder="Specialization" #speInput="ngModel" required/>
+              <mat-error *ngIf="speInput.hasError('required')">Enter Specialization.</mat-error>
+            </mat-form-field> 
+          <mat-form-field appearance="outline">                                         
+            <mat-label>GPA/Score</mat-label>
+             <input  matInput name="score" [(ngModel)]="edu.score" type="text" placeholder="GPA/Score" #scoreInput="ngModel" required/>
+              <mat-error *ngIf="scoreInput.hasError('required')">Enter Your GPA/Score.</mat-error>
+            </mat-form-field> 
+             <div class="row">
+               <div class="col-md-6">
+                <mat-form-field appearance="outline">           
+                  <mat-label>Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker" readonly  name="start_date" [(ngModel)]="edu.start_date" placeholder="Select Start Date" #sdataInput="ngModel" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker disabled="false"></mat-datepicker>
+                  <mat-error *ngIf="sdataInput.hasError('required')">Please Select Start Date.</mat-error>
+              </mat-form-field>
+            </div>
+              <div class="col-md-6">
+               <mat-form-field appearance="outline">           
+                  <mat-label>End Date</mat-label>
+                  <input matInput  [matDatepicker]="picker1" readonly   name="end_date" [(ngModel)]="edu.end_date" placeholder="Select Due Date" #edataInput="ngModel" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                  <mat-error *ngIf="edataInput.hasError('required')">Please Select End Date.</mat-error>
+              </mat-form-field>
+            </div>
+          </div> 
+        </div>
+           <div mat-card-actions align="end">
+              <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+              <button mat-raised-button color="primary" [disabled]="isLoading||eduForm.invalid" type="submit">Save</button>
+           </div>
+     </form>
+  </div>
+  <div  *ngIf="data.page=='Work'&&data.mode=='add'||data.page=='Work'&&data.mode=='update'">
+    <form (submit)="addWork(workForm)" #workForm="ngForm"> 
+      <div class="font" mat-dialog-content>
+          <mat-form-field appearance="outline">                                         
+           <mat-label>Company Name</mat-label>
+             <input matInput name="company_name" [(ngModel)]="work.company_name" type="text" placeholder="Company Name" #companyInput="ngModel" required/>
+                <mat-error *ngIf="companyInput.hasError('required')">Enter Company Name.</mat-error>
+             </mat-form-field>  
+            <mat-form-field appearance="outline">                         
+           <mat-label>Job Title / Position</mat-label>
+           <input matInput name="job_title" [(ngModel)]="work.job_title" type="text" placeholder="Job Title/Position" #titleInput="ngModel" required/>
+              <mat-error *ngIf="titleInput.hasError('required')">Enter Job Title/Position.</mat-error>
+           </mat-form-field>
+        <mat-form-field appearance="outline">                                         
+            <mat-label>Description</mat-label>
+             <textarea  matInput name="work_desc" [(ngModel)]="work.work_desc" type="text" placeholder="What You have Done/Achievements." #descInput="ngModel" required>{{work.work_desc}}</textarea>
+              <mat-error *ngIf="descInput.hasError('required')">Enter Specialization.</mat-error>
+            </mat-form-field> 
+          <mat-form-field appearance="outline">                                         
+            <mat-label>Team Size</mat-label>
+             <input  matInput name="team_size" [(ngModel)]="work.team_size" type="text" placeholder="Team Size" #teamInput="ngModel"/>
+              <!-- <mat-error *ngIf="teamInput.hasError('required')">Enter Your Team Size.</mat-error> -->
+            </mat-form-field> 
+            <div class="row">                           
+              <mat-chip-list #chipList>
+                <mat-chip  matTooltip="{{p.project_name}}" *ngFor="let p of work.projects"
+                [selectable]="selectable"
+                [removable]="removable"
+                (removed)="remove(p)"> 
+                  <a class="formate_chip">{{p.project_name}}</a>
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </div>  
+             <br />
+            <div class="row"> 
+             <div class="col-md-6">
+              <mat-form-field appearance="outline">
+               <mat-label>Project </mat-label> 
+                 <input name="project_name" type="text" [(ngModel)]="project_name" matInput #project placeholder="Project You have Done/Worked." placeholder="New Project..."> 
+              </mat-form-field>
+             </div>
+            <div class="col-md-6">
+                <a class="skill_add_btn" (click)="addProject(project.value)" [disabled]="!project.value" mat-raised-button>Add</a>
+            </div>
+             </div>
+             <div class="row">
+               <div class="col-md-6">
+                <mat-form-field appearance="outline">           
+                  <mat-label>Start Date</mat-label>
+                  <input matInput [matDatepicker]="picker" readonly  name="start_date" [(ngModel)]="work.start_date" placeholder="Select Start Date" #sdataInput="ngModel" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker disabled="false"></mat-datepicker>
+                  <mat-error *ngIf="sdataInput.hasError('required')">Please Select Start Date.</mat-error>
+              </mat-form-field>
+            </div>
+              <div class="col-md-6">
+               <mat-form-field appearance="outline">           
+                  <mat-label>End Date</mat-label>
+                  <input matInput  [matDatepicker]="picker1" readonly   name="end_date" [(ngModel)]="work.end_date" placeholder="Select Due Date" #edataInput="ngModel" required>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1 disabled="false"></mat-datepicker>
+                  <mat-error *ngIf="edataInput.hasError('required')">Please Select End Date.</mat-error>
+              </mat-form-field>
+            </div>
+          </div> 
+        </div>
+           <div mat-card-actions align="end">
+              <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+              <button mat-raised-button color="primary" [disabled]="isLoading||workForm.invalid" type="submit">Save</button>
+           </div>
+     </form>
+  </div>

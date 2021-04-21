@@ -1,0 +1,25 @@
+<div class="card-container">
+  <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
+    <div *ngFor="let u of users" style="margin:8px;">
+        <mat-card>
+            <mat-card-title-group style="margin-left: 5px;">
+                <mat-card-title matTooltip="{{u.first_name}} {{u.last_name}}" >{{u.first_name}} {{u.last_name}}</mat-card-title><br />
+                <mat-card-subtitle matTooltip="{{u.email}}">{{u.email}} {{users.length}}</mat-card-subtitle>
+                <mat-card-subtitle matTooltip="{{u.mobile}}">{{u.mobile}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="u.jobDetailsId">{{u.jobDetailsId.job_location}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="u.jobDetailsId" style="text-align: center;">{{u.jobDetailsId.jobId.job_name}}</mat-card-subtitle>
+                <img mat-card-md-image *ngIf="u.profile_img" src="{{host_ip}}/uploads/{{u.profile_img}}">
+                <img mat-card-md-image *ngIf="!u.profile_img" src="/assets/logo01.PNG">
+            </mat-card-title-group>
+        </mat-card>
+    </div>
+    <br />
+</div>
+<div class="card-container1">
+    <mat-progress-spinner *ngIf="isLoadmore" mode="indeterminate" diameter="20" value="10"></mat-progress-spinner> 
+</div>
+ <div class="card-container1" *ngIf="!isLoading">   
+     <a mat-raised-button *ngIf="users.length!=count" (click)="loadMore()">
+       Load More 
+    </a>
+  </div>

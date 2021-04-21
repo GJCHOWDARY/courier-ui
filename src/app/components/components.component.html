@@ -1,0 +1,157 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav  [fixedInViewport]="true" #sideNavTooggle  [fixedTopGap]="48" #sidenav mode="side" class="example-sidenav"  opened="true" (mouseenter)="increase()">
+    <div style="flex-direction: column; box-sizing: border-box; display: flex;"  *ngIf="sidenavWidth > 6" >
+      <a (click)="decrease()" class="close"></a> 
+    </div>
+    <div  *ngIf="sidenavWidth > 6" class="profile_nav" style="height: 130px; padding: 28px;">
+      <div style="flex-direction: column; box-sizing: border-box; display: flex;">
+        <div class="avatar-container fuse-navy-700">
+          <img *ngIf="userDetails.profile_img" src="{{host_ip}}/uploads/{{userDetails.profile_img}}" class="avatar mr-0 mr-sm-16">
+          <img *ngIf="!userDetails.profile_img" src="/assets/logo01.PNG" class="avatar mr-0 mr-sm-16">
+          </div>
+        <div matTooltip="{{userData.name}}" class="h3 sidenav_text" style="font-size: 16px;">{{userData.name}}</div>
+        <div matTooltip="{{userData.email}}" class="h5 sidenav_text email hint-text mt-8"  style="font-size: 14px;">{{userData.email}}</div>
+        <div class="h5 sidenav_text email hint-text mt-8" *ngIf="userDetails?.jobDetailsId?.jobId"  style="font-size: 14px;">{{userDetails.jobDetailsId.jobId.job_name}}</div>
+      </div>
+    </div>
+   <mat-nav-list>
+     <mat-list-item matTooltip="Dashboard" (click)="decrease()" [routerLink]="'emp'" routerLinkActive="mat-accent">
+       <mat-icon >dashboard</mat-icon>
+        <div fxFlex="10"></div>
+       <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+         <span>Dashboard</span>
+       </div>
+     </mat-list-item> 
+     <div  *ngIf="userData.role==2||userData.role==3">
+     <mat-list-item matTooltip="Profile Details" (click)="decrease()" [routerLink]="['emp/profile']">
+      <mat-icon md-list-icon>person</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>My Info</span>
+      </div>
+    </mat-list-item> 
+     <mat-list-item matTooltip="Leave" (click)="decrease()" [routerLink]="['emp/myleave']">
+       <mat-icon md-list-icon>timelapse</mat-icon>
+       <div fxFlex="20"></div>
+       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+         <span>My Leave</span>
+       </div>
+     </mat-list-item>  
+     <mat-list-item matTooltip="Leave" (click)="decrease()" [routerLink]="['emp/apply', 'create', 'new']">
+      <mat-icon matSuffix>schedule</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Apply New Leave</span>
+      </div>
+    </mat-list-item>    
+     <mat-list-item matTooltip="Leave Calender"  (click)="decrease()" [routerLink]="['emp/calendar']" routerLinkActive="mat-accent">
+      <mat-icon md-list-icon>date_range</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Your Leave Calender</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item matTooltip="Your Attachments"  (click)="decrease()" [routerLink]="['emp/myattachments']" routerLinkActive="mat-accent">
+     <mat-icon md-list-icon>storage</mat-icon>
+     <div fxFlex="20"></div>
+     <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+       <span>Attachments</span>
+     </div>
+   </mat-list-item>
+   <mat-list-item matTooltip="Your Qualifications"  (click)="decrease()" [routerLink]="['emp/qualifications']" routerLinkActive="mat-accent">
+    <mat-icon md-list-icon>account_balance</mat-icon>
+    <div fxFlex="20"></div>
+    <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+      <span>Qualifications</span>
+    </div>
+  </mat-list-item>
+   </div>
+   <div *ngIf="userData.role==2">
+   <mat-list-item matTooltip="Assignees" (click)="decrease()" [routerLink]="['manager/assigned_users']" routerLinkActive="mat-accent">
+    <mat-icon md-list-icon>account_tree</mat-icon>
+    <div fxFlex="20"></div>
+    <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+      <span>Assigned</span>
+    </div>
+  </mat-list-item>
+</div>
+<!-- <mat-list-item matTooltip="All projects" [routerLink]="'/authorized/projects'" (click)="decrease()" >
+  <mat-icon md-list-icon>filter_center_focus</mat-icon>
+  <div fxFlex="20"></div>
+  <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+    <span>Projects</span>
+  </div>
+</mat-list-item>  -->
+
+<mat-list-item matTooltip="All Orders" (click)="decrease()" >
+  <mat-icon md-list-icon>filter_center_focus</mat-icon>
+  <div fxFlex="20"></div>
+  <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+    <span>Orders</span>
+  </div>
+</mat-list-item> 
+   <div  *ngIf="userData.role==1">
+     <mat-list-item matTooltip="Users" (click)="decrease()" [routerLink]="['admin/users']" routerLinkActive="mat-accent">
+      <mat-icon md-list-icon>group</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Users</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item matTooltip="Applied Leaves" (click)="decrease()" [routerLink]="['admin/applied_leaves']">
+      <mat-icon md-list-icon>timelapse</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Applied Leaves</span>
+      </div>
+    </mat-list-item>  
+    <mat-list-item matTooltip="Job Category" [routerLink]="'admin/categories'" (click)="decrease()" >
+      <mat-icon md-list-icon>category</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Categories</span>
+      </div>
+    </mat-list-item>
+    <mat-list-item matTooltip="Job Sub Category / Sub Unit" [routerLink]="'admin/sub_categories'" (click)="decrease()" >
+      <mat-icon md-list-icon>apps</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Sub Categories</span>
+      </div>
+    </mat-list-item>  
+    <mat-list-item matTooltip="Jobs Title / List" [routerLink]="'admin/jobs'" (click)="decrease()" >
+      <mat-icon md-list-icon>wc</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Jobs</span>
+      </div>
+    </mat-list-item>  
+    <mat-list-item matTooltip="Leave Types" [routerLink]="'admin/leave_types'" (click)="decrease()" >
+      <mat-icon md-list-icon>speaker_notes</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Leave Types</span>
+      </div>
+    </mat-list-item>   
+     <mat-list-item matTooltip="Roles" [routerLink]="'admin/roles'" (click)="decrease()" >
+       <mat-icon md-list-icon>visibility</mat-icon>
+       <div fxFlex="20"></div>
+       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+         <span>Roles</span>
+       </div>
+     </mat-list-item>
+     </div>
+     <mat-list-item matTooltip="Quick Info / Emp Directory" [routerLink]="'emp/directory'" (click)="decrease()" >
+       <mat-icon md-list-icon>group</mat-icon>
+       <div fxFlex="20"></div>
+       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+         <span>Emp Directory</span>
+       </div>
+     </mat-list-item>
+   </mat-nav-list>
+ </mat-sidenav>
+      <mat-sidenav-content style="margin-left: 74px;">
+              <router-outlet></router-outlet>
+      </mat-sidenav-content> 
+ </mat-sidenav-container>
+ 

@@ -1,0 +1,49 @@
+<div class="card-container">
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+       </div>
+        <div class="col-md-6">
+           <mat-card>
+              <form action="#" autocomplete="off">
+                   <mat-form-field style="width:45%">
+                       <input matInput name="name" [(ngModel)]="search" (keyup)="onSearch()" type="text" placeholder="Search" #nameInput="ngModel">
+                   </mat-form-field>
+                  <mat-icon md-list-icon>search</mat-icon>
+              <button class="btn btn-success float-right"  (click)="openDialog(0,'create')">+ New Job Category</button>
+             </form>
+           </mat-card>
+       </div>
+    </div>
+   </div>
+<br />
+  <table mat-table [dataSource]="jobs" class="mat-elevation-z8 table-striped">
+   <ng-container matColumnDef="Job Title">
+     <th mat-header-cell *matHeaderCellDef> Job Title </th>
+     <td mat-cell *matCellDef="let element"> {{element.job_name}} </td>
+   </ng-container>
+   <ng-container matColumnDef="Description">
+     <th mat-header-cell *matHeaderCellDef> Description </th>
+     <td mat-cell *matCellDef="let element"> {{element.job_desc}} </td>
+   </ng-container> 
+   <ng-container matColumnDef="Action">
+     <th mat-header-cell *matHeaderCellDef  style="text-align: center; padding: 18px 55px;">Action </th>
+     <td mat-cell *matCellDef="let element" style="text-align: center;">
+       <a mat-button color="primary" (click)="openDialog(element._id,'edit')"
+       matTooltip="Edit Category Details"  aria-label="Button that displays a tooltip when focused or hovered over">
+         <mat-icon md-list-icon>edit</mat-icon>
+       </a>
+       <button mat-button  color="warn" (click)="onDelete(element._id)"
+       matTooltip="Delete Category" aria-label="Button that displays a tooltip when focused or hovered over">
+         <mat-icon md-list-icon>delete</mat-icon>
+       </button>
+     </td>
+   </ng-container>
+   <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+ </table>
+ <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
+ <p class="info-text mat-body-1" *ngIf="jobs.length <= 0 && !isLoading">No Jobs Found!</p>
+  <mat-paginator [length]="Count" [pageSize]="perPage" [pageSizeOptions]="sizeOptions" 
+  (page)="onChangedPage($event)" *ngIf="jobs.length > 0"></mat-paginator>
+</div>

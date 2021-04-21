@@ -1,0 +1,89 @@
+  <div>
+  <h2 mat-dialog-title>Leave Details Applied On: {{data.createdAt|date}}</h2>
+</div>  
+    <div class="container"  *ngIf="!isLoading"> 
+     <div class="row"> 
+       <div class="col-md-12">
+      <mat-form-field  appearance="outline">
+          <mat-label>Leave Type</mat-label>
+        <input matInput name="leaveId" value="{{data.leaveId.leave_type}}" readonly>
+        <mat-icon matSuffix>launch</mat-icon>
+         </mat-form-field>
+       </div> 
+    </div> 
+       <div class="row"> 
+     <div class="col-md-12">
+          <mat-form-field appearance="outline">           
+              <mat-label>Start Date</mat-label>
+              <input matInput readonly name="start_date" value="{{data.start_date|date: 'shortDate'}}">        
+              <mat-icon matSuffix>calendar_today</mat-icon>
+            </mat-form-field>
+     </div>
+    </div>
+    <div class="row"> 
+      <div class="col-md-12">
+          <mat-form-field appearance="outline">           
+              <mat-label>End Date</mat-label>
+              <input matInput name="end_date" value="{{data.end_date|date: 'shortDate'}}" readonly>
+              <mat-icon matSuffix>calendar_today</mat-icon>
+             </mat-form-field>
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-md-12">
+          <mat-form-field  *ngIf="data.duration" appearance="outline">
+            <mat-label>Duration</mat-label>
+          <input matInput name="duration" value="{{data.duration}}" readonly>
+          <mat-icon matSuffix>schedule</mat-icon>
+            </mat-form-field>
+      </div>
+    </div>
+      <div class="row"> 
+        <div class="col-md-12">
+        <mat-form-field  *ngIf="data.shift" appearance="outline">
+          <mat-label>Shift</mat-label>
+        <input matInput name="shift" value="{{data.shift}}" readonly>
+        <mat-icon matSuffix>schedule</mat-icon>
+          </mat-form-field>
+        </div>
+    </div>
+    <div class="row"  *ngIf="data.duration=='Specify Time'"> 
+        <div class="col-md-4"> 
+        <mat-form-field appearance="outline">           
+            <mat-label>Start Time</mat-label>
+               <input matInput name="start_time"  value="{{data.start_time}}" placeholder="Start Time" readonly>
+               <mat-icon matSuffix>access_time</mat-icon>
+        </mat-form-field>
+        </div>
+        <div class="col-md-4">
+        <mat-form-field appearance="outline">           
+          <mat-label>End Time</mat-label>
+             <input matInput name="end_time" placeholder="End Time" value="{{data.end_time}}"  readonly>
+             <mat-icon matSuffix>access_time</mat-icon>
+       </mat-form-field>
+        </div>
+    <div class="col-md-4">  
+      <mat-form-field appearance="outline">                                         
+      <mat-label>Time Taken</mat-label>
+       <input  matInput name="time_taken" disabled="true" value="{{data.time_taken}}" type="text" readonly>
+       <mat-icon matSuffix>timelapse</mat-icon>
+       </mat-form-field>
+      </div>
+      </div>
+      <div class="row"> 
+        <div class="col-md-12">  
+          <mat-form-field appearance="outline">                                         
+           <mat-label>Comments</mat-label>
+            <textarea  matInput name="leave_desc" value="{{data.leave_desc}}" type="text" readonly>{{data.leave_desc}}</textarea>
+            <mat-icon matSuffix>notes</mat-icon>
+        </mat-form-field>  
+          <br />
+        </div>
+      </div>
+        <div mat-card-actions align="end_date">
+           <button mat-raised-button color="primary"  (click)="close()" >Close</button>&nbsp;
+        </div> 
+        <!-- <div class="col-md-2" *ngIf="data.leave_balance" matTooltip="data Balance 0">
+          <button mat-mini-fab color="primary">0</button>
+          </div> -->
+  </div> 

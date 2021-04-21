@@ -1,0 +1,73 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  display: flex;
+} 
+.avatar {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  line-height: 40px;
+  margin: 0 8px 0 0;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.mr-12 {
+  margin-right: 12px !important;
+  margin-left: 12px !important;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+mat-icon {
+  color: #f7851c;
+  font-size: 18px;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+mat-toolbar {
+  background-color: #ffffff;
+  position: fixed;
+  position: -webkit-sticky; /* For macOS/iOS Safari */
+  top: 0; /* Sets the sticky toolbar to be on top */
+  z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+  /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+  font-size: 24px;
+  height: 100%;
+}
+
+.header_name {
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  color: #f6851c;
+  font-size: 25px;
+  font-variant-caps: all-petite-caps;
+  font-weight: 500;
+}
+
+.header_name:focus {
+  letter-spacing: 1.5px;
+   outline-color: #ffffff;
+  font-size: 25px;
+  font-variant-caps: all-petite-caps;
+  font-weight: 500;
+}
+.brand_name {
+  font-weight: 700;
+  font-size: 19px;
+  padding: 18px 1px 4px 4px;
+}
+
+button.mat-menu-item {
+  color: #f6851c;
+}

@@ -1,0 +1,35 @@
+<div class="card-container">
+   <mat-card>
+      <form action="#" autocomplete="off">
+         <mat-form-field style="width:45%">
+            <input matInput name="name" [(ngModel)]="search" (keyup)="onSearch()" type="text" placeholder="Search" #nameInput="ngModel">
+          </mat-form-field>
+          <mat-icon md-list-icon>search</mat-icon>
+          <button *ngIf="userData.role!=3" class="btn btn-success float-right"  (click)="openDialog(0,'create')">+ New Project</button>
+      </form>
+   </mat-card> 
+</div>
+<br />
+<br />
+<div class="card-container">
+    <div *ngFor="let p of projects" style="margin: 5px;"> 
+        <mat-card class="example-card">
+            <mat-card-header>
+              <div mat-card-avatar matTooltip="View Project Tickets" class="example-header-image"  [routerLink]="['/authorized/tickets',p._id]"></div>
+                <mat-card-title matTooltip="{{p.project_name}}"   [routerLink]="['/authorized/tickets',p._id]">{{p.project_name}}</mat-card-title>
+                <mat-card-subtitle matTooltip="{{p.project_desc}}">{{p.project_desc}}</mat-card-subtitle>
+                <mat-card-actions>
+                 <mat-icon *ngIf="userData.role!=3" md-list-icon color="primary" (click)="openDialog(p._id,'edit')"  matTooltip="Edit Project">edit</mat-icon>
+                 <mat-icon  *ngIf="userData.role!=3" (click)="onDelete(p._id)" matTooltip="Delete Project" color="warn" md-list-icon>delete</mat-icon>
+                 <mat-icon (click)="projectInfoDialog(p._id)"  matTooltip="Project Info" md-list-icon>info</mat-icon>
+            </mat-card-actions>
+        </mat-card-header>
+    </mat-card>  
+  </div>
+  <div style="text-align: center;"  *ngIf="projects.length<=0&&!isLoading">  
+        <p class="info-text mat-body-1">No Projects Found!</p>
+    </div> 
+    <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
+    <mat-paginator [length]="Count" [pageSize]="perPage" [pageSizeOptions]="sizeOptions" 
+    (page)="onChangedPage($event)" *ngIf="projects.length > 0"></mat-paginator>
+</div>

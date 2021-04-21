@@ -1,0 +1,27 @@
+<h1 mat-dialog-title *ngIf="mode=='edit'">Edit Sub Unit/Sub Category</h1>
+<h1 mat-dialog-title *ngIf="mode=='create'">Create Sub Unit/Sub Category</h1>
+<form (submit)="onSaveRole(roleForm)" #roleForm="ngForm">
+ <div class="font" mat-dialog-content>
+     <mat-form-field appearance="outline">                                         
+      <mat-label>Sub Category Name</mat-label>
+        <input matInput name="sub_category_name" [disabled]="isEdit" [(ngModel)]="category.sub_category_name" type="text" placeholder="Category Name" #nameInput="ngModel" required>
+           <mat-error *ngIf="nameInput.hasError('required')">Please Enter Sub Category Name.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">                                         
+         <mat-label>Description</mat-label>
+          <textarea matInput name="sub_category_desc" [(ngModel)]="category.sub_category_desc" type="text" placeholder="Description" #descInput="ngModel" required>{{category.sub_category_desc}}</textarea>
+           <mat-error *ngIf="descInput.hasError('required')">Please Enter Sub Catgory Description.</mat-error>
+         </mat-form-field> 
+     <mat-form-field appearance="outline">                                         
+      <mat-label>Select Category</mat-label>
+       <mat-select name="categoryId"  placeholder="Select Job Category" [(ngModel)]="category.categoryId" #catInput="ngModel" required>
+        <mat-option *ngFor="let cat of dropDownCategories"  [value]="cat._id">{{cat.category_name}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="catInput.hasError('required')">Please Select Job Category.</mat-error>
+      </mat-form-field>
+   </div>
+      <div mat-card-actions align="end">
+         <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+         <button mat-raised-button color="primary" [disabled]="isLoading||roleForm.invalid" type="submit">Save</button>
+      </div>
+</form>

@@ -1,0 +1,22 @@
+
+<div class="card-container">
+    <div class="container"  *ngIf="calendarVisible">
+        <div class="row">
+            <div class="app-calendar">
+            <full-calendar
+            #calendar
+            defaultView="dayGridMonth"
+            [header]="{
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            }"
+            [plugins]="calendarPlugins"
+            [weekends]="calendarWeekends"
+            [events]="calendarEvents"
+            (dateClick)="handleDateClick($event)"
+            ></full-calendar>
+         </div>
+        </div>
+     </div>
+  </div>
