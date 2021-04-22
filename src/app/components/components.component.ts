@@ -46,7 +46,6 @@ export class ComponentsComponent implements OnInit {
   getUserDetails(){
       this.authService.getUserDetails().subscribe((res: any) => {
          this.userDetails=res.user;
-         console.log(this.userDetails,"00000")
         },
         error => {
       });

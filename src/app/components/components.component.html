@@ -14,7 +14,7 @@
         <div class="h5 sidenav_text email hint-text mt-8" *ngIf="userDetails?.jobDetailsId?.jobId"  style="font-size: 14px;">{{userDetails.jobDetailsId.jobId.job_name}}</div>
       </div>
     </div>
-   <mat-nav-list  *ngIf="userData.role === 1 || userData.role === 2 || userData.role === 3">
+   <mat-nav-list  *ngIf="userData.role === 1 || userData.role === 2 || userData.role === 3 || userData.role === 4">
      <mat-list-item matTooltip="Dashboard" (click)="decrease()" [routerLink]="'emp'" routerLinkActive="mat-accent">
        <mat-icon >dashboard</mat-icon>
         <div fxFlex="10"></div>
@@ -22,6 +22,13 @@
          <span>Dashboard</span>
        </div>
      </mat-list-item> 
+    <mat-list-item  matTooltip="All Orders" (click)="decrease()" >
+      <mat-icon md-list-icon>filter_center_focus</mat-icon>
+      <div fxFlex="20"></div>
+      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
+        <span>Orders</span>
+      </div>
+    </mat-list-item> 
      <div  *ngIf="userData.role === 2||userData.role === 3">
      <mat-list-item matTooltip="Profile Details" (click)="decrease()" [routerLink]="['emp/profile']">
       <mat-icon md-list-icon>person</mat-icon>
@@ -82,14 +89,6 @@
     <span>Projects</span>
   </div>
 </mat-list-item>  -->
-
-  <mat-list-item  *ngIf="userData.role === 1 || userData.role === 2 || userData.role === 4" matTooltip="All Orders" (click)="decrease()" >
-    <mat-icon md-list-icon>filter_center_focus</mat-icon>
-    <div fxFlex="20"></div>
-    <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
-      <span>Orders</span>
-    </div>
-  </mat-list-item> 
 
    <div  *ngIf="userData.role === 1  || userData.role === 2">
      <mat-list-item matTooltip="Users" (click)="decrease()" [routerLink]="['admin/users']" routerLinkActive="mat-accent">

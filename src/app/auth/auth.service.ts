@@ -86,11 +86,10 @@ export class AuthService {
       )
   }
 
-  createUser(email: string, password: string, name: string) {
+  createCustomer(customer: any) {
     localStorage.clear();
-    const newUser: any = { email, password, name };
-    console.log(newUser, ":00000000")
-    return this.http.post(BACKEND_URL + "/signup", newUser)
+    console.log(customer, ":00000000")
+    return this.http.post(BACKEND_URL + "/customer_signup", customer)
   }
 
   sendemail(email: string, name: string, organisation: string, message: string) {
@@ -176,8 +175,7 @@ export class AuthService {
   }
 
   private setAuthTimer(duration: number) {
-    console.log("Setting timer: " + duration);
-    this.tokenTimer = setTimeout(() => {
+     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
   }
