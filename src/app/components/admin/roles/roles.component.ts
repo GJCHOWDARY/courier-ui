@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from "@angular/material/paginator";
-import { Subscription } from "rxjs";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
 import { RolesService } from "./roles.service";

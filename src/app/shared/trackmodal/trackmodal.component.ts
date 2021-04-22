@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { Subscription } from "rxjs";
+import { MatDialog, MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-trackmodal',
@@ -7,30 +11,35 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./trackmodal.component.css']
 })
 export class TrackmodalComponent implements OnInit {
-  closeResult = '';
 
-  constructor(private modalService: NgbModal) {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  isLoading = false;
+  role: any = []; disablerole = true;
+  data: any = [];
+  roleId: string;
+  mode: string;
+  isEdit = true;
+  userId = null;
+
+  constructor(private dialogRef: MatDialogRef<TrackmodalComponent>,
+    public route: ActivatedRoute,
+    private router: Router, private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) data) {
+    console.log(data, "0000000")
+    this.data = data;
+    this.role = { _id: '', role_name: '', role_desc: '', role_id: '' };
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  ngOnInit() {
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
+  onSaveRole(form: NgForm) {
+    if (form.invalid) {
+      return;
     }
+    this.isLoading = true;
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }
-
-

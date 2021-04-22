@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from "../../../environments/environment";
-import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from "rxjs";
 import { Router, ActivatedRoute, ParamMap,Params } from "@angular/router";
 import { NgForm, FormControl, Validators } from '@angular/forms';
 import { AuthService } from "../../auth/auth.service";
+import { TrackmodalComponent } from '../trackmodal/trackmodal.component';
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
  @Component({
   selector: 'app-home',
@@ -13,45 +14,7 @@ import { AuthService } from "../../auth/auth.service";
 })
 export class HomeComponent implements OnInit {
   images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
-  host_ip: string=environment.ip;
-  isLoading:Boolean=false;
-  gridList = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
-  ];
-  slides = [
-    {img: "https://www.solodev.com/assets/carousel/image1.png"},
-    {img: "https://www.solodev.com/assets/carousel/image2.png"},
-    {img: "https://www.solodev.com/assets/carousel/image3.png"},
-    {img: "https://www.solodev.com/assets/carousel/image4.png"},
-    {img: "https://www.solodev.com/assets/carousel/image5.png"},
-    {img: "https://www.solodev.com/assets/carousel/image6.png"},
-    {img: "https://www.solodev.com/assets/carousel/image7.png"},
-    {img: "https://www.solodev.com/assets/carousel/image7.png"}
-  ];
-  slideConfig = {
-    slidesToShow: 4, 
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 1000,
-    arrows: false,
-    dots: false,
-    adaptiveHeight: false,
-    pauseOnHover: false,
-    responsive: [{
-    breakpoint: 768,
-    settings: {
-      slidesToShow: 3
-    }
-  }, {
-    breakpoint: 520,
-    settings: {
-      slidesToShow: 2
-    }
-  }]
-  };
+  isLoading:Boolean=false;  
   
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
@@ -61,6 +24,7 @@ export class HomeComponent implements OnInit {
 
 constructor(public authService: AuthService,
   private activatedRoute: ActivatedRoute,
+  public dialog: MatDialog,
    private router: Router) {
  }
 
@@ -82,6 +46,21 @@ sendMessage(form: NgForm) {
     }
     this.isLoading=true; 
   }
+
+
+ openDialog() {
+  const dialogConfig = new MatDialogConfig();
+
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.maxWidth = '962px';
+  dialogConfig.width = '740px';
+  dialogConfig.data = {};
+  const dialogRef = this.dialog.open(TrackmodalComponent, dialogConfig);
+  //------After close the dialog dataset Description will be changed
+  dialogRef.afterClosed().subscribe(result => {
+  });
+}
 
 onLogout() {
  this.authService.logout();

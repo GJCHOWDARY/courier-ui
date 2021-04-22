@@ -1,31 +1,14 @@
-<ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="dateOfBirth">Date of birth</label>
-          <div class="input-group">
-            <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div>
-  </ng-template>
-  
-  
-  
-  <hr>
-  
-  <pre>{{ closeResult }}</pre>
-  
+<h1 mat-dialog-title>Track Your Order</h1>
+<form (submit)="onSaveRole(roleForm)" #roleForm="ngForm">
+ <div class="font" mat-dialog-content>
+     <mat-form-field appearance="outline">                                         
+      <mat-label>Order Number/ID</mat-label>
+          <input matInput name="order" ngModel type="text" placeholder="Order No" #orderInput="ngModel" required>
+           <mat-error *ngIf="orderInput.hasError('required')">Please enter Order Number/DI.</mat-error>
+       </mat-form-field> 
+      </div>
+      <div mat-card-actions align="end">
+         <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+         <button mat-raised-button color="primary" [disabled]="isLoading||roleForm.invalid" type="submit">Track</button>
+      </div>
+</form>
