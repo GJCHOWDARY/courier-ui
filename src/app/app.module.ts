@@ -14,6 +14,7 @@ import { AuthInterceptor } from "./auth/auth-interceptor";
 import { ErrorInterceptor } from "./error-interceptor";
 import { BottomSheetComponent } from './shared/bottom-sheet/bottom-sheet.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TrackmodalComponent } from './shared/trackmodal/trackmodal.component';
 
  
 @NgModule({
@@ -32,7 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    BottomSheetComponent
+    BottomSheetComponent,
+    TrackmodalComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
