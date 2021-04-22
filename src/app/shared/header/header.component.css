@@ -1,3 +1,4 @@
+
 ul {
   list-style: none;
   padding: 0;
@@ -7,6 +8,12 @@ ul {
 ul {
   display: flex;
 } 
+.row{
+ display: flex;
+ flex-wrap: nowrap;
+ margin-right:0 !important;
+
+}
 .avatar {
   width: 30px;
   min-width: 30px;
