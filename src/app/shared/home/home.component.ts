@@ -32,11 +32,10 @@ ngOnInit() {
   this.authService.autoAuthUser();  
   localStorage.removeItem("ProcessingData"); 
   this.userIsAuthenticated = this.authService.getIsAuth();
-  console.log(this.userIsAuthenticated);
-  if (!this.userIsAuthenticated) {
+   if (!this.userIsAuthenticated) {
     this.router.navigate(['/']);
   }else{
-  this.router.navigate(['/dashboard']);
+    this.router.navigate(["/authorized/emp/"]);
   }
 }
 

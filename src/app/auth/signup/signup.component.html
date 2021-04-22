@@ -23,7 +23,7 @@
         <div class="col-md-6">
           <mat-form-field  appearance="outline">           
             <mat-label>Mobile</mat-label>
-            <input matInput name="mobile" ngModel="mobile" type="text" mobile  pattern="[0-9]*" minlength="10" maxlength="10" placeholder="Enter Mobile Number" #mobileInput="ngModel" required>
+            <input matInput name="mobile" ngModel type="text" mobile  pattern="[0-9]*" minlength="10" maxlength="10" placeholder="Enter Mobile Number" #mobileInput="ngModel" required>
             <mat-icon matSuffix>call</mat-icon>         
             <mat-error *ngIf="mobileInput.hasError('required')">Please Enter PhoneNumber.</mat-error>
             <mat-error *ngIf="mobileInput.hasError('pattern')">Mobile number should be only numbers</mat-error>

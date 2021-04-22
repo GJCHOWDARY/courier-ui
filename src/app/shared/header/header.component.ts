@@ -12,71 +12,74 @@ import { environment } from "../../../environments/environment";
 })
 export class HeaderComponent implements OnInit {
   userIsAuthenticated = false;
-  processingData:any =[];
-  host_ip: string=environment.ip;
+  processingData: any = [];
+  host_ip: string = environment.ip;
   private authListenerSubs: Subscription;
   private processListenerSubs: Subscription;
-  userData: any=[];
-  usersAnvData:any;
-  userDetails: any={};
+  userData: any = [];
+  usersAnvData: any;
+  userDetails: any = {};
   selectedFiles: any;
-  sidenavWidth=4;
+  sidenavWidth = 4;
   private toggelListener = new Subject<boolean>();
- 
-  constructor(private authService: AuthService,private _bottomSheet: MatBottomSheet) {}
+
+  constructor(private authService: AuthService, private _bottomSheet: MatBottomSheet) { }
 
   ngOnInit(): void {
     this.userIsAuthenticated = this.authService.getIsAuth();
     this.userData = this.authService.getUserData()
-    if(this.userIsAuthenticated){
-    this.getUserDetails();
-    this.getEmpAnniversaries();
+    if (this.userIsAuthenticated) {
+      this.getUserDetails();
+      this.getEmpAnniversaries();
     }
     this.authListenerSubs = this.authService.getAuthStatusListener()
       .subscribe(isAuthenticated => {
         this.userIsAuthenticated = isAuthenticated;
         this.userData = this.authService.getUserData()
-        if(this.userIsAuthenticated){
+        if (this.userIsAuthenticated) {
           this.getUserDetails();
           this.getEmpAnniversaries();
-          }
+        }
       });
   }
 
   selectFile(event) {
     this.selectedFiles = event.target.files[0];
-    let name=this.selectedFiles.name
+    let name = this.selectedFiles.name
     let formData = new FormData();
     formData.append("file", this.selectedFiles);
     formData.append("filename", name);
     this.authService.updateProfileImg(formData)
   }
-  
-  getUserDetails(){
+
+  getUserDetails() {
     this.authService.getUserDetails().subscribe((res: any) => {
-       this.userDetails=res.user;
-      },
+      this.userDetails = res.user;
+    },
       error => {
-    });
+      });
   }
 
-  getEmpAnniversaries(){
-    this.authService.getEmpAnniversaries().subscribe((res: any) => {
-      this.usersAnvData=res.data;
-     },
-     error => {
-   });
+  getEmpAnniversaries() {
+    if (this.userData.role !== 4) {
+      this.authService.getEmpAnniversaries().subscribe((res: any) => {
+        this.usersAnvData = res.data;
+      },
+        error => {
+          console.log(error);
+        });
+    }
   }
 
   openBottomSheet(): void {
-    this._bottomSheet.open(BottomSheetComponent,{data:this.usersAnvData});
+    this._bottomSheet.open(BottomSheetComponent, { data: this.usersAnvData });
   }
 
   onLogout() {
     this.authService.logout();
-   }
+  }
 
-  Toggle(){
-   }
+  Toggle() {
+  }
 
 }

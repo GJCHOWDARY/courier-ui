@@ -2,7 +2,7 @@
   <mat-progress-spinner *ngIf="isLoading||isLoadingData" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner>
   <mat-card *ngIf="!isLoadingData">
      <mat-tab-group color="accent" animationDuration="0ms" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
-        <mat-tab>
+        <mat-tab *ngIf="user.role !== 4">
            <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">business_center</mat-icon>
               Job Info
@@ -16,13 +16,13 @@
                        <input matInput readonly name="email" value="{{user.email}}" type="email">
                     </mat-form-field>
                  </div>
-                 <div class="col-md-4" *ngIf="user.jobDetailsId.jobId">
+                 <div class="col-md-4" *ngIf="user.jobDetailsId&&user.jobDetailsId.jobId">
                     <mat-form-field appearance="outline">
                        <mat-label>Job Title</mat-label>
                        <input matInput *ngIf="user.jobDetailsId" readonly name="jobId" value="{{user.jobDetailsId.jobId.job_name}}" type="text">
                     </mat-form-field>
                  </div>
-                 <div class="col-md-4" *ngIf="user.jobDetailsId.categoryId">
+                 <div class="col-md-4" *ngIf="user.jobDetailsId&&user.jobDetailsId.categoryId">
                     <mat-form-field  appearance="outline">
                        <mat-label>Job Category</mat-label>
                        <input matInput readonly  name="categoryId" value="{{user.jobDetailsId.categoryId.category_name}}" type="text">
@@ -30,13 +30,13 @@
                  </div>
               </div>
               <div class="row">
-                 <div class="col-md-4" *ngIf="user.jobDetailsId.subcategoryId">
+                 <div class="col-md-4" *ngIf="user.jobDetailsId&&user.jobDetailsId.subcategoryId">
                     <mat-form-field  appearance="outline">
                        <mat-label>Sub Unit</mat-label>
                        <input matInput readonly name="subcategoryId" value="{{user.jobDetailsId.subcategoryId.sub_category_name}}" type="text">
                     </mat-form-field>
                  </div>
-                 <div class="col-md-4">
+                 <div class="col-md-4" *ngIf="user.jobDetailsId&&user.jobDetailsId.work_shift">
                     <mat-form-field  appearance="outline">
                        <mat-label>Work Shift</mat-label>
                        <input matInput readonly name="work_shift" value="{{user.jobDetailsId.work_shift}}" type="text">
@@ -51,13 +51,13 @@
               </div>
               <div class="row">
                  <div class="col-md-4">
-                    <mat-form-field  appearance="outline">
+                    <mat-form-field  appearance="outline" *ngIf="user.jobDetailsId">
                        <mat-label>Employment Status</mat-label>
                        <input matInput readonly name="employment_status" value="{{user.jobDetailsId.employment_status}}" type="text">
                     </mat-form-field>
                  </div>
                  <div class="col-md-4">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" *ngIf="user.jobDetailsId">
                        <mat-label>Job Specification</mat-label>
                        <input matInput readonly name="job_specification" value="{{user.jobDetailsId.job_specification}}" type="text">
                     </mat-form-field>
@@ -71,14 +71,14 @@
               </div>
               <div class="row">
                  <div class="col-md-4">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline" *ngIf="user.jobDetailsId">
                        <mat-label>Joined Date</mat-label>
                        <input matInput  name="join_date" value="{{user.jobDetailsId.join_date|date}}">
                        <mat-icon matSuffix>calendar_today</mat-icon>
                     </mat-form-field>
                  </div>
                  <div class="col-md-4">
-                    <mat-form-field appearance="outline">
+                    <mat-form-field appearance="outline"  *ngIf="user.jobDetailsId">
                        <mat-label>Jod Location</mat-label>
                        <input matInput readonly name="job_location" value="{{user.jobDetailsId.job_location}}" type="text">
                     </mat-form-field>

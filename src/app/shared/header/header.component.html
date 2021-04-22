@@ -13,7 +13,7 @@
       <li *ngIf="!userIsAuthenticated">
         <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active" style="color: #f6851c;">SIGNUP</button>
     </li>    
-      <li *ngIf="userIsAuthenticated" matTooltip="Anniversary" (click)="openBottomSheet()">
+      <li *ngIf="userIsAuthenticated && userData.role !== 4" matTooltip="Anniversary" (click)="openBottomSheet()">
         <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" style="flex: 0 1 auto; box-sizing: border-box;flex-direction: row; display: flex; place-content: center flex-start; align-items: center;">
           <button  mat-button="" style="padding: 9px; ">
           <mat-icon md-list-icon style="font-size:22px">control_camera</mat-icon>
@@ -39,7 +39,7 @@
           <mat-icon>account_circle</mat-icon>
           <span>Profile</span>
           </button>
-          <button *ngIf="userData.role!=1" mat-menu-item  [routerLink]="['authorized/emp/qualifications']" routerLinkActive="mat-accent" >
+          <button *ngIf="userData.role !== 4" mat-menu-item  [routerLink]="['authorized/emp/qualifications']" routerLinkActive="mat-accent" >
             <mat-icon>account_balance</mat-icon>
             <span>Qualifications</span>
           </button>
