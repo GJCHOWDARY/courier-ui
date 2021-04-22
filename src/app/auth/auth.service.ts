@@ -10,7 +10,7 @@ const BACKEND_USER_URL = environment.apiUrl + "/users";
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
-  sankBardata: any={};
+  sankBardata: any = {};
   private isAuthenticated = false;
   private isAdmin = false;
   private isResetPassword = false;
@@ -22,11 +22,11 @@ export class AuthService {
   private userId: string;
   private authStatusListener = new Subject<boolean>();
 
-  horizontalPos:MatSnackBarHorizontalPosition ='right';
-  verticalPos:MatSnackBarVerticalPosition ='top'; 
-  
+  horizontalPos: MatSnackBarHorizontalPosition = 'right';
+  verticalPos: MatSnackBarVerticalPosition = 'top';
+
   constructor(private http: HttpClient, private router: Router,
-    private _snackBar: MatSnackBar) {}
+    private _snackBar: MatSnackBar) { }
 
   getToken() {
     return this.token;
@@ -42,7 +42,7 @@ export class AuthService {
   getUserId() {
     return this.userId;
   }
-  
+
   getUserEmail() {
     return this.email;
   }
@@ -55,39 +55,46 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  getResetPassword(){
+  getResetPassword() {
     return this.isResetPassword;
   }
 
- checkResetToken(token: string){
+  checkResetToken(token: string) {
     this.http.get(BACKEND_URL + `/reset_password/${token}`).subscribe(
-      (response : any) => {
-         if(response.status){
-           return response.status
-        }else{
-          this.sankBardata.message=response.message;
+      (response: any) => {
+        if (response.status) {
+          return response.status
+        } else {
+          this.sankBardata.message = response.message;
           this.openSnakBar()
-           this.router.navigate(['/']) 
+          this.router.navigate(['/'])
         }
       })
   }
 
-verifyUserEmail(email: string){
-    return this.http.put(BACKEND_URL + `/verifyemail/${email}`,{email})
+  verifyUserEmail(email: string) {
+    return this.http.put(BACKEND_URL + `/verifyemail/${email}`, { email })
   }
 
- login(email: string, password: string) {
-    localStorage.clear(); 
+  login(email: string, password: string) {
+    localStorage.clear();
     const authData: AuthData = { email: email, password: password };
-     return this.http
-    .post<{ token: string; expiresIn: number; userId: string; password_update:number;role:string, email: string, name: string }>(
-      BACKEND_URL + "/login",
-      authData
-    )
+    return this.http
+      .post<{ token: string; expiresIn: number; userId: string; password_update: number; role: string, email: string, name: string }>(
+        BACKEND_URL + "/login",
+        authData
+      )
   }
 
- sendemail(email: string, name: string, organisation:string, message:string) {
-    const saveData = { email: email, name: name, organization:organisation, message: message };
+  createUser(email: string, password: string, name: string) {
+    localStorage.clear();
+    const newUser: any = { email, password, name };
+    console.log(newUser, ":00000000")
+    return this.http.post(BACKEND_URL + "/signup", newUser)
+  }
+
+  sendemail(email: string, name: string, organisation: string, message: string) {
+    const saveData = { email: email, name: name, organization: organisation, message: message };
     // return this.http
     // .post(
     //   BACKEND_URL + "/sendmessage",
@@ -95,31 +102,31 @@ verifyUserEmail(email: string){
     // )
   }
 
- saveLoginInfo(response:any){
-   const token = response.token;
-   if(token){
+  saveLoginInfo(response: any) {
+    const token = response.token;
+    if (token) {
       this.token = token;
-          const expiresInDuration = response.expiresIn;
-          this.setAuthTimer(expiresInDuration);
-          this.isAuthenticated = true;
-          this.userId = response.userId;
-          this.email= response.email;
-          this.name= response.name;
-          this.role= response.role; 
-          this.authStatusListener.next(true);
-          const now = new Date();
-          const expirationDate = new Date(
-            now.getTime() + expiresInDuration * 1000
-          );
-           this.saveAuthData(token, expirationDate, this.userId, response.role, response.email,response.name);
-        }
+      const expiresInDuration = response.expiresIn;
+      this.setAuthTimer(expiresInDuration);
+      this.isAuthenticated = true;
+      this.userId = response.userId;
+      this.email = response.email;
+      this.name = response.name;
+      this.role = response.role;
+      this.authStatusListener.next(true);
+      const now = new Date();
+      const expirationDate = new Date(
+        now.getTime() + expiresInDuration * 1000
+      );
+      this.saveAuthData(token, expirationDate, this.userId, response.role, response.email, response.name);
     }
+  }
 
- updateProfileImg(data: any){
-  this.http.post(BACKEND_USER_URL + `/changeprofileimg`, data).subscribe(
+  updateProfileImg(data: any) {
+    this.http.post(BACKEND_USER_URL + `/changeprofileimg`, data).subscribe(
       (res: any) => {
         this.authStatusListener.next(true);
-        this.sankBardata.message='Profile Picture Updated!';
+        this.sankBardata.message = 'Profile Picture Updated!';
         this.openSnakBar()
       },
       error => {
@@ -127,15 +134,15 @@ verifyUserEmail(email: string){
     );
   }
 
- forgotPassword(email: string) {
-     return this.http.post(BACKEND_URL + "/forgot_password", {email})
+  forgotPassword(email: string) {
+    return this.http.post(BACKEND_URL + "/forgot_password", { email })
   }
 
- updatePassword(email: string, password: string, confirmPassword: string,token: string) {
-    return this.http.post(BACKEND_URL + "/update_reset_password", {email,password,confirmPassword,token})
+  updatePassword(email: string, password: string, confirmPassword: string, token: string) {
+    return this.http.post(BACKEND_URL + "/update_reset_password", { email, password, confirmPassword, token })
   }
 
- autoAuthUser() {
+  autoAuthUser() {
     const authInformation = this.getAuthData();
     if (!authInformation) {
       return;
@@ -154,37 +161,37 @@ verifyUserEmail(email: string){
     }
   }
 
- logout() {
-  return this.http.post(BACKEND_URL + "/logout", {userId:this.userId})
-    .subscribe((response: any) => {
-    this.token = null;
-    this.isAuthenticated = false;
-    this.authStatusListener.next(false);
-    this.clearAuthData();
-    localStorage.clear();
-    this.userId = null; 
-    clearTimeout(this.tokenTimer);        
-    this.router.navigate(['/auth/login']); 
- })
-}
+  logout() {
+    return this.http.post(BACKEND_URL + "/logout", { userId: this.userId })
+      .subscribe((response: any) => {
+        this.token = null;
+        this.isAuthenticated = false;
+        this.authStatusListener.next(false);
+        this.clearAuthData();
+        localStorage.clear();
+        this.userId = null;
+        clearTimeout(this.tokenTimer);
+        this.router.navigate(['/auth/login']);
+      })
+  }
 
- private setAuthTimer(duration: number) {
+  private setAuthTimer(duration: number) {
     console.log("Setting timer: " + duration);
-    this.tokenTimer = setTimeout(() => {      
+    this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);
   }
 
- private saveAuthData(token: string, expirationDate: Date, userId: string, role: string,email: string, name:string) {
+  private saveAuthData(token: string, expirationDate: Date, userId: string, role: string, email: string, name: string) {
     localStorage.setItem("token", token);
     localStorage.setItem("expiration", expirationDate.toISOString());
     localStorage.setItem("userId", userId);
     localStorage.setItem("role", role);
     localStorage.setItem("email", email);
-    localStorage.setItem("username", String(name));  
+    localStorage.setItem("username", String(name));
   }
 
- private clearAuthData() {
+  private clearAuthData() {
     localStorage.removeItem("token");
     localStorage.removeItem("expiration");
     localStorage.removeItem("userId");
@@ -193,14 +200,14 @@ verifyUserEmail(email: string){
     localStorage.removeItem("username");
   }
 
- private getAuthData() {
+  private getAuthData() {
     const token = localStorage.getItem("token");
     const expirationDate = localStorage.getItem("expiration");
     const userId = localStorage.getItem("userId");
     const email = localStorage.getItem("email");
     const role = localStorage.getItem("role");
-    const name = localStorage.getItem("username");  
-     if (!token || !expirationDate) {
+    const name = localStorage.getItem("username");
+    if (!token || !expirationDate) {
       return;
     }
     return {
@@ -210,36 +217,36 @@ verifyUserEmail(email: string){
       email: email,
       role: role,
       name: name
-     };
+    };
   }
-  
- getUserData() { 
-    return { 
+
+  getUserData() {
+    return {
       token: this.token,
       userId: this.userId,
       name: this.name,
       email: this.email,
       role: this.role,
-     };
+    };
   }
 
- getUserDetails(){
-  return this.http.get(BACKEND_USER_URL+`/getuserdetials/`+this.userId)
- }
- 
- getUserSkills(userId: string){
-   return this.http.get(BACKEND_USER_URL+`/getuserskills/`+userId)
- }
+  getUserDetails() {
+    return this.http.get(BACKEND_USER_URL + `/getuserdetials/` + this.userId)
+  }
 
- getEmpAnniversaries(){
-  return this.http.get(BACKEND_USER_URL+`/getanniversaries/`)
- }
+  getUserSkills(userId: string) {
+    return this.http.get(BACKEND_USER_URL + `/getuserskills/` + userId)
+  }
 
- openSnakBar(){
+  getEmpAnniversaries() {
+    return this.http.get(BACKEND_USER_URL + `/getanniversaries/`)
+  }
+
+  openSnakBar() {
     let config = new MatSnackBarConfig();
     config.verticalPosition = this.verticalPos;
     config.horizontalPosition = this.horizontalPos;
-    config.duration=8000; 
-     this._snackBar.open(this.sankBardata.message, 'Ok', config);
-    }
- }
+    config.duration = 8000;
+    this._snackBar.open(this.sankBardata.message, 'Ok', config);
+  }
+}

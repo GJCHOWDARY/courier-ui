@@ -1,14 +1,7 @@
 
 <div class="row">
   <div class="col-md-12 col-lg-12">
-    <mat-toolbar style="height: 55px;">
-      <!-- <span >
-       <a *ngIf="userIsAuthenticated" class="navbar-brand" (click)="Toggle()">
-             <mat-list-item>
-              <mat-icon style="font-size: 28px;">list</mat-icon> 
-            </mat-list-item>
-          </a>
-    </span> -->
+    <mat-toolbar style="height: 55px;"> 
     <p  matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active">
       Smart Courier
     </p>
@@ -17,6 +10,9 @@
       <li *ngIf="!userIsAuthenticated">
           <button mat-button [routerLink]="'/auth/login'" routerLinkActive="active" style="color: #f6851c;">LOGIN</button>
       </li>  
+      <li *ngIf="!userIsAuthenticated">
+        <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active" style="color: #f6851c;">SIGNUP</button>
+    </li>    
       <li *ngIf="userIsAuthenticated" matTooltip="Anniversary" (click)="openBottomSheet()">
         <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" style="flex: 0 1 auto; box-sizing: border-box;flex-direction: row; display: flex; place-content: center flex-start; align-items: center;">
           <button  mat-button="" style="padding: 9px; ">

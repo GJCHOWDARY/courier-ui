@@ -1,1 +1,127 @@
-<p>signup works!</p>
+<div class="content" role="main"> 
+    <div class="container">
+    <form (submit)="onSignup(singupForm)"  #singupForm="ngForm"> 
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput name="first_name" autocomplete="off" ngModel placeholder="Enter Your First Name" #firstInput="ngModel" required>
+            <mat-icon matSuffix>person_pin</mat-icon>         
+            <mat-error *ngIf="firstInput.hasError('required')">Please enter first name.</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput name="last_name" autocomplete="off" ngModel placeholder="Enter Your last Name" #lastInput="ngModel" required>
+            <mat-icon matSuffix>person_pin</mat-icon>         
+            <mat-error *ngIf="lastInput.hasError('required')">Please enter last name.</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field  appearance="outline">           
+            <mat-label>Mobile</mat-label>
+            <input matInput name="mobile" ngModel="mobile" type="text" mobile  pattern="[0-9]*" minlength="10" maxlength="10" placeholder="Enter Mobile Number" #mobileInput="ngModel" required>
+            <mat-icon matSuffix>call</mat-icon>         
+            <mat-error *ngIf="mobileInput.hasError('required')">Please Enter PhoneNumber.</mat-error>
+            <mat-error *ngIf="mobileInput.hasError('pattern')">Mobile number should be only numbers</mat-error>
+            <mat-error *ngIf="mobileInput.hasError('minlength')">Mobile should be 10digit</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">                                          
+            <mat-label>Email</mat-label>
+            <input matInput name="email" autocomplete="off" ngModel type="email" placeholder="Enter Your Email" #emailInput="ngModel" required email>
+            <mat-icon matSuffix>email</mat-icon>         
+            <mat-error *ngIf="emailInput.hasError('required')">Please enter valid email.</mat-error>
+          </mat-form-field>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">                                         
+                <mat-label>Password</mat-label>
+                <input [type]="hide ? 'password' : 'text'" autocomplete="off" name="password" ngModel matInput placeholder="Enter Password" #passwordInput="ngModel" required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="passwordInput.hasError('required')">Please enter valid password.</mat-error>
+              </mat-form-field> 
+            </div>
+          <div class="col-md-6">
+            <mat-form-field appearance="outline">                                         
+                <mat-label>Confirm Password</mat-label>
+                <input [type]="hide ? 'password' : 'text'" autocomplete="off" name="cpassword" ngModel matInput placeholder="Enter Confirm Password" #cpasswordInput="ngModel" required>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="cpasswordInput.hasError('required')">Please enter valid password.</mat-error>
+              </mat-form-field> 
+              <mat-error *ngIf="passwordInput.value!==''&&cpasswordInput.value!==''&&cpasswordInput.value!==passwordInput.value"> Password & confirm password don't match.</mat-error>  
+          </div>
+        </div>
+        <div>
+          <p>Address Details</p>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Address1</mat-label>
+          <textarea matInput name="address1" ngModel type="text" placeholder="Enter Address1" #Add1Input="ngModel" required></textarea>
+           <mat-hint align="end">Not more then 50 characters long.</mat-hint>
+          <mat-error *ngIf="Add1Input.hasError('required')">Please Enter Address1.</mat-error>
+         </mat-form-field>
+          </div>
+          <div class="col-md-6">
+         <mat-form-field appearance="outline">
+           <mat-label>Address2</mat-label>
+           <textarea matInput name="address2" ngModel type="text" placeholder="Enter Address2" #Add12nput="ngModel" required></textarea>
+            <mat-hint align="end">Not more then 50 characters long.</mat-hint>
+           <mat-error *ngIf="Add1Input.hasError('required')">Please Enter Address2.</mat-error>
+          </mat-form-field>
+          </div>
+          </div>
+        <div class="row">
+          <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>City</mat-label>
+          <input matInput name="city" ngModel type="text" placeholder="Enter City" #cityInput="ngModel" required>
+           <mat-error *ngIf="cityInput.hasError('required')">Please Enter City.</mat-error>
+         </mat-form-field>
+         </div>
+          <div class="col-md-6">
+         <mat-form-field appearance="outline">
+           <mat-label>State</mat-label>
+           <input matInput name="state" ngModel type="text" placeholder="Enter State" #stateInput="ngModel" required>
+            <mat-error *ngIf="stateInput.hasError('required')">Please Enter State.</mat-error>
+          </mat-form-field>
+          </div>
+          </div>
+
+        <div class="row">
+          <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <input matInput name="country" ngModel type="text" placeholder="Enter Country" #countryInput="ngModel" required>
+             <mat-error *ngIf="countryInput.hasError('required')">Please Enter County.</mat-error>
+           </mat-form-field>
+          </div>
+          <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Zip Code</mat-label>
+            <input matInput name="zip_code" ngModel type="text" placeholder="Enter Zip" #zipInput="ngModel" required>
+             <mat-error *ngIf="zipInput.hasError('required')">Please Enter Zip Code.</mat-error>
+           </mat-form-field>
+            </div>
+        </div> 
+        <mat-card-actions align="end">
+          <div class="row">
+          <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+          <button class="login-btn" style="width: 50%;" mat-raised-button color="primary" [routerLink]="'/'" routerLinkActive="active">Cancle</button>
+          <button class="login-btn" style="width: 50%;" mat-raised-button color="primary" type="submit">Signup</button>
+        </div>
+          </div>
+        </mat-card-actions> 
+  </form>
+ </div>
+</div>

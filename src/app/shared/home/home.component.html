@@ -1,166 +1,114 @@
-<div class="container-fluid">
-   
-   <section>
-      <div class="row">
-         <div class="col-md-12 col-lg-12">
-            <ngb-carousel *ngIf="images" class="car_full">
-               <ng-template ngbSlide>
-                 <div class="picsum-img-wrapper">
-                   <img [src]="images[0]" alt="Random first slide" class="car_size">
-                 </div>
-                 <div class="carousel-caption">
-                 <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Track your Order</button>-->
-                   <h3>First slide label</h3>
-                   <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                 </div>
-               </ng-template>
-               <ng-template ngbSlide>
-                 <div class="picsum-img-wrapper">
-                   <img [src]="images[1]" alt="Random second slide" class="car_size">
-                 </div>
-                 <div class="carousel-caption">
-                  <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Track your Order</button> -->
-                   <h3>Second slide label</h3>
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                 </div>
-               </ng-template>
-               <ng-template ngbSlide>
-                 <div class="picsum-img-wrapper">
-                   <img [src]="images[2]" alt="Random third slide" class="car_size">
-                 </div>
-                 <div class="carousel-caption">
-                  <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Track your Order</button> -->
-                   <h3>Third slide label</h3>
-                   <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                 </div>
-               </ng-template>
-             </ngb-carousel>
-         </div>
-      </div>
-   </section>
-   <section>
-      <div class="ourtitle"> 
-         <div class=" row car_full ">
-            <div class="col-md-12 col-lg-12">
-               <h2 class="ourser">
-                  <p class="ourtxt">OUR SERVICES</p> 
-               </h2>
-            </div>
-         </div>
-      </div>
-   </section>
-   <section class="cards_land">
-       <!-- Topic Cards -->
-    <div id="cards_landscape_wrap-2">
-      <div class="container">
-          <div class="row">
-              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 colimg">
-                  <a href="">
-                      <div class="card-flyer">
-                          <div class="text-box">
-                              <div class="image-box">
-                                  <img src="../assets/logo/cour1.jpeg" alt="courier" />
-                              </div>
-                              <div class="text-container">
-                                  <h6>Courier</h6>
-                                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                              </div>
-                          </div>
-                      </div>
-                  </a>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 colimg">
-                  <a href="">
-                      <div class="card-flyer">
-                          <div class="text-box">
-                              <div class="image-box">
-                                  <img src="../assets/logo/taxi2.jpeg" alt="" />
-                              </div>
-                              <div class="text-container">                                    
-                                  <h6>Taxi Trucks</h6>
-                                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                              </div>
-                          </div>
-                      </div>
-                  </a>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 colimg">
-                  <a href="">
-                      <div class="card-flyer">
-                          <div class="text-box">
-                              <div class="image-box">
-                                  <img src="../assets/logo/home2.jpeg" alt="" />
-                              </div>
-
-                              <div class="text-container">
-                                  <h6>Home Delivery</h6>
-                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                              </div>
-                          </div>
-                      </div>
-                  </a>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 colimg">
-                  <a href="">
-                      <div class="card-flyer">
-                          <div class="text-box">
-                              <div class="image-box">
-                                  <img src="../assets/logo/logi2.jpeg" alt="" />
-                              </div>
-                              <div class="text-container">
-                                  <h6>Logistics</h6>
-                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                              </div>
-                          </div>
-                      </div>
-                  </a>
-              </div>
-          </div>
-      </div>
-  </div>
-
-   </section>
-   
-   
-   <!-- <div class="container servicesub">
-      <div class="row ">
-         <div class="col-md-3 col-lg-3 card-avatar">
-            <div class="card">
-               <img src="../assets/logo/home.png" alt="Avatar" class="card-img-top">
-               <div class="container">
-                 <h4><b>John Doe</b></h4>
-                 <p>Architect & Engineer</p>
-               </div>
-             </div>
-         </div>
-         <div class="col-md-3 col-lg-3 card-avatar">
-            <div class="card">
-               <img src="../assets/logo/home.png" alt="Avatar" class="card-img-top">
-               <div class="container">
-                 <h4><b>John Doe</b></h4>
-                 <p>Architect & Engineer</p>
-               </div>
-             </div>
-         </div>
-         <div class="col-md-3 col-lg-3 card-avatar">
-            <div class="card">
-               <img src="../assets/logo/home.png" alt="Avatar" class="card-img-top">
-               <div class="container">
-                 <h4><b>John Doe</b></h4>
-                 <p>Architect & Engineer</p>
-               </div>
-             </div>
-         </div>
-         <div class="col-md-3 col-lg-3 card-avatar">
-            <div class="card">
-               <img src="../assets/logo/home.png" alt="Avatar" class="card-img-top">
-               <div class="container">
-                 <h4><b>John Doe</b></h4>
-                 <p>Architect & Engineer</p>
-               </div>
-             </div>
-         </div>
-      </div>
-   </div> -->
-   
+<mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+  <mdb-carousel-item>
+    <div class="view w-100" style="height:400px">
+        <video style="width: 100%;" class="video-fluid" autoplay loop muted>
+            <source src="assets/video0.mp4" />
+          </video>
+        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+    </div>
+    <div class="carousel-caption">
+      <h3 class="h3-responsive">TRACK</h3>
+      <!-- <p>--------<qs/p> -->
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
+<br />
+<div class="container">
+<div class="row">
+<div class="col-md-4">
+<mat-card class="example-card">
+<img style="height:200px;" mat-card-image src="assets/fast.png" alt="Photo of a Shiba Inu">
+<mat-card-content>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</mat-card-content>
+</mat-card>
 </div>
+<div class="col-md-4">
+<mat-card class="example-card"> 
+<img style="height:200px;" mat-card-image src="assets/delivery.png" alt="Photo of a Shiba Inu">
+<mat-card-content>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</mat-card-content>
+</mat-card>
+</div>
+<div class="col-md-4">
+<mat-card class="example-card"> 
+<img style="height:200px;" mat-card-image src="assets/delivery1.png"  alt="Photo of a Shiba Inu">
+<mat-card-content>
+  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</mat-card-content>
+</mat-card>
+</div>
+</div>
+</div>
+<br />
+
+<div class="content" role="main"> 
+  <div class="container">
+    <mat-card > 
+            <div *ngIf="!isLoading">
+                <h2 class="text-center">Keep in touch?</h2>
+                <div class="card-container" *ngIf="isLoading">
+                  <mat-spinner [diameter]=25></mat-spinner>
+                </div>
+                <form  (ngSubmit)="sendMessage(messageForm)" #messageForm="ngForm"> 
+                  <div class="row">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput  type="email" name="email" ngModel #emailInput="ngModel"  email placeholder="Email" required>
+                        <mat-icon matSuffix>email</mat-icon>
+                         <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput  type="text" name="name" ngModel #nameInput="ngModel"  placeholder="Your Name" required>
+                        <mat-icon matSuffix>person</mat-icon>
+                         <mat-error *ngIf="nameInput.invalid">Please enter your name.</mat-error>
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                      </mat-form-field> 
+                  </div>
+                </div>
+                <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Mobile</mat-label>
+                        <input matInput  type="text" name="mobile" ngModel #mobileInput="ngModel"  placeholder="Organization" mobile required>
+                        <mat-icon matSuffix>call</mat-icon>
+                         <mat-error *ngIf="mobileInput.invalid">Please enter mobile.</mat-error>
+                        <!-- <mat-hint>Hint</mat-hint> -->
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Location</mat-label>
+                      <input matInput  type="text" name="text" ngModel #locationInput="ngModel"  placeholder="Location" required>
+                      <mat-icon matSuffix>location_on</mat-icon>
+                       <mat-error *ngIf="locationInput.invalid">Please enter location.</mat-error>
+                      <!-- <mat-hint>Hint</mat-hint> -->
+                    </mat-form-field>
+                    </div>
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Message</mat-label>
+                        <textarea rows="10" matInput type="text" name="message" maxlength="350" ngModel placeholder="Message" #msgInput="ngModel" required></textarea>
+                        <mat-icon matSuffix>message</mat-icon>
+                        <mat-hint align="end">{{msgInput.value?.length || 0}}/350</mat-hint>
+                        <mat-error *ngIf="msgInput.invalid">Please enter message.</mat-error>
+                      </mat-form-field>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4 mr-auto ml-auto">
+                            <button  type="submit" class="btn btn-danger btn-lg btn-fill">Send Message
+                                <mat-icon matSuffix>send</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div> 
+</mat-card> 
+</div>
+</div>
+<br /><br /> 

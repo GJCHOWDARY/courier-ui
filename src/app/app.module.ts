@@ -15,7 +15,8 @@ import { ErrorInterceptor } from "./error-interceptor";
 import { BottomSheetComponent } from './shared/bottom-sheet/bottom-sheet.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TrackmodalComponent } from './shared/trackmodal/trackmodal.component';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
  
 @NgModule({
   imports: [
@@ -26,7 +27,10 @@ import { TrackmodalComponent } from './shared/trackmodal/trackmodal.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    MDBBootstrapModule.forRoot(), 
+    CarouselModule,
+    WavesModule
   ],
   declarations: [
     AppComponent,
