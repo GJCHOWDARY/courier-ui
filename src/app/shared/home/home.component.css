@@ -11,6 +11,30 @@
 mat-form-field{
   width: 98%;
 }
+/* button styles */
+.btn-danger:not(:disabled):not(.disabled).active,
+.btn-danger:not(:disabled):not(.disabled):active, 
+.show>.btn-danger.dropdown-toggle {
+ background-color: #f6851c;
+ color: #fff;
+}
+.btn-danger {
+  background-color: #f6851c;
+  color: #fff;
+}
+/* track style */
+.h3-responsive{
+ background-color:transparent;
+ width: 250px;
+ font-size: 25px;
+ /* opacity: 0.5; */
+ color: #f6851c;
+}
+.h3-responsive:hover{
+  background-color:#fff;
+  color: #f6851c;
+  opacity: 1;
+}
 /* Slider */
 .slick-slide {
     margin: 0px 20px;
