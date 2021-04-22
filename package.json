@@ -1,5 +1,5 @@
 {
-  "name": "Smart Courier",
+  "name": "SmartCourier",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -17,6 +17,7 @@
     "@angular/compiler": "~9.0.5",
     "@angular/core": "~9.0.5",
     "@angular/forms": "^9.0.6",
+    "@angular/localize": "9.1.13",
     "@angular/material": "^9.1.2",
     "@angular/material-moment-adapter": "^9.2.3",
     "@angular/platform-browser": "~9.0.5",
@@ -32,9 +33,11 @@
     "jquery": "^3.5.1",
     "ng2-charts": "^2.3.0",
     "ngx-material-timepicker": "^5.4.3",
+    "ngx-socket-io": "^4.0.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "smooth-scrollbar": "^8.5.2",
+    "socket.io-client": "^4.0.1",
     "tslib": "^1.10.0",
     "underscore": "^1.10.2",
     "zone.js": "~0.10.2"

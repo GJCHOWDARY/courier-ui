@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthInterceptor } from "./auth/auth-interceptor";
 import { ErrorInterceptor } from "./error-interceptor";
 import { BottomSheetComponent } from './shared/bottom-sheet/bottom-sheet.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
  
 @NgModule({
@@ -23,7 +24,8 @@ import { BottomSheetComponent } from './shared/bottom-sheet/bottom-sheet.compone
     AngularMaterialModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,
