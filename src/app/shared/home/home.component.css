@@ -12,7 +12,18 @@
 agm-map {
     height: 400px;
 }
-
+.ourservices{
+    margin-top: 4% !important;
+}
+.mat-card-header .mat-card-title {
+    font-size: 20px;
+    color: #f6851c;
+    text-align: left;
+}
+.mat-card-header-text{
+    margin: 0 1px !important;
+}
+ 
 mat-form-field{
   width: 98%;
 }

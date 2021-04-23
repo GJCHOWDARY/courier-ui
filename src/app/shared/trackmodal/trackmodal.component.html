@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>Track Your Order</h1>
+<h1 mat-dialog-title>Track Your Shipment</h1>
 <form (submit)="onSaveRole(roleForm)" #roleForm="ngForm">
  <div class="font" mat-dialog-content>
      <mat-form-field appearance="outline">                                         
-      <mat-label>Order Number/ID</mat-label>
-          <input matInput name="order" ngModel type="text" placeholder="Order No" #orderInput="ngModel" required>
-           <mat-error *ngIf="orderInput.hasError('required')">Please enter Order Number/DI.</mat-error>
+      <mat-label>Track Your Shipment</mat-label>
+          <input matInput name="order" ngModel type="text" placeholder="Enter your tracking number" #orderInput="ngModel" required>
+           <mat-error *ngIf="orderInput.hasError('required')">Please Enter your tracking number.</mat-error>
        </mat-form-field> 
       </div>
       <div mat-card-actions align="end">

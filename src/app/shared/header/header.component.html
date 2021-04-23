@@ -12,11 +12,20 @@
     <!-- </p> -->
     <span class="spacer"></span>
     <ul>  
+      <li>
+        <button mat-button class="home_btn">HOME</button>
+      </li>
+      <li>
+        <button mat-button class="home_btn" (click)="openDialog()">TRACK</button>
+      </li>
+      <li>
+        <button mat-button class="home_btn">SUPPORT</button>
+      </li>
       <li *ngIf="!userIsAuthenticated">
-          <button mat-button [routerLink]="'/auth/login'" routerLinkActive="active" style="color: #f6851c;">LOGIN</button>
+          <button mat-button [routerLink]="'/auth/login'" routerLinkActive="active" class="home_btn">LOGIN</button>
       </li>  
       <li *ngIf="!userIsAuthenticated">
-        <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active" style="color: #f6851c;">SIGNUP</button>
+        <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active"  class="home_btn">SIGNUP</button>
     </li>    
       <li *ngIf="userIsAuthenticated && userData.role !== 4" matTooltip="Anniversary" (click)="openBottomSheet()">
         <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" style="flex: 0 1 auto; box-sizing: border-box;flex-direction: row; display: flex; place-content: center flex-start; align-items: center;">
