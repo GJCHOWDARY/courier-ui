@@ -7,7 +7,7 @@
         <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
     </div>
     <div class="carousel-caption">
-      <h3 class="h3-responsive" (click)="openDialog()">Track your order</h3>
+      <button mat-raised-button color="primary" class="h3-responsive login-btn" (click)="openDialog()">Track your order</button>
       <!-- <p>--------<qs/p> -->
     </div>
   </mdb-carousel-item>
@@ -126,4 +126,6 @@
 </mat-card> 
 </div>
 </div>
-<br /><br /> 
+<div>
+  <app-footer *ngIf="!userIsAuthenticated"></app-footer>
+  </div>
