@@ -23,17 +23,19 @@ mat-form-field{
   color: #fff;
 }
 /* track style */
-.h3-responsive{
- background-color:transparent;
+.h3-responsive{ 
  width: 250px;
  font-size: 25px;
- /* opacity: 0.5; */
- color: #f6851c;
+ background-color:transparent;
+ color: #ffffff;
+ float: left;
+ border: 1px solid #ffffff
 }
 .h3-responsive:hover{
-  background-color:#fff;
-  color: #f6851c;
-  opacity: 1;
+  background-color:transparent;
+  color: #ffffff;
+  opacity: 0.5;
+  float: left;
 }
 /* Slider */
 .slick-slide {
