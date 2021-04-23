@@ -1,15 +1,15 @@
 <div class="card-container">
   <mat-progress-spinner *ngIf="isLoading" class="example-margin" mode="indeterminate" diameter="40" value="20"></mat-progress-spinner> 
     <div *ngFor="let u of users" style="margin:8px;">
-        <mat-card>
+        <mat-card style="min-height:92px">
             <mat-card-title-group style="margin-left: 5px;">
                 <mat-card-title matTooltip="{{u.first_name}} {{u.last_name}}" >{{u.first_name}} {{u.last_name}}</mat-card-title><br />
-                <mat-card-subtitle matTooltip="{{u.email}}">{{u.email}} {{users.length}}</mat-card-subtitle>
+                <mat-card-subtitle matTooltip="{{u.email}}">{{u.email}}</mat-card-subtitle>
                 <mat-card-subtitle matTooltip="{{u.mobile}}">{{u.mobile}}</mat-card-subtitle>
                 <mat-card-subtitle *ngIf="u.jobDetailsId">{{u.jobDetailsId.job_location}}</mat-card-subtitle>
-                <mat-card-subtitle *ngIf="u.jobDetailsId" style="text-align: center;">{{u.jobDetailsId.jobId.job_name}}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="u.jobDetailsId&&u.jobDetailsId.jobId" style="text-align: center;">{{u.jobDetailsId.jobId.job_name}}</mat-card-subtitle>
                 <img mat-card-md-image *ngIf="u.profile_img" src="{{host_ip}}/uploads/{{u.profile_img}}">
-                <img mat-card-md-image *ngIf="!u.profile_img" src="/assets/logo01.PNG">
+                <img mat-card-md-image *ngIf="!u.profile_img" src="/assets/avatar.png">
             </mat-card-title-group>
         </mat-card>
     </div>

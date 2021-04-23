@@ -1,0 +1,158 @@
+<h1 mat-dialog-title *ngIf="mode=='edit'">Edit Order</h1>
+<h1 mat-dialog-title *ngIf="mode=='create'">New Order</h1>
+<form (submit)="onSave(orderForm)" #orderForm="ngForm">
+ <div class="font" mat-dialog-content>
+   <div class="row">
+      <div class="col-md-6">
+     <mat-form-field appearance="outline">                                         
+      <mat-label>Order Name</mat-label>
+        <input matInput name="name" [(ngModel)]="order.name" type="text" placeholder="Order Name" #nameInput="ngModel" required>
+           <mat-error *ngIf="nameInput.hasError('required')">Please enter order name.</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">                                         
+         <mat-label>Description</mat-label>
+          <textarea  matInput name="desc" [(ngModel)]="order.desc" type="text" placeholder="Description" #descInput="ngModel">{{order.desc}}</textarea>
+         </mat-form-field>  
+      </div>
+      </div>
+         <div class="row">
+            <div class="col-md-6">
+            <mat-form-field  appearance="outline">           
+               <mat-label>Mobile</mat-label>
+               <input matInput name="mobile" [(ngModel)]="order.mobile" type="text" mobile  pattern="[0-9]*" minlength="10" maxlength="10" placeholder="Enter Mobile Number" #mobileInput="ngModel" required>
+               <mat-icon matSuffix>call</mat-icon>         
+               <mat-error *ngIf="mobileInput.hasError('required')">Please Enter PhoneNumber.</mat-error>
+               <mat-error *ngIf="mobileInput.hasError('pattern')">Mobile number should be only numbers</mat-error>
+               <mat-error *ngIf="mobileInput.hasError('minlength')">Mobile should be 10digit</mat-error>
+            </mat-form-field>
+            </div>
+            <div class="col-md-6">
+            <mat-form-field appearance="outline">                                          
+               <mat-label>Email</mat-label>
+               <input matInput name="email" autocomplete="off" [(ngModel)]="order.email" type="email" placeholder="Enter Your Email" #emailInput="ngModel" email>
+               <mat-icon matSuffix>email</mat-icon>         
+            </mat-form-field>
+            </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+         <mat-form-field appearance="outline">
+            <mat-label>If Existing Customer...</mat-label> 
+               <input type="text" matInput (keyup)="searchUsers(assigneeInput.value)" [matAutocomplete]="auto"
+                 placeholder="Serach Customer"
+                 #assigneeInput   
+                 [formControl]="fruitCtrl"> 
+             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelection($event)" [displayWith]="displayFn">
+               <mat-option *ngFor="let user of searchUser" [value]="user" #datae>
+                  {{ user.first_name }} {{user.last_name}}
+               </mat-option>      
+               </mat-autocomplete>
+          </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field  appearance="outline">
+               <mat-label>Type</mat-label>
+            <mat-select name="subcategoryId" placeholder="Order Type" [(ngModel)]="order.type" #typeInput="ngModel" required>
+               <mat-option *ngFor="let type of services" [value]="type">
+               {{type}}
+               </mat-option>
+            </mat-select>
+            <mat-error *ngIf="typeInput.hasError('required')">Please choose order type.</mat-error>
+         </mat-form-field>
+          </div>
+          </div> 
+
+          <div class="row">
+            <div class="col-md-6">   
+               <mat-form-field  appearance="outline">                                     
+               <mat-label>Quantity</mat-label>
+                 <input matInput name="qty" [(ngModel)]="order.qty" type="text" placeholder="Quantity" #qtyInput="ngModel" required>
+                    <mat-error *ngIf="qtyInput.hasError('required')">Please enter quantity name.</mat-error>
+                 </mat-form-field>
+            </div>
+            <div class="col-md-6">  
+               <mat-form-field  appearance="outline">                                      
+               <mat-label>Amount</mat-label>
+                 <input matInput name="amount" [(ngModel)]="order.amount" type="text" placeholder="Amount" #amtInput="ngModel" required>
+                    <mat-error *ngIf="amtInput.hasError('required')">Please enter amount name.</mat-error>
+                 </mat-form-field>
+            </div>
+         </div> 
+
+
+      <div class="content" role="main"> 
+         <div class="container">
+           <div class="row">
+            <div class="col-md-6">
+               <div>
+                  <p style="font-family: 800;">From Address</p>
+                </div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Address</mat-label>
+                  <textarea matInput name="from_address" [(ngModel)]="order.from.from_address" type="text" placeholder="Enter Address" #Add1Input="ngModel" required>{{order.from.from_address}}</textarea>
+                   <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+                  <mat-error *ngIf="Add1Input.hasError('required')">Please enter from address.</mat-error>
+                 </mat-form-field> 
+                <mat-form-field appearance="outline">
+                  <mat-label>City</mat-label>
+                  <input matInput name="from_city" [(ngModel)]="order.from.from_city" type="text" placeholder="Enter City" #cityInput="ngModel" required>
+                   <mat-error *ngIf="cityInput.hasError('required')">Please enter city.</mat-error>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline">
+                   <mat-label>State</mat-label>
+                   <input matInput name="from_state" [(ngModel)]="order.from.from_state" type="text" placeholder="Enter State" #stateInput="ngModel" required>
+                    <mat-error *ngIf="stateInput.hasError('required')">Please enter state.</mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input matInput name="from_country" [(ngModel)]="order.from.from_country" type="text" placeholder="Enter Country" #countryInput="ngModel" required>
+                     <mat-error *ngIf="countryInput.hasError('required')">Please enter county.</mat-error>
+                   </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Zip Code</mat-label>
+                    <input matInput name="from_zip_code" [(ngModel)]="order.from.from_zip_code" type="text" placeholder="Enter Zip" #zipInput="ngModel" required>
+                     <mat-error *ngIf="zipInput.hasError('required')">Please enter zip code.</mat-error>
+                   </mat-form-field>
+               </div>
+            <div class="col-md-6">
+               <div>
+                  <p style="font-family: 800;">To Address</p>
+                </div>
+               <mat-form-field appearance="outline">
+                  <mat-label>Address</mat-label>
+                  <textarea matInput name="to_address" [(ngModel)]="order.to.to_address" type="text" placeholder="Enter Address" #Add2Input="ngModel" required>{{order.to.to_address}}</textarea>
+                   <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+                  <mat-error *ngIf="Add2Input.hasError('required')">Please enter to address.</mat-error>
+                 </mat-form-field> 
+                <mat-form-field appearance="outline">
+                  <mat-label>City</mat-label>
+                  <input matInput name="to_city" [(ngModel)]="order.to.to_city" type="text" placeholder="Enter City" #city2Input="ngModel" required>
+                   <mat-error *ngIf="city2Input.hasError('required')">Please enter city.</mat-error>
+                 </mat-form-field>
+                 <mat-form-field appearance="outline">
+                   <mat-label>State</mat-label>
+                   <input matInput name="to_state" [(ngModel)]="order.to.to_state" type="text" placeholder="Enter State" #state2Input="ngModel" required>
+                    <mat-error *ngIf="state2Input.hasError('required')">Please enter state.</mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input matInput name="to_country" [(ngModel)]="order.to.to_country" type="text" placeholder="Enter Country" #country2Input="ngModel" required>
+                     <mat-error *ngIf="country2Input.hasError('required')">Please enter county.</mat-error>
+                   </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Zip Code</mat-label>
+                    <input matInput name="to_zip_code" [(ngModel)]="order.to.to_zip_code" type="text" placeholder="Enter Zip" #zip2Input="ngModel" required>
+                     <mat-error *ngIf="zip2Input.hasError('required')">Please enter zip code.</mat-error>
+                   </mat-form-field>
+            </div>
+          </div>
+         </div>
+         </div>
+   </div>
+      <div mat-card-actions align="end">
+         <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
+         <button mat-raised-button color="primary" [disabled]="isLoading||orderForm.invalid" type="submit">Save</button>
+      </div>
+</form>
