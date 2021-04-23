@@ -13,6 +13,9 @@ ul {
   background-color: #ffffff;
   color: #f6851c !important;
 }
+.home_btn{
+  color: #f6851c;
+}
 a{
  color: #f6851c;
  text-decoration: none;

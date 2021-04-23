@@ -4,6 +4,8 @@ import { AuthService } from "../../auth/auth.service";
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { environment } from "../../../environments/environment";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { TrackmodalComponent } from '../trackmodal/trackmodal.component';
 
 @Component({
   selector: 'app-header',
@@ -23,7 +25,7 @@ export class HeaderComponent implements OnInit {
   sidenavWidth = 4;
   private toggelListener = new Subject<boolean>();
 
-  constructor(private authService: AuthService, private _bottomSheet: MatBottomSheet) { }
+  constructor(private authService: AuthService, public dialog: MatDialog, private _bottomSheet: MatBottomSheet) { }
 
   ngOnInit(): void {
     this.userIsAuthenticated = this.authService.getIsAuth();
@@ -80,6 +82,19 @@ export class HeaderComponent implements OnInit {
   }
 
   Toggle() {
+  }
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxWidth = '962px';
+    dialogConfig.width = '740px';
+    dialogConfig.data = {};
+    const dialogRef = this.dialog.open(TrackmodalComponent, dialogConfig);
+    //------After close the dialog dataset Description will be changed
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }
