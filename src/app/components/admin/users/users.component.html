@@ -26,7 +26,7 @@
        <td mat-cell *matCellDef="let element">
         <div fxlayout="row" fxlayoutalign="center center" style="flex-direction: row; box-sizing: border-box; display: flex;align-items: center;">
           <img *ngIf="element.profile_img" src="{{host_ip}}/uploads/{{element.profile_img}}" class="avatar mr-0 mr-sm-16">
-          <img *ngIf="!element.profile_img" src="/assets/logo01.PNG" class="avatar mr-0 mr-sm-16">
+          <img *ngIf="!element.profile_img" src="/assets/avatar.png" class="avatar mr-0 mr-sm-16">
            {{element.first_name}} {{element.last_name}}
           </div>
         </td>

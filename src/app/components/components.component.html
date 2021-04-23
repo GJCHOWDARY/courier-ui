@@ -7,7 +7,7 @@
       <div style="flex-direction: column; box-sizing: border-box; display: flex;">
         <div class="avatar-container fuse-navy-700">
           <img *ngIf="userDetails.profile_img" src="{{host_ip}}/uploads/{{userDetails.profile_img}}" class="avatar mr-0 mr-sm-16">
-          <img *ngIf="!userDetails.profile_img" src="/assets/logo01.PNG" class="avatar mr-0 mr-sm-16">
+          <img *ngIf="!userDetails.profile_img" src="/assets/avatar.png" class="avatar mr-0 mr-sm-16">
           </div>
         <div matTooltip="{{userData.name}}" class="h3 sidenav_text" style="font-size: 16px;">{{userData.name}}</div>
         <div matTooltip="{{userData.email}}" class="h5 sidenav_text email hint-text mt-8"  style="font-size: 14px;">{{userData.email}}</div>
