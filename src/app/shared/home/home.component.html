@@ -1,131 +1,148 @@
 <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
   <mdb-carousel-item>
-    <div class="view w-100" style="height:400px">
-        <video style="width: 100%;" class="video-fluid" autoplay loop muted>
-            <source src="assets/video0.mp4" />
+      <div class="view w-100" style="height: 470px;">
+          <video style="width: 100%;" class="video-fluid" autoplay loop muted>
+              <source src="assets/video0.mp4" />
           </video>
-        <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-    </div>
-    <div class="carousel-caption">
-      <button mat-raised-button color="primary" class="h3-responsive login-btn" (click)="openDialog()">Track your order</button>
-      <!-- <p>--------<qs/p> -->
-    </div>
+          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+      </div>
+      <div class="carousel-caption">
+          <button mat-raised-button color="primary" class="h3-responsive login-btn" (click)="openDialog()">Track your order</button>
+          <!-- <p>--------<qs/p> -->
+      </div>
   </mdb-carousel-item>
 </mdb-carousel>
-<br />
 <div class="container">
-<div class="row">
-<div class="col-md-4">
-<mat-card class="example-card">
-<mat-card-header>
-<div mat-card-avatar class="example-header-image"></div>
-<mat-card-title>Finibus et Malorum</mat-card-title>
-<mat-card-subtitle>de Finibus Bonorum et Malorum</mat-card-subtitle>
-</mat-card-header>
-<img style="height:200px;" mat-card-image src="assets/fast.png" alt="Photo of a Shiba Inu">
-<mat-card-content>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-</mat-card-content>
-</mat-card>
-</div>
-<div class="col-md-4">
-<mat-card class="example-card"> 
-  <mat-card-header>
-  <div mat-card-avatar class="example-header-image"></div>
-  <mat-card-title>Finibus et Malorum</mat-card-title>
-  <mat-card-subtitle>de Finibus Bonorum et Malorum</mat-card-subtitle>
-  </mat-card-header>
-<img style="height:200px;" mat-card-image src="assets/delivery.png" alt="Photo of a Shiba Inu">
-<mat-card-content>
-<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-</mat-card-content>
-</mat-card>
-</div>
-<div class="col-md-4">
-<mat-card class="example-card"> 
-  <mat-card-header>
-  <div mat-card-avatar class="example-header-image"></div>
-  <mat-card-title>Finibus et Malorum</mat-card-title>
-  <mat-card-subtitle>de Finibus Bonorum et Malorum</mat-card-subtitle>
-  </mat-card-header>
-<img style="height:200px;" mat-card-image src="assets/delivery1.png"  alt="Photo of a Shiba Inu">
-<mat-card-content>
-  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-</mat-card-content>
-</mat-card>
-</div>
-</div>
-</div>
-<br />
-
-<div class="content" role="main"> 
-  <div class="container">
-    <mat-card > 
-            <div *ngIf="!isLoading">
-                <h2 class="text-center">Keep in touch?</h2>
-                <div class="card-container" *ngIf="isLoading">
-                  <mat-spinner [diameter]=25></mat-spinner>
-                </div>
-                <form  (ngSubmit)="sendMessage(messageForm)" #messageForm="ngForm"> 
-                  <div class="row">
-                  <div class="col-md-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Email</mat-label>
-                        <input matInput  type="email" name="email" ngModel #emailInput="ngModel"  email placeholder="Email" required>
-                        <mat-icon matSuffix>email</mat-icon>
-                         <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
-                      </mat-form-field>
-                  </div>
-                  <div class="col-md-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Name</mat-label>
-                        <input matInput  type="text" name="name" ngModel #nameInput="ngModel"  placeholder="Your Name" required>
-                        <mat-icon matSuffix>person</mat-icon>
-                         <mat-error *ngIf="nameInput.invalid">Please enter your name.</mat-error>
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                      </mat-form-field> 
-                  </div>
-                </div>
-                <div class="row">
-                <div class="col-md-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Mobile</mat-label>
-                        <input matInput  type="text" name="mobile" ngModel #mobileInput="ngModel"  placeholder="Organization" mobile required>
-                        <mat-icon matSuffix>call</mat-icon>
-                         <mat-error *ngIf="mobileInput.invalid">Please enter mobile.</mat-error>
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                      </mat-form-field>
-                    </div>
-                    <div class="col-md-6">
-                    <mat-form-field appearance="outline">
-                      <mat-label>Location</mat-label>
-                      <input matInput  type="text" name="text" ngModel #locationInput="ngModel"  placeholder="Location" required>
-                      <mat-icon matSuffix>location_on</mat-icon>
-                       <mat-error *ngIf="locationInput.invalid">Please enter location.</mat-error>
-                      <!-- <mat-hint>Hint</mat-hint> -->
-                    </mat-form-field>
-                    </div>
-                    </div>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Message</mat-label>
-                        <textarea rows="10" matInput type="text" name="message" maxlength="350" ngModel placeholder="Message" #msgInput="ngModel" required></textarea>
-                        <mat-icon matSuffix>message</mat-icon>
-                        <mat-hint align="end">{{msgInput.value?.length || 0}}/350</mat-hint>
-                        <mat-error *ngIf="msgInput.invalid">Please enter message.</mat-error>
-                      </mat-form-field>
-                    <br />
-                    <div class="row">
-                        <div class="col-md-4 mr-auto ml-auto">
-                            <button  type="submit" class="btn btn-danger btn-lg btn-fill">Send Message
-                                <mat-icon matSuffix><span>send</span></mat-icon>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div> 
-</mat-card> 
-</div>
-</div>
-<div>
-  <app-footer *ngIf="!userIsAuthenticated"></app-footer>
+  <div class="row">
+      <div class="col-md-4">
+          <mat-card class="example-card">
+              <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Finibus et Malorum</mat-card-title>
+                  <mat-card-subtitle>de Finibus Bonorum et Malorum</mat-card-subtitle>
+              </mat-card-header>
+              <img style="height: 200px;" mat-card-image src="assets/fast.png" alt="Photo of a Shiba Inu" />
+              <mat-card-content>
+                  <p>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+                      to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+                      sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                  </p>
+              </mat-card-content>
+          </mat-card>
+      </div>
+      <div class="col-md-4">
+          <mat-card class="example-card">
+              <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Finibus et Malorum</mat-card-title>
+                  <mat-card-subtitle>de Finibus Bonorum et Malorum</mat-card-subtitle>
+              </mat-card-header>
+              <img style="height: 200px;" mat-card-image src="assets/delivery.png" alt="Photo of a Shiba Inu" />
+              <mat-card-content>
+                  <p>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+                      to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+                      sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                  </p>
+              </mat-card-content>
+          </mat-card>
+      </div>
+      <div class="col-md-4">
+          <mat-card class="example-card">
+              <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Finibus et Malorum</mat-card-title>
+                  <mat-card-subtitle>de Finibus Bonorum et Malorum</mat-card-subtitle>
+              </mat-card-header>
+              <img style="height: 200px;" mat-card-image src="assets/delivery1.png" alt="Photo of a Shiba Inu" />
+              <mat-card-content>
+                  <p>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+                      to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+                      sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                  </p>
+              </mat-card-content>
+          </mat-card>
+      </div>
   </div>
+</div>
+<div class="content" role="main">
+  <div class="container">
+      <mat-card>
+          <div *ngIf="!isLoading">
+              <h2 class="text-center">Keep in touch?</h2>
+              <div class="card-container" *ngIf="isLoading">
+                  <mat-spinner [diameter]="25"></mat-spinner>
+              </div>
+              <form (ngSubmit)="sendMessage(messageForm)" #messageForm="ngForm">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <mat-form-field appearance="outline">
+                              <mat-label>Email</mat-label>
+                              <input matInput type="email" name="email" ngModel #emailInput="ngModel" email placeholder="Email" required />
+                              <mat-icon matSuffix>email</mat-icon>
+                              <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                          <mat-form-field appearance="outline">
+                              <mat-label>Name</mat-label>
+                              <input matInput type="text" name="name" ngModel #nameInput="ngModel" placeholder="Your Name" required />
+                              <mat-icon matSuffix>person</mat-icon>
+                              <mat-error *ngIf="nameInput.invalid">Please enter your name.</mat-error>
+                              <!-- <mat-hint>Hint</mat-hint> -->
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <mat-form-field appearance="outline">
+                              <mat-label>Mobile</mat-label>
+                              <input matInput type="text" name="mobile" ngModel #mobileInput="ngModel" placeholder="Organization" mobile required />
+                              <mat-icon matSuffix>call</mat-icon>
+                              <mat-error *ngIf="mobileInput.invalid">Please enter mobile.</mat-error>
+                              <!-- <mat-hint>Hint</mat-hint> -->
+                          </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                          <mat-form-field appearance="outline">
+                              <mat-label>Location</mat-label>
+                              <input matInput type="text" name="text" ngModel #locationInput="ngModel" placeholder="Location" required />
+                              <mat-icon matSuffix>location_on</mat-icon>
+                              <mat-error *ngIf="locationInput.invalid">Please enter location.</mat-error>
+                              <!-- <mat-hint>Hint</mat-hint> -->
+                          </mat-form-field>
+                      </div>
+                  </div>
+                  <mat-form-field appearance="outline">
+                      <mat-label>Message</mat-label>
+                      <textarea rows="10" matInput type="text" name="message" maxlength="350" ngModel placeholder="Message" #msgInput="ngModel" required></textarea>
+                      <mat-icon matSuffix>message</mat-icon>
+                      <mat-hint align="end">{{msgInput.value?.length || 0}}/350</mat-hint>
+                      <mat-error *ngIf="msgInput.invalid">Please enter message.</mat-error>
+                  </mat-form-field>
+                  <br />
+                  <div class="row">
+                      <div class="col-md-4 mr-auto ml-auto">
+                          <button type="submit" class="btn btn-danger btn-lg btn-fill">
+                              Send Message
+                              <mat-icon matSuffix><span>send</span></mat-icon>
+                          </button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </mat-card>
+  </div>
+</div>
+
+<section>
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+      <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+</section>
+
+<section>
+  <app-footer *ngIf="!userIsAuthenticated"></app-footer>
+</section>

@@ -1,0 +1,68 @@
+.form{
+    line-height: normal;
+    }
+    
+mat-form-field,
+textarea {
+      width: 100%;
+    }
+    
+ mat-spinner {
+      margin: auto;
+    }
+    
+.image-preview {
+      height: 5rem;
+      margin: 1rem 0;
+    }
+    
+.image-preview img {
+      height: 100%;
+    }
+    
+.select_role{
+      width: auto;
+    }
+    
+    /*   Create Button code */
+    
+ .btn-success:hover {
+      color: #0747a6 !important;
+      background-color: #fff !important; 
+      border-color: #0747a6 !important;
+    }
+    
+ .btn-success {
+      color: #fff !important;
+      background-color: #0747a6 !important;
+      border-color: #0747a6 !important;
+    }
+    
+.mat-fab.mat-primary, .mat-flat-button.mat-primary,
+ .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+       background-color: #fff !important; 
+       color:#f89b46;
+    }
+    
+.mat-raised-button[disabled]:not([class*=mat-elevation-z])  {
+      color: #b3b7bd !important;
+      background-color: #fff !important; 
+      border-color:#b3b7bd !important;  
+      border-color: red !important;
+    }
+    
+.mat-fab.mat-primary, .mat-flat-button.mat-primary,
+.mat-mini-fab.mat-primary, .mat-raised-button.mat-primary:hover {
+      color: #fff !important;
+      background-color: #f89b46 !important; 
+      border-color: #f89b46 !important;
+    }
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+ }
+
+.assign_btn{
+  padding: 0px 28px;
+  margin: 11px;
+}

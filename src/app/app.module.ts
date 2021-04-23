@@ -17,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TrackmodalComponent } from './shared/trackmodal/trackmodal.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
- 
+import { AgmCoreModule } from '@agm/core';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -30,7 +31,10 @@ import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
     NgbModule,
     MDBBootstrapModule.forRoot(), 
     CarouselModule,
-    WavesModule
+    WavesModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDj1pziKP52hi8nU82LAHJw3Qsz8t4FW0I',
+    }),
   ],
   declarations: [
     AppComponent,

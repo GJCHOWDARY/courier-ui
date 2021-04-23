@@ -1,0 +1,54 @@
+<div>
+    <h2 mat-dialog-title>Project Info</h2>
+  </div>  
+  <div class="font" mat-dialog-content *ngIf="!isLoading">
+        <mat-form-field  appearance="outline">
+            <mat-label>Project Name</mat-label>
+          <input matInput value="{{project.project_name}}" readonly>
+           </mat-form-field>  
+           <mat-form-field appearance="outline">                                         
+            <mat-label>Project Description</mat-label>
+             <textarea  matInput type="text" readonly>{{project.project_desc}}</textarea>
+         </mat-form-field> 
+         <div class="container" *ngIf="project.assignedUsers.length>0">
+            <div class="row">  
+               <mat-icon md-list-icon>group</mat-icon>
+               <mat-label>Assigned Users</mat-label>  <br />
+            </div>
+         <div class="row">                                      
+            <mat-chip-list #chipList>
+               <mat-chip
+               *ngFor="let a of project.assignedUsers">
+               {{a.first_name}} {{a.last_name}}
+               </mat-chip>
+            </mat-chip-list>
+         </div>  
+      </div> <br />
+       <mat-form-field appearance="outline" *ngIf="project.userId">           
+         <mat-label>Created By</mat-label>
+             <input matInput value="{{project.userId.first_name}} {{project.userId.last_name}}" readonly>
+        </mat-form-field> 
+        <mat-form-field appearance="outline" *ngIf="project.userId">           
+          <mat-label>Email</mat-label>
+              <input matInput value="{{project.userId.email}}" readonly>
+         </mat-form-field> 
+        <mat-form-field appearance="outline" *ngIf="project.userId">           
+            <mat-label>updated By</mat-label>
+            <input matInput value="{{project.updatedBy.first_name}} {{project.userId.last_name}}" readonly>
+            </mat-form-field> 
+         <mat-form-field appearance="outline">           
+            <mat-label>Created At</mat-label>
+                <input matInput value="{{project.createdAt|date}}" readonly>
+               </mat-form-field> 
+            <mat-form-field  appearance="outline">
+              <mat-label>Updated At</mat-label>
+            <input matInput value="{{project.updatedAt|date}}" readonly>
+              </mat-form-field> 
+            <mat-form-field  appearance="outline">
+                <mat-label>Status</mat-label>
+              <input matInput value="{{project.status}}" readonly>
+           </mat-form-field>  
+    </div> 
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary"  (click)="close()" >Close</button>&nbsp;
+    </div> 
