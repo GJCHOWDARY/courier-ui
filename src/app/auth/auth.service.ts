@@ -230,8 +230,14 @@ export class AuthService {
 
   getUserDetails() {
     return this.http.get(BACKEND_USER_URL + `/getuserdetials/` + this.userId)
-  }
+  } 
+  
+  trackOrders(orderIds: string) {
+    let queryParams = `?orderIds=${orderIds}`;
 
+    return this.http.get(BACKEND_URL + `/trackOrders` + queryParams)
+  }
+  
   getUserSkills(userId: string) {
     return this.http.get(BACKEND_USER_URL + `/getuserskills/` + userId)
   }

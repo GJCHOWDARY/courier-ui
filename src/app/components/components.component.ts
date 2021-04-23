@@ -11,54 +11,54 @@ import { environment } from "../../environments/environment";
 })
 export class ComponentsComponent implements OnInit {
   sidenavWidth = 4;
-  userData: any=[];
-  host_ip: string=environment.ip;
+  userData: any = [];
+  host_ip: string = environment.ip;
   userIsAuthenticated = false;
   private authListenerSubs: Subscription;
   private toggleSubs: Subscription;
-  email :string;
-  role  :number;
+  email: string;
+  role: number;
   selectedFiles: File;
-  userDetails:any={};
-  isLoading = true; selectedfile=false;
-  selectedFileName: string; 
-  private userId: string; toggle: boolean=true;
-  bufferValue=10;
-  progressValue=0;brogressBar=false;
-  constructor(private authService:AuthService) { }
- 
-  ngOnInit(): void {  
+  userDetails: any = {};
+  isLoading = true; selectedfile = false;
+  selectedFileName: string;
+  private userId: string; toggle: boolean = true;
+  bufferValue = 10;
+  progressValue = 0; brogressBar = false;
+  constructor(private authService: AuthService) { }
+
+  ngOnInit(): void {
     this.userData = this.authService.getUserData();
-    this.userIsAuthenticated= this.authService.getIsAuth();
-    if(this.userIsAuthenticated){
-    this.getUserDetails();
-    this.authListenerSubs = this.authService.getAuthStatusListener()
-      .subscribe(isAuthenticated => {
-        this.userIsAuthenticated = isAuthenticated;
-        this.userData = this.authService.getUserData();
-        if(this.userIsAuthenticated){
-        this.getUserDetails();
-        }
-      });
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    if (this.userIsAuthenticated) {
+      this.getUserDetails();
+      this.authListenerSubs = this.authService.getAuthStatusListener()
+        .subscribe(isAuthenticated => {
+          this.userIsAuthenticated = isAuthenticated;
+          this.userData = this.authService.getUserData();
+          if (this.userIsAuthenticated) {
+            this.getUserDetails();
+          }
+        });
     }
-   } 
+  }
 
-  getUserDetails(){
-      this.authService.getUserDetails().subscribe((res: any) => {
-         this.userDetails=res.user;
-        },
-        error => {
+  getUserDetails() {
+    this.authService.getUserDetails().subscribe((res: any) => {
+      this.userDetails = res.user;
+    },
+      error => {
       });
-    } 
+  }
 
-  increase(){
+  increase() {
     this.sidenavWidth = 15;
     // console.log("increase sidenav width");
   }
-  decrease(){
+  decrease() {
     this.sidenavWidth = 4;
     // console.log("decrease sidenav width");
   }
   onLogout() {
-   }
+  }
 }

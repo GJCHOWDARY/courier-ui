@@ -12,20 +12,30 @@
     <!-- </p> -->
     <span class="spacer"></span>
     <ul>  
-      <li>
-        <button mat-button class="home_btn">HOME</button>
-      </li>
-      <li>
-        <button mat-button class="home_btn" (click)="openDialog()">TRACK</button>
-      </li>
-      <li>
-        <button mat-button class="home_btn">SUPPORT</button>
+      <li *ngIf="!userIsAuthenticated">
+        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+          <button  mat-button class="home_btn" [routerLink]="'/'" routerLinkActive="active">HOME</button>
+        </div>
       </li>
       <li *ngIf="!userIsAuthenticated">
+        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+          <button  mat-button class="home_btn">SUPPORT</button>
+        </div>
+      </li>
+      <li (click)="openDialog()">
+        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+          <button  mat-button class="home_btn">TRACK</button>
+        </div>
+      </li>
+      <li *ngIf="!userIsAuthenticated">
+        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
           <button mat-button [routerLink]="'/auth/login'" routerLinkActive="active" class="home_btn">LOGIN</button>
+         </div>
       </li>  
       <li *ngIf="!userIsAuthenticated">
-        <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active"  class="home_btn">SIGNUP</button>
+        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+          <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active"  class="home_btn">SIGNUP</button>
+        </div>
     </li>    
       <li *ngIf="userIsAuthenticated && userData.role !== 4" matTooltip="Anniversary" (click)="openBottomSheet()">
         <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" style="flex: 0 1 auto; box-sizing: border-box;flex-direction: row; display: flex; place-content: center flex-start; align-items: center;">

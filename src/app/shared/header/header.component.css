@@ -1,31 +1,39 @@
-
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
+.header_nav {
+  flex: 0 1 auto;
+  box-sizing: border-box;
+  flex-direction: row;
+  display: flex;
+  place-content: center flex-start;
+  align-items: center;
+}
+
 ul {
   display: flex;
-} 
-.headermenu{
+}
+.headermenu {
   border: none;
   background-color: #ffffff;
   color: #f6851c !important;
 }
-.home_btn{
+.home_btn {
   color: #f6851c;
+  padding: 10px;
 }
-a{
- color: #f6851c;
- text-decoration: none;
- background-color: transparent;
+a {
+  color: #f6851c;
+  text-decoration: none;
+  background-color: transparent;
 }
-.row{
- display: flex;
- flex-wrap: nowrap;
- margin-right:0 !important;
-
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-right: 0 !important;
 }
 .avatar {
   width: 30px;
@@ -77,7 +85,7 @@ mat-toolbar {
 
 .header_name:focus {
   letter-spacing: 1.5px;
-   outline-color: #ffffff;
+  outline-color: #ffffff;
   font-size: 25px;
   font-variant-caps: all-petite-caps;
   font-weight: 500;

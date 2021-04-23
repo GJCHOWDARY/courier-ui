@@ -83,6 +83,7 @@ export class HeaderComponent implements OnInit {
 
   Toggle() {
   }
+
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 

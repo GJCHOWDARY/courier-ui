@@ -1,14 +1,70 @@
 <h1 mat-dialog-title>Track Your Shipment</h1>
-<form (submit)="onSaveRole(roleForm)" #roleForm="ngForm">
+<section>
+<form (submit)="onTract(trackForm)" #trackForm="ngForm">
  <div class="font" mat-dialog-content>
      <mat-form-field appearance="outline">                                         
-      <mat-label>Track Your Shipment</mat-label>
-          <input matInput name="order" ngModel type="text" placeholder="Enter your tracking number" #orderInput="ngModel" required>
+      <mat-label>OrderId's</mat-label>
+          <input matInput name="orderIds" ngModel type="text" placeholder="Track multiple orderId's, by comma separated. (123, 321, ...)" #orderInput="ngModel" required>
            <mat-error *ngIf="orderInput.hasError('required')">Please Enter your tracking number.</mat-error>
        </mat-form-field> 
       </div>
       <div mat-card-actions align="end">
          <button mat-raised-button color="primary" matDialogClose (click)="close()">Close</button>&nbsp;
-         <button mat-raised-button color="primary" [disabled]="isLoading||roleForm.invalid" type="submit">Track</button>
+         <button mat-raised-button color="primary" [disabled]="isLoading||trackForm.invalid" type="submit">Track</button>
       </div>
 </form>
+<br />
+<section>
+<div class="container" *ngIf="orders.length">
+    <div class="font" mat-dialog-content>
+    <mat-card class="example-card" *ngFor="let o of orders">
+        <div class="row">
+            <div class="col-md-6">
+                <mat-card-header>
+                    <mat-card-title>Order : {{o.name}}</mat-card-title>
+                    <mat-card-subtitle>
+                        OrderId : {{o.orderId}}
+                    </mat-card-subtitle>
+                    <mat-card-subtitle matTooltip="Amount: {{o.amount}} (Quantity: {{o.qty}})">
+                        Mobile : {{o.mobile}}
+                    </mat-card-subtitle>
+                </mat-card-header>
+            </div>
+            <div class="col-md-6" style="text-align: right;">
+                <mat-card-header>
+                <mat-card-subtitle matTooltip="Amount: {{o.amount}} (Quantity: {{o.qty}})">
+                    Amount : Rs:{{o.amount}}/- (Quantity: {{o.qty}})
+                </mat-card-subtitle>
+                <mat-card-subtitle matTooltip="Amount: {{o.amount}} (Quantity: {{o.qty}})">
+                    Status : {{o.status}}
+                </mat-card-subtitle>
+            </mat-card-header>
+            </div>
+        </div>
+        <mat-card-content class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-card-subtitle>From</mat-card-subtitle>
+                    <span>{{o.from.from_address}}</span><br />
+                    <span>{{o.from.from_address}}</span><br />
+                    <span>{{o.from.from_state}}</span>, <span>{{o.from.from_city}}</span><br />
+                    <span>{{o.from.from_country}}</span> - &nbsp;<span>{{o.from.from_zip_code}}</span>
+                </div>
+                <div class="col-md-6">
+                    <mat-card-subtitle>To</mat-card-subtitle>
+                    <span>{{o.to.to_address}}</span><br />
+                    <span>{{o.to.to_address}}</span><br />
+                    <span>{{o.to.to_state}}</span>, <span>{{o.to.to_city}}</span><br />
+                    <span>{{o.to.to_country}}</span> - &nbsp;<span>{{o.to.to_zip_code}}</span>
+                </div>
+            </div>
+            <div class="row container">
+                <mat-card-subtitle>
+                    Description : {{o.desc}}
+                </mat-card-subtitle>
+            </div>
+        </mat-card-content> 
+    </mat-card>
+    </div> 
+  </div>
+</section>
