@@ -7,6 +7,9 @@
     height: 70px;
  }
  
+mat-form-field {
+    height: 57px;
+}
  .btn.focus, .btn:focus {
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgb(255, 255, 255);

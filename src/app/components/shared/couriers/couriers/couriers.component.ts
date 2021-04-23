@@ -19,6 +19,7 @@ export class CouriersComponent implements OnInit {
   userData: any;
   isLoading = false;
   search: string;
+  orderId: string;
   filter: string;
   viewType: boolean = false;
   perPage = 10;
@@ -26,7 +27,7 @@ export class CouriersComponent implements OnInit {
   Count = 0;
   sizeOptions = [10, 20, 50];
   start_date: Date; end_date: Date;
-  displayedColumns: string[] = ['Name', 'Description', 'Mobile', 'Amount', 'Status', 'CreatedAt', 'UpdatedAt', 'Action'];
+  displayedColumns: string[] = ['Name', 'Description', 'OrderId', 'Mobile', 'Amount', 'Status', 'CreatedAt', 'UpdatedAt', 'Action'];
 
   filterTypes: any = [
     { title: 'Confirmed', id: 1 },
@@ -35,6 +36,7 @@ export class CouriersComponent implements OnInit {
     { title: 'Out for Delivery', id: 4 },
     { title: 'Delivered', id: 5 },
     { title: 'Failed to Deliver', id: 4 }]
+  services: string[] = ["Confirmed", "Shipped", "Faild to Ship", "Out for Delivery", "Delivered", "Failed to Deliver",];
 
   constructor(
     public orderService: OrderService,
@@ -54,7 +56,7 @@ export class CouriersComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.userData = this.authService.getUserData()
-    this.orderService.getOrders(this.perPage, this.currentPage, this.filter, this.start_date, this.end_date).subscribe((resData: any) => {
+    this.orderService.getOrders(this.orderId, this.perPage, this.currentPage, this.filter, this.start_date, this.end_date).subscribe((resData: any) => {
       this.orders = resData.data;
       this.Count = resData.count;
       this.isLoading = false;
@@ -77,7 +79,6 @@ export class CouriersComponent implements OnInit {
   }
 
   checkChangesDates(type: string, event) {
-    console.log('changeeee')
     if (type == 'startDate') {
       this.start_date = event.value;
     }
@@ -97,6 +98,12 @@ export class CouriersComponent implements OnInit {
     this.currentPage = pageData.pageIndex + 1;
     this.perPage = pageData.pageSize;
     this.ngOnInit();
+  }
+
+  onChangeStatus(status: string, id: string) {
+    this.orderService.updateOrderStatus(status, id).subscribe((resData: any) => {
+      this.ngOnInit();
+    })
   }
 
   openDialog(id: number, mode: string) {
