@@ -1,175 +1,156 @@
-
-
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo unique-color" [containerInside]="false">
-
-  <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Asha Enterprises</a></mdb-navbar-brand>
-
-  <!-- Collapsible content -->
-  <links>
-
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light"  [routerLink]="'/'" routerLinkActive="active" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" href="#contact" routerLinkActive="active" mdbWavesEffect>Contact</a>
-      </li>
-      <li class="nav-item " (click)="openDialog()">
-        <a class="nav-link waves-light" fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center"  mdbWavesEffect>Track</a>
-      </li>
-
-      <!-- Dropdown -->
-      <!-- <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Basic dropdown<span class="caret"></span></a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
-          <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
-        </div>
-      </li> -->
-
-    </ul>
-    <!-- Links -->
-
-    <ul class="navbar-nav ml-auto nav-flex-icons">
-      <!-- <li class="nav-item">
-        <a class="nav-link">
-          <mdb-icon fab icon="twitter"></mdb-icon>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link">
-          <mdb-icon fab icon="google-plus"></mdb-icon>
-        </a>
-      </li> -->
-       <!-- Dropdown -->
-      <li class="nav-item dropdown" dropdown *ngIf="!userIsAuthenticated">
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          <!--<mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>-->Profile<span class="caret"></span></a> 
-        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu" >
-          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="'/auth/login'" routerLinkActive="active" fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center">LOGIN</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="'/auth/signup'" routerLinkActive="active"fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center">SIGNUP</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect  (click)="onLogout()">
-            <!--<mat-icon>exit_to_app</mat-icon>-->Log out</a>
-        </div>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link">
-          <div class="btn-group" mdbDropdown>
-            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
-            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <div class="divider dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Separated link</a>
-            </div>
-          </div>
-        </a>
-      </li> -->
-    </ul>
-  </links>
-  <!-- Collapsible content -->
-
-</mdb-navbar>
-<!--/.Navbar-->
-
-
-
-
-
-<!-- old code-->
-
-<!-- <div class="row header_row">
+<div class="row header_row">
   <div class="col-sm-12 col-md-12 col-lg-12">
-    <mat-toolbar style="height: 55px;"> 
-      <ul>
-        <li>
-          <a matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active">Asha Enterprises</a>
-          </li>
-      </ul>
-    <p  matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active"> -->
-      <!-- Smart Courier -->
-    <!-- </p> -->
-    <!-- <span class="spacer"></span>
-    <ul class="rightmenu">  
-      <li *ngIf="!userIsAuthenticated">
-        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-          <button  mat-button class="home_btn" [routerLink]="'/'" routerLinkActive="active">HOME</button>
-        </div>
-      </li>
-      <li *ngIf="!userIsAuthenticated">
-        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-          <button  mat-button [routerLink]="'support'" routerLinkActive="active" class="home_btn">SUPPORT</button>
-        </div>
-      </li>
-      <li (click)="openDialog()">
-        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-          <button  mat-button class="home_btn">TRACK</button>
-        </div>
-      </li>
-      <li *ngIf="!userIsAuthenticated">
-        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-          <button mat-button [routerLink]="'/auth/login'" routerLinkActive="active" class="home_btn">LOGIN</button>
-         </div>
-      </li>  
-      <li *ngIf="!userIsAuthenticated">
-        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-          <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active"  class="home_btn">SIGNUP</button>
-        </div>
-    </li>    
-      <li *ngIf="userIsAuthenticated && userData.role !== 4" matTooltip="Anniversary" (click)="openBottomSheet()">
-        <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" style="flex: 0 1 auto; box-sizing: border-box;flex-direction: row; display: flex; place-content: center flex-start; align-items: center;">
-          <button  mat-button="" style="padding: 9px; ">
-          <mat-icon md-list-icon style="font-size:22px">control_camera</mat-icon>
-        </button>
-      </div>
-    </li>    
-    <li *ngIf="userIsAuthenticated">
-      <div fxflex="0 1 auto" [matMenuTriggerFor]="profile" fxlayout="row" fxlayoutalign="start center" style="align-items: center;">
-        <button  mat-button="" style="padding: 9px; ">
-          <span class="mat-button-wrapper">
-            <div fxlayout="row" fxlayoutalign="center center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
-              <img *ngIf="userDetails.profile_img" src="{{host_ip}}/uploads/{{userDetails.profile_img}}" class="avatar mr-0 mr-sm-16">
-              <img *ngIf="!userDetails.profile_img" src="/assets/avatar.png" class="avatar mr-0 mr-sm-16">
-              <span fxhide="" fxshow.gt-sm="" class="username mr-12">{{userData.name}}</span>
-              <mat-icon role="img" fxhide.xs="" class="mat-icon notranslate s-16 material-icons mat-icon-no-color" aria-hidden="true">keyboard_arrow_down</mat-icon></div>
-            </span>
-            <div matripple="" class="mat-ripple mat-button-ripple"></div>
-            <div class="mat-button-focus-overlay"></div>
-          </button>
-          </div>
-        <mat-menu #profile="matMenu">
-          <button mat-menu-item  [routerLink]="['authorized/emp/profile']" routerLinkActive="mat-accent" >
-          <mat-icon>account_circle</mat-icon>
-          <span>Profile</span>
-          </button>
-          <button *ngIf="userData.role !== 4" mat-menu-item  [routerLink]="['authorized/emp/qualifications']" routerLinkActive="mat-accent" >
-            <mat-icon>account_balance</mat-icon>
-            <span>Qualifications</span>
-          </button>
-          <button mat-menu-item  [routerLink]="['authorized/emp/changepassword']" routerLinkActive="mat-accent" >
-            <mat-icon>fingerprint</mat-icon>
-            <span>Change Password</span>
-          </button>
-          <button mat-menu-item  (click)="filePicker.click()">
-            <mat-icon>camera_alt</mat-icon>
-            <span> Update Picture</span> 
-             <input style="width: 1px;" type="file" #filePicker (change)="selectFile($event)">
-          </button>
-          <button mat-menu-item (click)="onLogout()" >
-            <mat-icon>exit_to_app</mat-icon>
-            <span>Logout</span> 
-          </button>
-       </mat-menu>
-        </li>
-      </ul>
-    </mat-toolbar>
-  </div> 
-</div>-->
+      <mat-toolbar style="height: 55px;">
+          <mat-toolbar-row>
+              <!-- <ul fxShow="true" fxHide.gt-sm>
+                <li>
+                    <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+                </li>
+                <li>
+                    <a matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active">Asha Enterprises</a>
+                </li>
+            </ul> -->
+              <ul>
+                  <li>
+                      <a matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active">Asha Enterprises</a>
+                  </li>
+              </ul>
+              <p matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active"></p>
+              <span class="spacer"></span>
+              <ul class="rightmenu" fxShow="true" fxHide.lt-md>
+                  <li *ngIf="!userIsAuthenticated">
+                      <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+                          <button mat-button class="home_btn" [routerLink]="'/'" routerLinkActive="active">HOME</button>
+                      </div>
+                  </li>
+                  <li *ngIf="!userIsAuthenticated">
+                      <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+                          <button mat-button [routerLink]="'support'" routerLinkActive="active" class="home_btn">SUPPORT</button>
+                      </div>
+                  </li>
+                  <li (click)="openDialog()">
+                      <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+                          <button mat-button class="home_btn">TRACK</button>
+                      </div>
+                  </li>
+                  <li *ngIf="!userIsAuthenticated">
+                      <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+                          <button mat-button [routerLink]="'/auth/login'" routerLinkActive="active" class="home_btn">LOGIN</button>
+                      </div>
+                  </li>
+                  <li *ngIf="!userIsAuthenticated">
+                      <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
+                          <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active" class="home_btn">SIGNUP</button>
+                      </div>
+                  </li>
+                  <li *ngIf="userIsAuthenticated && userData.role !== 4" matTooltip="Anniversary" (click)="openBottomSheet()">
+                      <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" style="flex: 0 1 auto; box-sizing: border-box; flex-direction: row; display: flex; place-content: center flex-start; align-items: center;">
+                          <button mat-button="" style="padding: 9px;">
+                              <mat-icon md-list-icon style="font-size: 22px;">control_camera</mat-icon>
+                          </button>
+                      </div>
+                  </li>
+                  <li *ngIf="userIsAuthenticated">
+                      <div fxflex="0 1 auto" [matMenuTriggerFor]="profile" fxlayout="row" fxlayoutalign="start center" style="align-items: center;">
+                          <button mat-button="" style="padding: 9px;">
+                              <span class="mat-button-wrapper">
+                                  <div fxlayout="row" fxlayoutalign="center center" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
+                                      <img *ngIf="userDetails.profile_img" src="{{host_ip}}/uploads/{{userDetails.profile_img}}" class="avatar mr-0 mr-sm-16" />
+                                      <img *ngIf="!userDetails.profile_img" src="/assets/avatar.png" class="avatar mr-0 mr-sm-16" />
+                                      <span fxhide="" fxshow.gt-sm="" class="username mr-12">{{userData.name}}</span>
+                                      <mat-icon role="img" fxhide.xs="" class="mat-icon notranslate s-16 material-icons mat-icon-no-color" aria-hidden="true">keyboard_arrow_down</mat-icon>
+                                  </div>
+                              </span>
+                              <div matripple="" class="mat-ripple mat-button-ripple"></div>
+                              <div class="mat-button-focus-overlay"></div>
+                          </button>
+                      </div>
+                      <mat-menu #profile="matMenu">
+                          <button mat-menu-item [routerLink]="['authorized/emp/profile']" routerLinkActive="mat-accent">
+                              <mat-icon>account_circle</mat-icon>
+                              <span>Profile</span>
+                          </button>
+                          <button *ngIf="userData.role !== 4" mat-menu-item [routerLink]="['authorized/emp/qualifications']" routerLinkActive="mat-accent">
+                              <mat-icon>account_balance</mat-icon>
+                              <span>Qualifications</span>
+                          </button>
+                          <button mat-menu-item [routerLink]="['authorized/emp/changepassword']" routerLinkActive="mat-accent">
+                              <mat-icon>fingerprint</mat-icon>
+                              <span>Change Password</span>
+                          </button>
+                          <button mat-menu-item (click)="filePicker.click()">
+                              <mat-icon>camera_alt</mat-icon>
+                              <span> Update Picture</span>
+                              <input style="width: 1px;" type="file" #filePicker (change)="selectFile($event)" />
+                          </button>
+                          <button mat-menu-item (click)="onLogout()">
+                              <mat-icon>exit_to_app</mat-icon>
+                              <span>Logout</span>
+                          </button>
+                      </mat-menu>
+                  </li>
+              </ul>
+              <ul>
+                  <li *ngIf="!userIsAuthenticated">
+                      <button mat-icon-button [matMenuTriggerFor]="profileMobile" fxShow="true" fxHide.gt-sm>
+                          <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #profileMobile="matMenu">
+                          <button mat-menu-item [routerLink]="'/'" routerLinkActive="active"><span>HOME</span></button>
+                          <button mat-menu-item [routerLink]="'support'" routerLinkActive="active"><span>SUPPORT</span></button>
+                          <button mat-menu-item (click)="openDialog()"><span>TRACK</span></button>
+                          <button mat-menu-item [routerLink]="'/auth/signup'" routerLinkActive="active">
+                              <span>SIGNUP</span>
+                          </button>
+                          <button mat-menu-item [routerLink]="'/auth/login'" routerLinkActive="active">
+                              <span>LOGIN</span>
+                          </button>
+                      </mat-menu>
+                  </li>
+
+                  <li *ngIf="userIsAuthenticated">
+                      <button mat-icon-button [matMenuTriggerFor]="profileMobile" fxShow="true" fxHide.gt-sm>
+                          <mat-icon>more_vert</mat-icon>
+                      </button>
+                      <mat-menu #profileMobile="matMenu">
+                        <button mat-menu-item (click)="openDialog()"><span>Track</span></button>
+                          <button mat-menu-item [routerLink]="['authorized/emp/profile']" routerLinkActive="mat-accent">
+                              <span>Profile</span>
+                          </button>
+                          <button *ngIf="userData.role !== 4" mat-menu-item [routerLink]="['authorized/emp/qualifications']" routerLinkActive="mat-accent">
+                              <span>Qualifications</span>
+                          </button>
+                          <button mat-menu-item [routerLink]="['authorized/emp/changepassword']" routerLinkActive="mat-accent">
+                              <span>Change Password</span>
+                          </button>
+                          <button mat-menu-item (click)="filePicker.click()">
+                              <span> Update Picture</span>
+                              <input style="width: 1px;" type="file" #filePicker (change)="selectFile($event)" />
+                          </button>
+                          <button mat-menu-item (click)="onLogout()">
+                              <span>Logout</span>
+                          </button>
+                          <!-- <button mat-menu-item [routerLink]="'/'" routerLinkActive="active"><span>home</span></button>
+                          <button mat-menu-item [routerLink]="'support'" routerLinkActive="active"><span>support</span></button> -->
+                      </mat-menu>
+                  </li>
+              </ul>
+          </mat-toolbar-row>
+      </mat-toolbar>
+
+      <mat-sidenav-container fxFlexFill>
+          <mat-sidenav #sidenav>
+              <mat-nav-list>
+                  <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+                  <a href="#" mat-list-item>Menu Item 1</a>
+                  <a href="#" mat-list-item>Menu Item 2</a>
+                  <a href="#" mat-list-item>Menu Item 3</a>
+                  <a href="#" mat-list-item>Menu Item 4</a>
+                  <a href="#" mat-list-item>Menu Item 5</a>
+                  <a href="#" mat-list-item>Menu Item 6</a>
+              </mat-nav-list>
+          </mat-sidenav>
+          <mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content>
+      </mat-sidenav-container>
+  </div>
+</div>

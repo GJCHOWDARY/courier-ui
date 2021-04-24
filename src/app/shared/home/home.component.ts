@@ -25,7 +25,8 @@ export class HomeComponent implements OnInit {
   role: string;
   verifyEmail: string;
 
-  constructor(public authService: AuthService,
+  constructor(
+    public authService: AuthService,
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
     private router: Router) {

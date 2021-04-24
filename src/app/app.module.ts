@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularMaterialModule } from "./angular-material.module";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FlexLayoutModule } from "@angular/flex-layout";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -33,6 +34,7 @@ import { SupportComponent } from './shared/support/support.component';
     MDBBootstrapModule.forRoot(), 
     CarouselModule,
     WavesModule,
+    FlexLayoutModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDj1pziKP52hi8nU82LAHJw3Qsz8t4FW0I',
     }),
