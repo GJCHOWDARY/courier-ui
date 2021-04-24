@@ -1,6 +1,7 @@
 
+
 <div class="row header_row">
-  <div class="col-md-12 col-lg-12">
+  <div class="col-sm-12 col-md-12 col-lg-12">
     <mat-toolbar style="height: 55px;"> 
       <ul>
         <li>
@@ -11,7 +12,7 @@
       <!-- Smart Courier -->
     <!-- </p> -->
     <span class="spacer"></span>
-    <ul>  
+    <ul class="rightmenu">  
       <li *ngIf="!userIsAuthenticated">
         <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
           <button  mat-button class="home_btn" [routerLink]="'/'" routerLinkActive="active">HOME</button>
