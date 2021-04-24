@@ -64,7 +64,6 @@
 <div class="content" role="main">
   <div class="container">
       <mat-card>
-          <div *ngIf="!isLoading">
               <h2 class="text-center">Keep in touch?</h2>
               <div class="card-container" *ngIf="isLoading">
                   <mat-spinner [diameter]="25"></mat-spinner>
@@ -102,9 +101,9 @@
                       <div class="col-md-6">
                           <mat-form-field appearance="outline">
                               <mat-label>Location</mat-label>
-                              <input matInput type="text" name="text" ngModel #locationInput="ngModel" placeholder="Location" required />
+                              <input matInput type="text" name="location" ngModel #locationInput="ngModel" placeholder="Location" />
                               <mat-icon matSuffix>location_on</mat-icon>
-                              <mat-error *ngIf="locationInput.invalid">Please enter location.</mat-error>
+                              <!-- <mat-error *ngIf="locationInput.invalid">Please enter location.</mat-error> -->
                               <!-- <mat-hint>Hint</mat-hint> -->
                           </mat-form-field>
                       </div>
@@ -126,7 +125,6 @@
                       </div>
                   </div>
               </form>
-          </div>
       </mat-card>
   </div>
 </div>

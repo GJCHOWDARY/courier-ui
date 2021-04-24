@@ -12,11 +12,11 @@ import { NgForm } from '@angular/forms';
 })
 export class TrackmodalComponent implements OnInit {
 
-  isLoading = false;
-  role: any = []; disablerole = true;
+  isLoading = false; disablerole = true;
   data: any = [];
   roleId: string;
-  orders: any =[];
+  view: boolean = false;
+  orders: any = [];
   mode: string;
   isEdit = true;
   userId = null;
@@ -29,7 +29,6 @@ export class TrackmodalComponent implements OnInit {
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) data) {
     this.data = data;
-    this.role = { _id: '', role_name: '', role_desc: '', role_id: '' };
   }
 
   ngOnInit() {
@@ -42,6 +41,7 @@ export class TrackmodalComponent implements OnInit {
     this.isLoading = true;
     this.authService.trackOrders(form.value.orderIds).subscribe((res: any) => {
       this.orders = res.orders;
+      this.view = true;
       this.isLoading = false;
     },
       error => {
