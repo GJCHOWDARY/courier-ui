@@ -1,6 +1,92 @@
 
 
-<div class="row header_row">
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo unique-color" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Asha Enterprises</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light"  [routerLink]="'/'" routerLinkActive="active" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" href="#contact" routerLinkActive="active" mdbWavesEffect>Contact</a>
+      </li>
+      <li class="nav-item " (click)="openDialog()">
+        <a class="nav-link waves-light" fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center"  mdbWavesEffect>Track</a>
+      </li>
+
+      <!-- Dropdown -->
+      <!-- <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          Basic dropdown<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+        </div>
+      </li> -->
+
+    </ul>
+    <!-- Links -->
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <!-- <li class="nav-item">
+        <a class="nav-link">
+          <mdb-icon fab icon="twitter"></mdb-icon>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">
+          <mdb-icon fab icon="google-plus"></mdb-icon>
+        </a>
+      </li> -->
+       <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown *ngIf="!userIsAuthenticated">
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <!--<mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>-->Profile<span class="caret"></span></a> 
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu" >
+          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="'/auth/login'" routerLinkActive="active" fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center">LOGIN</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="'/auth/signup'" routerLinkActive="active"fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center">SIGNUP</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect  (click)="onLogout()">
+            <!--<mat-icon>exit_to_app</mat-icon>-->Log out</a>
+        </div>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link">
+          <div class="btn-group" mdbDropdown>
+            <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+            <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="divider dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </div>
+        </a>
+      </li> -->
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+
+
+
+
+<!-- old code-->
+
+<!-- <div class="row header_row">
   <div class="col-sm-12 col-md-12 col-lg-12">
     <mat-toolbar style="height: 55px;"> 
       <ul>
@@ -8,10 +94,10 @@
           <a matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active">Asha Enterprises</a>
           </li>
       </ul>
-    <!-- <p  matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active"> -->
+    <p  matTooltip="Smart Courier" class="header_name pointor" [routerLink]="'/'" routerLinkActive="active"> -->
       <!-- Smart Courier -->
     <!-- </p> -->
-    <span class="spacer"></span>
+    <!-- <span class="spacer"></span>
     <ul class="rightmenu">  
       <li *ngIf="!userIsAuthenticated">
         <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
@@ -85,11 +171,5 @@
         </li>
       </ul>
     </mat-toolbar>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12 col-lg-12">
-    <h2>traking</h2>
-  </div>
-</div>
-
+  </div> 
+</div>-->

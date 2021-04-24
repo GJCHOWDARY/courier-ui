@@ -6,6 +6,7 @@ import { BottomSheetComponent } from '../bottom-sheet/bottom-sheet.component';
 import { environment } from "../../../environments/environment";
 import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 import { TrackmodalComponent } from '../trackmodal/trackmodal.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
