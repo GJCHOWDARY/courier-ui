@@ -105,3 +105,48 @@ mat-toolbar {
 button.mat-menu-item {
   color: #f6851c;
 }
+
+
+/*new navbar */
+.usericon{
+  background-color: #f6851c !important;
+  color: #ffffff !important;
+}
+.navbar-brand {
+  color: #f6851c !important;
+  font-size:  25px;
+  font-weight: bold;
+}
+.waves-light{
+  color: #f6851c !important;
+  font-size:  20px;
+  font-weight: bold;
+}
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+  background-color: aqua !important;
+}
+.navbar-toggler {
+  padding: .25rem .75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: #f6851c  !important;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+.navbar.navbar-dark .breadcrumb .nav-item.active>.nav-link:hover, .navbar.navbar-dark .navbar-nav .nav-item.active>.nav-link:hover, .navbar.navbar-dark .navbar-toggler {
+  color: #000;
+  background-color: #f6851c;
+}
+button, input, optgroup, select, textarea {
+  margin: 0;
+  background-color: #f6851c !important;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}

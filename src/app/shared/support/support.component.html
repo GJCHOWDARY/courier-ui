@@ -1,4 +1,68 @@
-<div class="content" role="main">
-  <p>support works!</p>
-  <div class="card-container"></div>
-</div>
+
+<div class="content" id="contact" role="main">
+    <div class="container">
+        <mat-card>
+                <h2 class="text-center">Keep in touch?</h2>
+                <div class="card-container" *ngIf="isLoading">
+                    <mat-spinner [diameter]="25"></mat-spinner>
+                </div>
+                <form (ngSubmit)="sendMessage(messageForm)" #messageForm="ngForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Email</mat-label>
+                                <input matInput type="email" name="email" ngModel #emailInput="ngModel" email placeholder="Email" required />
+                                <mat-icon matSuffix>email</mat-icon>
+                                <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Name</mat-label>
+                                <input matInput type="text" name="name" ngModel #nameInput="ngModel" placeholder="Your Name" required />
+                                <mat-icon matSuffix>person</mat-icon>
+                                <mat-error *ngIf="nameInput.invalid">Please enter your name.</mat-error>
+                                <!-- <mat-hint>Hint</mat-hint> -->
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Mobile</mat-label>
+                                <input matInput type="text" name="mobile" ngModel #mobileInput="ngModel" placeholder="Organization" mobile required />
+                                <mat-icon matSuffix>call</mat-icon>
+                                <mat-error *ngIf="mobileInput.invalid">Please enter mobile.</mat-error>
+                                <!-- <mat-hint>Hint</mat-hint> -->
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Location</mat-label>
+                                <input matInput type="text" name="location" ngModel #locationInput="ngModel" placeholder="Location" />
+                                <mat-icon matSuffix>location_on</mat-icon>
+                                <!-- <mat-error *ngIf="locationInput.invalid">Please enter location.</mat-error> -->
+                                <!-- <mat-hint>Hint</mat-hint> -->
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Message</mat-label>
+                        <textarea rows="10" matInput type="text" name="message" maxlength="350" ngModel placeholder="Message" #msgInput="ngModel" required></textarea>
+                        <mat-icon matSuffix>message</mat-icon>
+                        <mat-hint align="end">{{msgInput.value?.length || 0}}/350</mat-hint>
+                        <mat-error *ngIf="msgInput.invalid">Please enter message.</mat-error>
+                    </mat-form-field>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4 mr-auto ml-auto">
+                            <button type="submit" class="btn btn-danger btn-lg btn-fill">
+                                Send Message
+                                <!-- <mat-icon matSuffix><span>send</span></mat-icon> -->
+                            </button>
+                        </div>
+                    </div>
+                </form>
+        </mat-card>
+    </div>
+  </div>
