@@ -18,6 +18,7 @@ import { TrackmodalComponent } from './shared/trackmodal/trackmodal.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { CarouselModule, WavesModule } from 'angular-bootstrap-md';
 import { AgmCoreModule } from '@agm/core';
+import { SupportComponent } from './shared/support/support.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { AgmCoreModule } from '@agm/core';
     FooterComponent,
     HomeComponent,
     BottomSheetComponent,
-    TrackmodalComponent
+    TrackmodalComponent,
+    SupportComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

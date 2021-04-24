@@ -20,7 +20,7 @@
       </li>
       <li *ngIf="!userIsAuthenticated">
         <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-          <button  mat-button class="home_btn">SUPPORT</button>
+          <button  mat-button [routerLink]="'support'" routerLinkActive="active" class="home_btn">SUPPORT</button>
         </div>
       </li>
       <li (click)="openDialog()">

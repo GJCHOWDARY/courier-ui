@@ -3,10 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './shared/home/home.component';
 import { AuthGuard } from "./auth/auth.guard";
 import { LoginComponent } from './auth/login/login.component';
+import { SupportComponent } from './shared/support/support.component';
+
 
 const routes: Routes = [
   { 
     path: '', component: HomeComponent 
+  },
+  { 
+    path: 'support', component: SupportComponent 
   },
   { 
     path: 'auth', loadChildren: () => 
