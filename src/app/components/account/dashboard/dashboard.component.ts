@@ -16,7 +16,7 @@ import { AuthService } from "../../../auth/auth.service";
 export class DashboardComponent implements OnInit {
   day: string; date: number;
   year: number; month: string;
-  taskDetatils: any; isLoading: boolean = true;
+  orderDetatils: any; isLoading: boolean = true;
   leaves: any; userData: any;
   displayedColumns1: string[] = ['Leave Type', 'Applied Date', 'Start Date', 'End Date', 'No of Days Taken', 'Loss of Pay', 'Status', 'Action'];
   public lineChartData: Array<any> = [{
@@ -89,7 +89,6 @@ export class DashboardComponent implements OnInit {
           if (chartData[i] != undefined) {
             let temp = chartData[i]._id.month - 1;
             a[temp] = (chartData[i].days + chartData[i].time / 9.5).toFixed(2)
-            console.log(19.021000000000004.toFixed(2))
           }
         }
         this.lineChartData[0].data = a;
@@ -102,8 +101,8 @@ export class DashboardComponent implements OnInit {
         })
       })
     }
-    this.accountService.getDetails().subscribe((data: any) => {
-      this.taskDetatils = data.data
+    this.accountService.getOrderDetails().subscribe((data: any) => {
+      this.orderDetatils = data.data
       this.isLoading = false;
     })
   }

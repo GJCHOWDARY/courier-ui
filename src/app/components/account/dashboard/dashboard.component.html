@@ -40,14 +40,14 @@
   </div>
 </div> 
 
-<div class="row" style="margin: 10px;" *ngIf="taskDetatils">
+<div class="row" style="margin: 10px;" *ngIf="orderDetatils">
   <mat-card>  
       <div> 
          <span>Total Orders</span>
          <span class="card_icon"><mat-icon md-list-icon>more_vert</mat-icon></span>
         </div>         
        <div fxlayout="column" fxlayoutalign="center center" class="pt-8 pb-32 ng-tns-c256-80" style="flex-direction: column; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
-         <div class="light-orange-fg font-size-72 line-height-72 ng-tns-c256-80"> {{taskDetatils.projects}} </div>
+         <div class="light-orange-fg font-size-72 line-height-72 ng-tns-c256-80"> {{orderDetatils.totalOrders}} </div>
            <div class="">Orders 
            </div>
         </div> 
@@ -58,13 +58,13 @@
          <span class="card_icon"><mat-icon md-list-icon>more_vert</mat-icon></span>
         </div>         
        <div fxlayout="column" fxlayoutalign="center center" class="pt-8 pb-32 ng-tns-c256-80" style="flex-direction: column; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
-         <div class="light-blue-fg font-size-72 line-height-72 ng-tns-c256-80"> {{taskDetatils.total}} </div>
+         <div class="light-blue-fg font-size-72 line-height-72 ng-tns-c256-80"> {{orderDetatils.readyToShip}} </div>
            <div class="">Orders 
            </div>
         </div>
        <div fxlayout="row" fxlayoutalign="start center" class="p-16 border-top ng-tns-c256-80" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center flex-start; align-items: center;">
         <span class=""> Shipped Today: </span>
-        <span class="ml-8 ng-tns-c256-80"> {{taskDetatils.completed}} </span>
+        <span class="ml-8 ng-tns-c256-80"> {{orderDetatils.todayShipping}} </span>
       </div>
   </mat-card> 
   <mat-card>  
@@ -73,13 +73,13 @@
          <span class="card_icon"><mat-icon md-list-icon>more_vert</mat-icon></span>
         </div>         
        <div fxlayout="column" fxlayoutalign="center center" class="pt-8 pb-32 ng-tns-c256-80" style="flex-direction: column; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
-         <div class="light-black-fg font-size-72 line-height-72 ng-tns-c256-80"> {{taskDetatils.sheduled}} </div>
+         <div class="light-black-fg font-size-72 line-height-72 ng-tns-c256-80"> {{orderDetatils.devlivered}} </div>
            <div class=""> Orders 
            </div>
         </div>
         <div fxlayout="row" fxlayoutalign="start center" class="p-16 border-top ng-tns-c256-80" style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center flex-start; align-items: center;">
           <span class=""> Delivered Today: </span>
-          <span class="ml-8 ng-tns-c256-80"> {{taskDetatils.today}} </span>
+          <span class="ml-8 ng-tns-c256-80"> {{orderDetatils.todayDeliver}} </span>
         </div>
   </mat-card> 
   <mat-card>  
@@ -88,7 +88,7 @@
        <span class="card_icon"><mat-icon md-list-icon>more_vert</mat-icon></span>
       </div>         
      <div fxlayout="column" fxlayoutalign="center center" class="pt-8 pb-32 ng-tns-c256-80" style="flex-direction: column; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
-       <div class="light-gold-fg font-size-72 line-height-72 ng-tns-c256-80"> {{taskDetatils.starred}} </div>
+       <div class="light-gold-fg font-size-72 line-height-72 ng-tns-c256-80"> {{orderDetatils.faildToShip}} </div>
          <div class="">Orders 
          </div>
       </div> 
@@ -99,7 +99,7 @@
          <span class="card_icon"><mat-icon md-list-icon>more_vert</mat-icon></span>
         </div>         
        <div fxlayout="column" fxlayoutalign="center center" class="pt-8 pb-32 ng-tns-c256-80" style="flex-direction: column; box-sizing: border-box; display: flex; place-content: center; align-items: center;">
-         <div class="light-red-fg font-size-72 line-height-72 ng-tns-c256-80"> {{taskDetatils.priority}} </div>
+         <div class="light-red-fg font-size-72 line-height-72 ng-tns-c256-80"> {{orderDetatils.faildToDeliver}} </div>
            <div class="">Orders 
            </div>
         </div> 

@@ -10,6 +10,7 @@ import { AuthService } from "../../auth/auth.service"
 const BACKEND_URL_USER = environment.apiUrl + "/users";
 const BACKEND_URL_LEAVE = environment.apiUrl + "/leave";
 const BACKEND_URL_TASKS= environment.apiUrl + "/tasks";
+const BACKEND_URL_COURIER= environment.apiUrl + "/courierOrders";
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,10 @@ getUsers(currentPage:number,size:number){
 getDetails(){
     return this.http.get(BACKEND_URL_TASKS+'/getdetails');
   }
+
+getOrderDetails(){
+  return this.http.get(BACKEND_URL_COURIER+'/getOrderDetials');
+}
 
 getAppliedLeaves(start_date: Date, end_date: Date) {
   var queryParams = `?start_date=${start_date}&end_date=${end_date}`;
