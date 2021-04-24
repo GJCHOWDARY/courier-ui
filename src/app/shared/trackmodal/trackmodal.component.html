@@ -15,8 +15,9 @@
 </form>
 <br />
 <section>
-<div class="container" *ngIf="orders.length">
-    <div class="font" mat-dialog-content>
+<div class="container">
+    <p *ngIf="!orders.length && view" style="text-align: center;"> No roders Found!</p>
+    <div class="font" mat-dialog-content *ngIf="orders.length">
     <mat-card class="example-card" *ngFor="let o of orders">
         <div class="row">
             <div class="col-md-6">
@@ -33,10 +34,13 @@
             <div class="col-md-6" style="text-align: right;">
                 <mat-card-header>
                 <mat-card-subtitle matTooltip="Amount: {{o.amount}} (Quantity: {{o.qty}})">
-                    Amount : Rs:{{o.amount}}/- (Quantity: {{o.qty}})
+                    Amount : Rs:{{o.amount}}/- (Quantity : {{o.qty}})
                 </mat-card-subtitle>
                 <mat-card-subtitle matTooltip="Amount: {{o.amount}} (Quantity: {{o.qty}})">
-                    Status : {{o.status}}
+                    Status : {{o.status}} / Courier type : {{o.type}}
+                </mat-card-subtitle>
+                <mat-card-subtitle *ngIf="o.branch">
+                    Courier Branch : {{o.branch}}
                 </mat-card-subtitle>
             </mat-card-header>
             </div>

@@ -92,13 +92,12 @@ export class AuthService {
     return this.http.post(BACKEND_URL + "/customer_signup", customer)
   }
 
-  sendemail(email: string, name: string, organisation: string, message: string) {
-    const saveData = { email: email, name: name, organization: organisation, message: message };
-    // return this.http
-    // .post(
-    //   BACKEND_URL + "/sendmessage",
-    //   saveData
-    // )
+  sendEmail(data: any) {
+     return this.http
+    .post(
+      BACKEND_URL + "/sendMessage",
+      data
+    )
   }
 
   saveLoginInfo(response: any) {

@@ -53,13 +53,21 @@ export class HomeComponent implements OnInit {
       console.log(position);
     });
   }
+
   sendMessage(form: NgForm) {
     if (form.invalid) {
       return;
     }
     this.isLoading = true;
+    this.authService.sendEmail(form.value).subscribe((res: any) => {
+      this.isLoading = false;
+      form.reset();
+      alert('Your support will connect you shortly.');
+    },
+      error => {
+        this.isLoading = false;
+      });
   }
-
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();

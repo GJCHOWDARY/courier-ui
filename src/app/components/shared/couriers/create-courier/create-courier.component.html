@@ -63,7 +63,6 @@
          </mat-form-field>
           </div>
           </div> 
-
           <div class="row">
             <div class="col-md-6">   
                <mat-form-field  appearance="outline">                                     
@@ -81,6 +80,17 @@
             </div>
          </div> 
 
+         <div class="row">
+            <div class="col-md-6">   
+               <mat-form-field  appearance="outline">                                     
+               <mat-label>Branch</mat-label>
+                 <input matInput name="branch" [(ngModel)]="order.branch" type="text" placeholder="Courier Branch" #qtyInput="ngModel" required>
+                    <mat-error *ngIf="qtyInput.hasError('required')">Please enter courier branch.</mat-error>
+                 </mat-form-field>
+            </div>
+            <div class="col-md-6">   
+            </div>
+         </div> 
 
       <div class="content" role="main"> 
          <div class="container">
