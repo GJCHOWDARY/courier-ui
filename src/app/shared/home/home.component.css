@@ -8,6 +8,9 @@
     padding-bottom: 20px;
     text-align: center;
 }
+.carouselscroll{
+    margin: 0 !important;
+}
 
 agm-map {
     height: 400px;
