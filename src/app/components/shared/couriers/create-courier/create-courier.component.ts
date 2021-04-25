@@ -48,6 +48,7 @@ export class CreateCouriersComponent implements OnInit {
       email: '', 
       type: '',
       qty: '',
+      customerId: '',
       amount: '',
       from: {
         from_address: '', 
@@ -89,6 +90,7 @@ export class CreateCouriersComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    console.log(this.order,form.value)
     if (this.mode === "create") {
       this.orderService.addOrder(this.order, this.userId)
         .subscribe(responseData => {

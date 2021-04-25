@@ -24,7 +24,7 @@ export class ManagerGuard implements CanActivate, CanActivateChild, CanDeactivat
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const isAuth = this.authService.getIsAuth();   
       const role = this.authService.getUserRole();   
-        if (isAuth && role==1||role==2) {
+        if (isAuth && role==1 ||role==2) {
           return true;
         } else{
           this.router.navigate(['/authorized']);

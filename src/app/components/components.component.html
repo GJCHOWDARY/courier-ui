@@ -29,7 +29,7 @@
         <span>Orders</span>
       </div>
     </mat-list-item> 
-     <div  *ngIf="userData.role === 2||userData.role === 3">
+     <div  *ngIf="userData.role === 2 || userData.role === 3">
      <mat-list-item matTooltip="Profile Details" (click)="decrease()" [routerLink]="['emp/profile']">
       <mat-icon md-list-icon>person</mat-icon>
       <div fxFlex="20"></div>
@@ -105,35 +105,35 @@
         <span>Applied Leaves</span>
       </div>
     </mat-list-item>  
-    <mat-list-item matTooltip="Job Category" [routerLink]="'admin/categories'" (click)="decrease()" >
+    <mat-list-item *ngIf="userData.role === 1" matTooltip="Job Category" [routerLink]="'admin/categories'" (click)="decrease()" >
       <mat-icon md-list-icon>category</mat-icon>
       <div fxFlex="20"></div>
       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
         <span>Categories</span>
       </div>
     </mat-list-item>
-    <mat-list-item matTooltip="Job Sub Category / Sub Unit" [routerLink]="'admin/sub_categories'" (click)="decrease()" >
+    <mat-list-item *ngIf="userData.role === 1" matTooltip="Job Sub Category / Sub Unit" [routerLink]="'admin/sub_categories'" (click)="decrease()" >
       <mat-icon md-list-icon>apps</mat-icon>
       <div fxFlex="20"></div>
       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
         <span>Sub Categories</span>
       </div>
     </mat-list-item>  
-    <mat-list-item matTooltip="Jobs Title / List" [routerLink]="'admin/jobs'" (click)="decrease()" >
+    <mat-list-item *ngIf="userData.role === 1" matTooltip="Jobs Title / List" [routerLink]="'admin/jobs'" (click)="decrease()" >
       <mat-icon md-list-icon>wc</mat-icon>
       <div fxFlex="20"></div>
       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
         <span>Jobs</span>
       </div>
     </mat-list-item>  
-    <mat-list-item matTooltip="Leave Types" [routerLink]="'admin/leave_types'" (click)="decrease()" >
+    <mat-list-item *ngIf="userData.role === 1" matTooltip="Leave Types" [routerLink]="'admin/leave_types'" (click)="decrease()" >
       <mat-icon md-list-icon>speaker_notes</mat-icon>
       <div fxFlex="20"></div>
       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
         <span>Leave Types</span>
       </div>
     </mat-list-item>   
-     <mat-list-item matTooltip="Roles" [routerLink]="'admin/roles'" (click)="decrease()" >
+     <mat-list-item *ngIf="userData.role === 1" matTooltip="Roles" [routerLink]="'admin/roles'" (click)="decrease()" >
        <mat-icon md-list-icon>visibility</mat-icon>
        <div fxFlex="20"></div>
        <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
