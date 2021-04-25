@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container">
-  <mat-sidenav  [fixedInViewport]="true" #sideNavTooggle  [fixedTopGap]="48" #sidenav mode="side" class="example-sidenav"  opened="true" (mouseenter)="increase()">
+  <mat-sidenav  [fixedInViewport]="true" #sideNavTooggle  [fixedTopGap]="62" #sidenav mode="side" class="example-sidenav"  opened="true" (mouseenter)="increase()">
     <div style="flex-direction: column; box-sizing: border-box; display: flex;"  *ngIf="sidenavWidth > 6" >
       <a (click)="decrease()" class="close"></a> 
     </div>
@@ -150,7 +150,7 @@
     </div>
    </mat-nav-list>
  </mat-sidenav>
-      <mat-sidenav-content style="margin-left: 74px;">
+      <mat-sidenav-content style="margin-left: 64px;">
               <router-outlet></router-outlet>
       </mat-sidenav-content> 
  </mat-sidenav-container>

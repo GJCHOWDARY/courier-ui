@@ -108,7 +108,7 @@ height: 45px;
   .content {
     display: flex;
     /* margin: 7% 0; */
-    margin: 42px auto 32px;
+    margin: 62px auto 32px;
     padding: 0 16px;
     max-width: 960px;
     flex-direction: column;
@@ -133,7 +133,7 @@ height: 45px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 56px;
+    margin-top: 69px;
     height: auto;
     /* min-height: 574px; */
   }
