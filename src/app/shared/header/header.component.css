@@ -25,14 +25,20 @@ ul {
 ul {
   display: flex;
 }
-.headermenu {
+.header_name{
+ font-size: 36px;
+ font-weight: bold;
+}
+/* .headermenu {
   border: none;
   background-color: #ffffff;
   color: #f6851c !important;
-}
+} */
 .home_btn {
   color: #f6851c;
   padding: 10px;
+  font-size: 15px;
+  /* font-weight: bold; */
 }
 a {
   color: #f6851c;

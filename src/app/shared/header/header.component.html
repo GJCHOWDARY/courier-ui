@@ -20,27 +20,28 @@
               <ul class="rightmenu" fxShow="true" fxHide.lt-md>
                   <li *ngIf="!userIsAuthenticated">
                       <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-                          <button mat-button class="home_btn" [routerLink]="'/'" routerLinkActive="active">HOME</button>
+                          <a class="home_btn" [routerLink]="'/'" routerLinkActive="active">HOME</a>
                       </div>
                   </li>
                   <li *ngIf="!userIsAuthenticated">
                       <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-                          <button mat-button [routerLink]="'support'" routerLinkActive="active" class="home_btn">SUPPORT</button>
+                          <!-- <button [routerLink]="'#contact'" routerLinkActive="active" class="home_btn">SUPPORT</a> -->
+                          <a href="#contact" class="home_btn">CONTACT</a>
                       </div>
                   </li>
                   <li (click)="openDialog()">
                       <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-                          <button mat-button class="home_btn">TRACK</button>
+                          <a class="home_btn">TRACK</a>
                       </div>
                   </li>
                   <li *ngIf="!userIsAuthenticated">
                       <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-                          <button mat-button [routerLink]="'/auth/login'" routerLinkActive="active" class="home_btn">LOGIN</button>
+                          <a [routerLink]="'/auth/login'" routerLinkActive="active" class="home_btn">LOGIN</a>
                       </div>
                   </li>
                   <li *ngIf="!userIsAuthenticated">
                       <div fxflex="0 1 auto" fxlayout="row" fxlayoutalign="start center" class="header_nav">
-                          <button mat-button [routerLink]="'/auth/signup'" routerLinkActive="active" class="home_btn">SIGNUP</button>
+                          <a [routerLink]="'/auth/signup'" routerLinkActive="active" class="home_btn">SIGNUP</a>
                       </div>
                   </li>
                   <li *ngIf="userIsAuthenticated && userData.role !== 4" matTooltip="Anniversary" (click)="openBottomSheet()">
