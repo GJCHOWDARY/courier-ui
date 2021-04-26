@@ -104,7 +104,9 @@ height: 45px;
   .spacer {
     flex: 1;
   }
-
+  .container{
+    margin: 3% 0;
+  }
   .content {
     display: flex;
     /* margin: 7% 0; */
@@ -133,7 +135,7 @@ height: 45px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 56px;
+    margin-top: 8%;
     height: auto;
     /* min-height: 574px; */
   }
