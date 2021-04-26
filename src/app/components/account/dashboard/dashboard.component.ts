@@ -101,6 +101,7 @@ export class DashboardComponent implements OnInit {
         })
       })
     }
+    
     this.accountService.getOrderDetails().subscribe((data: any) => {
       this.orderDetatils = data.data
       this.isLoading = false;

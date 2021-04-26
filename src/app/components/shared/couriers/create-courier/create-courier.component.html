@@ -40,11 +40,11 @@
                <div class="col-md-6">
          <mat-form-field appearance="outline">
             <mat-label>If Existing Customer...</mat-label> 
-               <input type="text" matInput (keyup)="searchUsers(assigneeInput.value)" [matAutocomplete]="auto"
+               <input type="text" name="customerId" [(ngModel)]="order.customerId" matInput (keyup)="searchUsers(assigneeInput.value)" [matAutocomplete]="auto"
                  placeholder="Serach Customer"
                  #assigneeInput   
                  [formControl]="fruitCtrl"> 
-             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelection($event)" [displayWith]="displayFn">
+             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                <mat-option *ngFor="let user of searchUser" [value]="user" #datae>
                   {{ user.first_name }} {{user.last_name}}
                </mat-option>      
@@ -54,7 +54,7 @@
           <div class="col-md-6">
             <mat-form-field  appearance="outline">
                <mat-label>Type</mat-label>
-            <mat-select name="subcategoryId" placeholder="Order Type" [(ngModel)]="order.type" #typeInput="ngModel" required>
+            <mat-select name="type" placeholder="Order Type" [(ngModel)]="order.type" #typeInput="ngModel" required>
                <mat-option *ngFor="let type of services" [value]="type">
                {{type}}
                </mat-option>
