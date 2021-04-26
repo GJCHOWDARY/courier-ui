@@ -44,7 +44,7 @@ footer {
 }
 .site-footer a:hover
 {
-  color:#3366cc;
+  color:#f6851c;
   text-decoration:none;
 }
 .footer-links
@@ -62,7 +62,7 @@ footer {
 }
 .footer-links a:active,.footer-links a:focus,.footer-links a:hover
 {
-  color:#3366cc;
+  color:#f6851c;
   text-decoration:none;
 }
 .footer-links.inline li

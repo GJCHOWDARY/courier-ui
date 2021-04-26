@@ -114,3 +114,11 @@ mat-toolbar {
 button.mat-menu-item {
   color: #f6851c;
 }
+
+.hd_menu a:active,.hd_menu a:focus,.hd_menu a:hover
+{
+  color:#f6851c;
+  text-decoration:none;
+  background-color: #edf4f7;
+  /* opacity: 0.5; */
+}
