@@ -37,28 +37,28 @@
         <span>My Info</span>
       </div>
     </mat-list-item> 
-     <mat-list-item matTooltip="Leave" (click)="decrease()" [routerLink]="['emp/myleave']">
+     <!-- <mat-list-item matTooltip="Leave" (click)="decrease()" [routerLink]="['emp/myleave']">
        <mat-icon md-list-icon>timelapse</mat-icon>
        <div fxFlex="20"></div>
        <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
          <span>My Leave</span>
        </div>
-     </mat-list-item>  
-     <mat-list-item matTooltip="Leave" (click)="decrease()" [routerLink]="['emp/apply', 'create', 'new']">
+     </mat-list-item>   -->
+     <!-- <mat-list-item matTooltip="Leave" (click)="decrease()" [routerLink]="['emp/apply', 'create', 'new']">
       <mat-icon matSuffix>schedule</mat-icon>
       <div fxFlex="20"></div>
       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
         <span>Apply New Leave</span>
       </div>
-    </mat-list-item>    
-     <mat-list-item matTooltip="Leave Calender"  (click)="decrease()" [routerLink]="['emp/calendar']" routerLinkActive="mat-accent">
+    </mat-list-item>     -->
+     <!-- <mat-list-item matTooltip="Leave Calender"  (click)="decrease()" [routerLink]="['emp/calendar']" routerLinkActive="mat-accent">
       <mat-icon md-list-icon>date_range</mat-icon>
       <div fxFlex="20"></div>
       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
         <span>Your Leave Calender</span>
       </div>
-    </mat-list-item>
-    <mat-list-item matTooltip="Your Attachments"  (click)="decrease()" [routerLink]="['emp/myattachments']" routerLinkActive="mat-accent">
+    </mat-list-item> -->
+    <!-- <mat-list-item matTooltip="Your Attachments"  (click)="decrease()" [routerLink]="['emp/myattachments']" routerLinkActive="mat-accent">
      <mat-icon md-list-icon>storage</mat-icon>
      <div fxFlex="20"></div>
      <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
@@ -71,9 +71,9 @@
     <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
       <span>Qualifications</span>
     </div>
-  </mat-list-item>
+  </mat-list-item> -->
    </div>
-   <div *ngIf="userData.role==2">
+   <!-- <div *ngIf="userData.role==2">
    <mat-list-item matTooltip="Assignees" (click)="decrease()" [routerLink]="['manager/assigned_users']" routerLinkActive="mat-accent">
     <mat-icon md-list-icon>account_tree</mat-icon>
     <div fxFlex="20"></div>
@@ -81,7 +81,7 @@
       <span>Assigned</span>
     </div>
   </mat-list-item>
-</div>
+</div> -->
 <!-- <mat-list-item matTooltip="All projects" [routerLink]="'/authorized/projects'" (click)="decrease()" >
   <mat-icon md-list-icon>filter_center_focus</mat-icon>
   <div fxFlex="20"></div>
@@ -98,13 +98,13 @@
         <span>Users</span>
       </div>
     </mat-list-item>
-    <mat-list-item matTooltip="Applied Leaves" (click)="decrease()" [routerLink]="['admin/applied_leaves']">
+    <!-- <mat-list-item matTooltip="Applied Leaves" (click)="decrease()" [routerLink]="['admin/applied_leaves']">
       <mat-icon md-list-icon>timelapse</mat-icon>
       <div fxFlex="20"></div>
       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
         <span>Applied Leaves</span>
       </div>
-    </mat-list-item>  
+    </mat-list-item>   -->
     <mat-list-item *ngIf="userData.role === 1" matTooltip="Job Category" [routerLink]="'admin/categories'" (click)="decrease()" >
       <mat-icon md-list-icon>category</mat-icon>
       <div fxFlex="20"></div>
@@ -126,13 +126,13 @@
         <span>Jobs</span>
       </div>
     </mat-list-item>  
-    <mat-list-item *ngIf="userData.role === 1" matTooltip="Leave Types" [routerLink]="'admin/leave_types'" (click)="decrease()" >
+    <!-- <mat-list-item *ngIf="userData.role === 1" matTooltip="Leave Types" [routerLink]="'admin/leave_types'" (click)="decrease()" >
       <mat-icon md-list-icon>speaker_notes</mat-icon>
       <div fxFlex="20"></div>
       <div *ngIf="sidenavWidth > 6"  class="sidenav-item">
         <span>Leave Types</span>
       </div>
-    </mat-list-item>   
+    </mat-list-item>    -->
      <mat-list-item *ngIf="userData.role === 1" matTooltip="Roles" [routerLink]="'admin/roles'" (click)="decrease()" >
        <mat-icon md-list-icon>visibility</mat-icon>
        <div fxFlex="20"></div>

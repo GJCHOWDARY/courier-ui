@@ -43,6 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log("%cSTOP!","color:red;font-size:xx-large;font-weight:bold;", "This is a browser feature intended for developers.");
     // INFO: check internet connection
     this.onlineEvent = fromEvent(window, 'online');
     this.offlineEvent = fromEvent(window, 'offline');
