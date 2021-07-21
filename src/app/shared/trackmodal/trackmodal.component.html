@@ -26,17 +26,17 @@
                     <mat-card-subtitle>
                         OrderId : {{o.orderId}}
                     </mat-card-subtitle>
-                    <mat-card-subtitle matTooltip="Amount: {{o.amount}} (Quantity: {{o.qty}})">
-                        Mobile : {{o.mobile}}
+                    <mat-card-subtitle matTooltip="Invoice Amount: {{o.amount}} (Quantity: {{o.qty}})">
+                        Sender phone number : {{o.mobile}}
                     </mat-card-subtitle>
                 </mat-card-header>
             </div>
             <div class="col-md-6" style="text-align: right;">
                 <mat-card-header>
-                <mat-card-subtitle matTooltip="Amount: {{o.amount}} (Quantity: {{o.qty}})">
-                    Amount : Rs:{{o.amount}}/- (Quantity : {{o.qty}})
+                <mat-card-subtitle matTooltip="Invoice Amount: {{o.amount}} (Quantity: {{o.qty}})">
+                    Invoice Amount : Rs:{{o.amount}}/- (Quantity : {{o.qty}})
                 </mat-card-subtitle>
-                <mat-card-subtitle matTooltip="Amount: {{o.amount}} (Quantity: {{o.qty}})">
+                <mat-card-subtitle matTooltip="Invoice Amount: {{o.amount}} (Quantity: {{o.qty}})">
                     Status : {{o.status}} / Courier type : {{o.type}}
                 </mat-card-subtitle>
                 <mat-card-subtitle *ngIf="o.branch">

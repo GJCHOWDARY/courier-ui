@@ -95,10 +95,10 @@ export class DashboardComponent implements OnInit {
         let d = new Date(), year = d.getFullYear(),
           start_date = new Date(`${year}/01/01`), end_date = new Date(`${year}/12/31`);
 
-        this.accountService.getAppliedLeaves(start_date, end_date).subscribe((catData: any) => {
-          this.leaves = catData.data;
-          this.isLoading = false;
-        })
+        // this.accountService.getAppliedLeaves(start_date, end_date).subscribe((catData: any) => {
+        //   this.leaves = catData.data;
+        //   this.isLoading = false;
+        // })
       })
     }
     

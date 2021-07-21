@@ -5,9 +5,9 @@
    <div class="row">
       <div class="col-md-6">
      <mat-form-field appearance="outline">                                         
-      <mat-label>Order Name</mat-label>
-        <input matInput name="name" [(ngModel)]="order.name" type="text" placeholder="Order Name" #nameInput="ngModel" required>
-           <mat-error *ngIf="nameInput.hasError('required')">Please enter order name.</mat-error>
+      <mat-label>AWB Number</mat-label>
+        <input matInput name="name" [(ngModel)]="order.name" type="text" placeholder="AWB number" #nameInput="ngModel" required>
+           <mat-error *ngIf="nameInput.hasError('required')">Please enter AWB number.</mat-error>
         </mat-form-field>
       </div>
       <div class="col-md-6">
@@ -20,12 +20,12 @@
          <div class="row">
             <div class="col-md-6">
             <mat-form-field  appearance="outline">           
-               <mat-label>Mobile</mat-label>
-               <input matInput name="mobile" [(ngModel)]="order.mobile" type="text" mobile  pattern="[0-9]*" minlength="10" maxlength="10" placeholder="Enter Mobile Number" #mobileInput="ngModel" required>
+               <mat-label>Sender Phone Number</mat-label>
+               <input matInput name="mobile" [(ngModel)]="order.mobile" type="text" mobile  pattern="[0-9]*" minlength="10" maxlength="10" placeholder="Enter Sender Phone Number" #mobileInput="ngModel" required>
                <mat-icon matSuffix>call</mat-icon>         
-               <mat-error *ngIf="mobileInput.hasError('required')">Please Enter PhoneNumber.</mat-error>
-               <mat-error *ngIf="mobileInput.hasError('pattern')">Mobile number should be only numbers</mat-error>
-               <mat-error *ngIf="mobileInput.hasError('minlength')">Mobile should be 10digit</mat-error>
+               <mat-error *ngIf="mobileInput.hasError('required')">Please Enter Phone Number.</mat-error>
+               <mat-error *ngIf="mobileInput.hasError('pattern')">Sender Phone Number should be only numbers</mat-error>
+               <mat-error *ngIf="mobileInput.hasError('minlength')">Sender Phone Number should be 10digit</mat-error>
             </mat-form-field>
             </div>
             <div class="col-md-6">
@@ -73,9 +73,9 @@
             </div>
             <div class="col-md-6">  
                <mat-form-field  appearance="outline">                                      
-               <mat-label>Amount</mat-label>
+               <mat-label>Invoice Amount</mat-label>
                  <input matInput name="amount" [(ngModel)]="order.amount" type="text" placeholder="Amount" #amtInput="ngModel" required>
-                    <mat-error *ngIf="amtInput.hasError('required')">Please enter amount name.</mat-error>
+                    <mat-error *ngIf="amtInput.hasError('required')">Please enter Invoice Amount.</mat-error>
                  </mat-form-field>
             </div>
          </div> 

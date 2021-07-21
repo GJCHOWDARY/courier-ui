@@ -27,7 +27,7 @@ export class CouriersComponent implements OnInit {
   Count = 0;
   sizeOptions = [10, 20, 50];
   start_date: Date; end_date: Date;
-  displayedColumns: string[] = ['Name', 'Description', 'OrderId', 'Mobile', 'Amount', 'Status', 'CreatedAt', 'UpdatedAt', 'Action'];
+  displayedColumns: string[] = ['Name', 'Description', 'OrderId', 'Mobile', 'Invoice Amount', 'Status', 'CreatedAt', 'UpdatedAt', 'Action'];
 
   filterTypes: any = [
     { title: 'Confirmed', id: 1 },
