@@ -16,7 +16,7 @@
      <mat-form-field appearance="outline">                                         
       <mat-label>AWB Number</mat-label>
         <input matInput name="name" [(ngModel)]="order.name" type="text" placeholder="AWB number" #nameInput="ngModel" required>
-           <mat-error *ngIf="nameInput.hasError('required')">Please enter AWB number.</mat-error>
+           <mat-error *ngIf="nameInput.hasError('required')">Please enter AWB Number/Name.</mat-error>
         </mat-form-field>
       </div>
       <div class="col-md-6">
@@ -64,8 +64,8 @@
             <mat-form-field  appearance="outline">
                <mat-label>Type</mat-label>
             <mat-select name="type" placeholder="Order Type" [(ngModel)]="order.type" #typeInput="ngModel" required>
-               <mat-option *ngFor="let type of services" [value]="type">
-               {{type}}
+               <mat-option *ngFor="let s_type of services" [value]="s_type">
+               {{s_type}}
                </mat-option>
             </mat-select>
             <mat-error *ngIf="typeInput.hasError('required')">Please choose order type.</mat-error>
